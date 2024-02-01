@@ -10,8 +10,19 @@ Bone age can reflect the level and maturity of human growth and development. Bon
 ### How ML methods could achive bettere results?
 As mentioned above, bone age assessment is a technique prone to human error, therefore, with the popularization and development of coputer technology, machine learning-based bone age prediction has become a research hotspot in recent years. First of all, machine learning solves the problems of subjective factors linked to the doctors' interpretation, and at the same time reduces the prediction time. From 2007, a lot of ML algorithms for bone age assessment were developed, improving precision over and over and reaching an impressive result of a mean absolute error of 5.46 months. [quotation]
 
-## Dataset
 ![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/13196%20copia.png)
+
+## Dataset
+- Dimensions: 10.93 GB
+- Training : 12,613 images
+- Validation : 801 images
+- Test : 626 images
+- Avaibility: free
+
+Two preliminary studies on the dataset are then presented.
+### Training dataset
+
+### Validation dataset
 
 ## Usage
 
