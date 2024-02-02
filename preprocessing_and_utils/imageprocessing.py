@@ -5,27 +5,27 @@ Purpose: The purpose of the ImageProcessing class is to encapsulate common image
 operations in a reusable and modular way. By defining static methods within the class, these
 operations can be accessed and used without the need to create an instance of the class.
 Static Methods: Each method in the class performs a specific image processing task, such as
-resizing, rotating, flipping, adjusting brightness, normalization, histogram equalization, 
+resizing, rotating, flipping, adjusting brightness, normalization, histogram equalization,
 and more.
 
-How it Works: All methods in the class are static, which means they 
+How it Works: All methods in the class are static, which means they
 can be called directly on the class itself without needing to create an instance of the class.
 
-Input and Output: The methods typically take an input image (as a NumPy array) and perform 
+Input and Output: The methods typically take an input image (as a NumPy array) and perform
 the specified operation on it, returning the processed image as output.
 
 Library Usage: The class makes use of the OpenCV library (cv2) for many of its image processing
-operations, as well as NumPy for array manipulation and Matplotlib (matplotlib.pyplot) for image 
+operations, as well as NumPy for array manipulation and Matplotlib (matplotlib.pyplot) for image
 visualization.
 
 Documentation: Each method in the class is well-documented with docstrings, providing information
 about the purpose of the method, the arguments it accepts, the expected data types, potential
 exceptions raised, and the return values.
 
-Usage: Users can import the ImageProcessing class into their Python scripts or projects and 
-call its methods to perform specific image processing tasks. For example, they can resize an 
-image, rotate it, adjust its brightness, or perform histogram equalization by calling the 
-respective methods. Overall, the ImageProcessing class serves as a convenient and versatile 
+Usage: Users can import the ImageProcessing class into their Python scripts or projects and
+call its methods to perform specific image processing tasks. For example, they can resize an
+image, rotate it, adjust its brightness, or perform histogram equalization by calling the
+respective methods. Overall, the ImageProcessing class serves as a convenient and versatile
 tool for performing a wide range of image processing tasks within Python applications and projects.
 """
 
