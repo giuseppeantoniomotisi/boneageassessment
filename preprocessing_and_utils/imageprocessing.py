@@ -216,6 +216,28 @@ class ImageProcessing:
         return equalized_image
 
     @staticmethod
+    def histogram_equalization_peppe(image: np.ndarray) -> np.ndarray:
+        """
+        Performs histogram equalization on the input image.
+
+        Args:
+            image (np.ndarray): The input image to undergo histogram equalization.
+
+        Returns:
+            np.ndarray: The image after histogram equalization (placeholder implementation returns
+            the original image).
+        """
+        img = np.round(255*image)
+        histim = img.reshape(img.size)
+        h,e = np.histogram(histim, range(0,256))
+        cdf = np.cumsum(h)
+        cdf_min = np.min(cdf[np.nonzero(cdf)])
+
+        cdf = np.append(cdf, 0.)
+        new_im = np.round((cdf[img.astype(int)] - cdf_min)/(img.size - cdf_min) * 255) 
+        return new_im
+
+    @staticmethod
     def clahe(image:np.ndarray) -> np.ndarray:
         """
         Applies Contrast Limited Adaptive Histogram Equalization (CLAHE) to the input image.
