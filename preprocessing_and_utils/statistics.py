@@ -8,7 +8,7 @@ code, it's an empty method (pass). No initialization logic is present in this me
 
 Dice Coefficients (dice_coefficients method):
 This method computes the Dice similarity coefficient between the true and predicted values.
-It takes y_true and y_pred as input, which represent the true labels and predicted labels, 
+It takes y_true and y_pred as input, which represent the true labels and predicted labels,
 respectively. The Dice coefficient is computed using the formula:
 
 (2 * intersection + smooth) / (union + smooth).
