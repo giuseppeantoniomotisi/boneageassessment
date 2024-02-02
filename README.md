@@ -21,11 +21,11 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 
 ![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/piechart_rsna_dataset.png)
 ### Training dataset
-![alt text] (https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/gender_counter.png)
+![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/gender_counter.png)
 
-![alt text] (https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/boneage.png)
+![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/boneage.png)
 
-![alt text] (https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/zscore.png)
+![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/zscore.png)
 
 ### Validation dataset
 
