@@ -25,8 +25,9 @@ First of all, the training dataset is preliminarily analyzed. The preliminary an
 - Gender assessment
 - Annual bone age distribution over all images and by gender.
 - Distribution of z score over all images and by gender.
+
 **z score of boneage**
-$$z_score(x_i, \bar{x}, \sigma_x) = \frac{x_i-\bar{x}}{\sigma_x}$$
+$$z_{score}(x_i, \bar{x}, \sigma_x) = \frac{x_i-\bar{x}}{\sigma_x}$$
 The introduction of the z score is explained in that models perform better when features are normalized to have zero mean and unity standard deviation.
 ![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/gender_counter.png)
 
