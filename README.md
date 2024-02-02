@@ -22,16 +22,30 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 ![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/piechart_rsna_dataset.png)
 ### Training dataset
 First of all, the training dataset is preliminarily analyzed. The preliminary analysis is divided into:
+
 - **Gender assessment**
 ![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/gender_counter.png)
+
 - **Annual bone age distribution over all images and by gender**
 ![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/boneage.png)
+
 - **Distribution of z score over all images and by gender**
 **z score of boneage**
 $$z_{score}(x_i, \bar{x}, \sigma_x) = \frac{x_i-\bar{x}}{\sigma_x}$$
 The introduction of the z score is explained in that models perform better when features are normalized to have zero mean and unity standard deviation.
 ![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/zscore.png)
+
+-**Violin plot**
+
 ### Validation dataset
+In agreement with what was done before:
+- **Gender assessment**
+
+- **Annual bone age distribution over all images and by gender**
+
+- **Distribution of z score over all images and by gender**
+
+- **Violin plot**
 
 ## Usage
 
