@@ -234,7 +234,7 @@ class ImageProcessing:
         cdf_min = np.min(cdf[np.nonzero(cdf)])
 
         cdf = np.append(cdf, 0.)
-        new_im = np.round((cdf[img.astype(int)] - cdf_min)/(img.size - cdf_min) * 255) 
+        new_im = np.round((cdf[img.astype(int)] - cdf_min)/(img.size - cdf_min) * 255)
         return new_im
 
     @staticmethod
@@ -266,4 +266,3 @@ class ImageProcessing:
         plt.colorbar()
         plt.tight_layout()
         plt.show()
-        
