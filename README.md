@@ -10,7 +10,7 @@ Bone age can reflect the level and maturity of human growth and development. Bon
 ### How ML methods could achive bettere results?
 As mentioned above, bone age assessment is a technique prone to human error, therefore, with the popularization and development of coputer technology, machine learning-based bone age prediction has become a research hotspot in recent years. First of all, machine learning solves the problems of subjective factors linked to the doctors' interpretation, and at the same time reduces the prediction time. From 2007, a lot of ML algorithms for bone age assessment were developed, improving precision over and over and reaching an impressive result of a mean absolute error of 5.46 months. [quotation]
 
-<img src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/13196.png" width=50% height=50%>
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/13196.png" width=50% height=50%>
 
 ## Dataset
 - Dimensions: 10.93 GB
@@ -19,38 +19,38 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 - Test : 626 images
 - Avaibility: free
 
-![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/piechart_rsna_dataset.png)
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/piechart_rsna_dataset.png" width=50% height=50%>
 ### Training dataset
 First of all, the training dataset is preliminarily analyzed. The preliminary analysis is divided into:
 
 - **Gender assessment**
-![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_gender_counter.png)
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_gender_counter.png" width=50% height=50%>
 
 - **Annual bone age distribution over all images and by gender**
-![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_boneage.png)
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_boneage.png" width=50% height=50%>
 
 - **Distribution of z score over all images and by gender**
 **z score of boneage**
 $$z_{score}(x_i, \bar{x}, \sigma_x) = \frac{x_i-\bar{x}}{\sigma_x}$$
 The introduction of the z score is explained in that models perform better when features are normalized to have zero mean and unity standard deviation.
-![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_zscore.png)
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_zscore.png width=50% height=50%>
 
 -**Violin plot**
-![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_violin.png)
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_violin.png" width=50% height=50%>
 
 ### Validation dataset
 In agreement with what was done before:
 - **Gender assessment**
-![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_gender_counter.png)
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_gender_counter.png" width=50% height=50%>
 
 - **Annual bone age distribution over all images and by gender**
-![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_boneage.png)
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_boneage.png" width=50% height=50%>
 
 - **Distribution of z score over all images and by gender**
-![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_zscore.png)
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_zscore.png" width=50% height=50%>
 
 - **Violin plot**
-![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_violin.png)
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_violin.png" width=50% height=50%>
 
 ## Usage
 
