@@ -75,8 +75,6 @@ In agreement with what was done before:
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_violin.png" width=50% height=50%>
 </p>
 
-## Usage
-
 ## Methods
 
 ## Results
