@@ -33,7 +33,7 @@ First of all, the training dataset is preliminarily analyzed. The preliminary an
 **z score of boneage**
 $$z_{score}(x_i, \bar{x}, \sigma_x) = \frac{x_i-\bar{x}}{\sigma_x}$$
 The introduction of the z score is explained in that models perform better when features are normalized to have zero mean and unity standard deviation.
-<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_zscore.png width=50% height=50%>
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_zscore.png" width=50% height=50%>
 
 -**Violin plot**
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_violin.png" width=50% height=50%>
