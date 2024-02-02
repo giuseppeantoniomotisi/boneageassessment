@@ -35,7 +35,7 @@ $$z_{score}(x_i, \bar{x}, \sigma_x) = \frac{x_i-\bar{x}}{\sigma_x}$$
 The introduction of the z score is explained in that models perform better when features are normalized to have zero mean and unity standard deviation.
 ![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_zscore.png)
 
--**Violin plot**
+- **Violin plot**
 ![alt text](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_violin.png)
 
 ### Validation dataset
