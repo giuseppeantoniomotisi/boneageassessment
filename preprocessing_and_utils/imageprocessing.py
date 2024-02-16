@@ -31,7 +31,7 @@ tool for performing a wide range of image processing tasks within Python applica
 
 import numpy as np
 import matplotlib.pyplot as plt
-from cv2 import cv2 as cv
+import cv2 as cv
 
 
 class ImageProcessing:
@@ -108,6 +108,15 @@ class ImageProcessing:
         rot_mat = cv.getRotationMatrix2D(image_center, angle, 1.0)
         result = cv.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv.INTER_LINEAR)
         return result
+    
+    @staticmethod
+    def rotate_image(img, angle):
+        size_reverse = np.array(img.shape[1::-1]) # swap x with y
+        M = cv.getRotationMatrix2D(tuple(size_reverse / 2.), angle, 1.)
+        MM = np.absolute(M[:,:2])
+        size_new = MM @ size_reverse
+        M[:,-1] += (size_new - size_reverse) / 2.
+        return cv.warpAffine(img, M, tuple(size_new.astype(int)))
 
     @staticmethod
     def flipping(image:np.ndarray) -> np.ndarray:
