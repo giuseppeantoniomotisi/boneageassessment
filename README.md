@@ -13,8 +13,25 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 <p align="center">
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/13196.png" width=50% height=50%>
 
+### Challange results
+<div align="center">
+| Position | Team              | MAD (months) |
+| :------: | :---------------: | :----------: |
+| 1        | 16 Bit Inc.       | 4.265        |
+| 2        | Ian Pan           | 4.350        |
+| 3        | F. Kitamura       | 4.382        |
+| 4        | H. Thodberg       | 4.505        |
+| 5        | MD.ai             | 4.525        |
+| 6        | amiper            | 4.527        |
+| 7        | rsnahandchallenge | 4.527        |
+| 8        | grin              | 4.802        |
+| 9        | lbicfigraz        | 4.881        |
+| 10       | jcrayan           | 4.907        |
+</div>
+
 ## Dataset
 - Dimensions: 10.93 GB
+- All images: 14036 images
 - Training : 12,613 images
 - Validation : 801 images
 - Test : 626 images
@@ -39,6 +56,7 @@ First of all, the training dataset is preliminarily analyzed. The preliminary an
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_boneage.png" width=50% height=50%>
 </p>
 
+ <!--
 - **Distribution of z score over all images and by gender**
 **z score of boneage**
 $$z_{score}(x_i, \bar{x}, \sigma_x) = \frac{x_i-\bar{x}}{\sigma_x}$$
@@ -47,6 +65,7 @@ The introduction of the z score is explained in that models perform better when 
 <p align="center">
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_zscore.png" width=50% height=50%>
 </p>
+-->
 
 -**Violin plot**
 <p align="center">
@@ -65,10 +84,12 @@ In agreement with what was done before:
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_boneage.png" width=50% height=50%>
 </p>
 
+<!--
 - **Distribution of z score over all images and by gender**
 <p align="center">
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_zscore.png" width=50% height=50%>
 </p>
+ -->
 
 - **Violin plot**
 <p align="center">
