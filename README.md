@@ -14,7 +14,6 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/13196.png" width=50% height=50%>
 
 ### Challange results
-<div align="center">
 | Position | Team              | MAD (months) |
 | :------: | :---------------: | :----------: |
 | 1        | 16 Bit Inc.       | 4.265        |
@@ -27,7 +26,6 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 | 8        | grin              | 4.802        |
 | 9        | lbicfigraz        | 4.881        |
 | 10       | jcrayan           | 4.907        |
-</div>
 
 ## Dataset
 - Dimensions: 10.93 GB
