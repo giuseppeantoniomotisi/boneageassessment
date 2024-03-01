@@ -193,5 +193,6 @@ def extract_info() -> dict:
     return output_dict
 
 if __name__ == '__main__':
-    create_directories()
-    check_path()
+    #create_directories()
+    #check_path()
+    print(extract_info())

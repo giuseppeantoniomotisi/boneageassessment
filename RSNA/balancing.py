@@ -143,17 +143,13 @@ class BalancingDataset:
         if type(num_classes) != int:
             raise TypeError(f"num_classes's expeted type is <class 'int'>, not {type(num_classes)}")
 
-        # Check if key_id and key_values exist in the dataframe
-        if self.key_id not in self.dataframe.columns or self.key_values not in self.dataframe.columns:
-            raise ValueError("key_id or key_values not found in the pandas.DataFrame!")
-
         # Create empty lists to append image id
         classes_value = [[] for _ in range(num_classes)]
         classes_key = np.arange(0, num_classes)
         classes = dict(zip(classes_key, classes_value))
 
         # Calculate histogram
-        hist, edges = np.histogram(self.dataframe[self.key_values], bins=num_classes)
+        hist, edges = np.histogram(self.dataframe[self.key_value], bins=num_classes)
 
         # Check if limit_value is greater than the maximum bin value
         if limit_value <= np.max(hist):
@@ -165,7 +161,7 @@ class BalancingDataset:
         # Assign elements to classes based on their values
         for i in range(len(self.dataframe)):
             for j in range(num_classes):
-                if edges[j] <= self.dataframe[self.key_values][i] <= edges[j + 1]:
+                if edges[j] <= self.dataframe[self.key_value][i] <= edges[j + 1]:
                     classes[j].append(self.dataframe[self.key_id][i])  # Adjusted the key from j + 1 to j
                     break
 
@@ -176,8 +172,8 @@ class BalancingDataset:
         Creates a balanced CSV file by augmenting the training data with additional samples and saves it.
         """
         num = 19
-        limit = np.max(self.dataframe[self.key_value].hist(bins=num))[0]
-        list_of_names, delta_balanced = self.find_element(self, limit, num)
+        limit = 1500
+        list_of_names, delta_balanced = self.find_element(limit, num)
 
         temp_id, temp_boneage, temp_gender, temp_bn, temp_angles = [], [], [], [], []
         for i in range(len(list_of_names)):
@@ -197,15 +193,15 @@ class BalancingDataset:
                 temp_id.append(new_name)
                 temp_angles.append(angle)
                 temp_boneage.append(self.dataframe['boneage'].values[idx][0])
-                temp_gender.append(self.dataframe['gender'].values[idx][0])
+                temp_gender.append(self.dataframe['male'].values[idx][0])
 
             print('Done!')
 
         temp_df = pd.DataFrame({'id':temp_id,
-                            'boneage':temp_boneage,
-                            'gender':temp_gender,
-                            'boneage_normalized':temp_bn,
-                           'angle':temp_angles})
+                                'boneage':temp_boneage,
+                                'gender':temp_gender,
+                                'boneage_normalized':temp_bn,
+                                'angle':temp_angles})
 
         dataframe_aug = pd.concat([self.dataframe, temp_df], ignore_index=True)
         dataframe_aug_name = os.path.join(self.path_to_csv, 'augmented.csv')

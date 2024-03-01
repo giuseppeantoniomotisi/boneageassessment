@@ -67,9 +67,9 @@ class Merge:
         Initializes the Merge class with default attributes for paths to training and validation CSV files.
         """
         info = extract_info()
-        self.path_to_train = info['train.csv']  # Default path to the training CSV file
-        self.path_to_train_imgs = info['train_images_path']  # Default path to the training images folder
-        self.path_to_val = info['val.csv']  # Default path to the validation CSV file
+        self.path_to_train = info['train.csv'][0]  # Default path to the training CSV file
+        self.path_to_train_imgs = info['train_images_path'][0]  # Default path to the training images folder
+        self.path_to_val = info['val.csv'][0]  # Default path to the validation CSV file
         self.path_to_val_imgs = info['val_images_path']  # Default path to the validation images folder
         self.main_dir = info['main_dir']  # Default path for the dataset project (Desktop/boneageassessment/)
         self.raw = info['raw']
@@ -107,7 +107,7 @@ class Merge:
         """
         Merges images from training and validation folders to a single folder.
         """
-        input_folders = [self.path_to_train_imgs[0], self.path_to_val_imgs[0], self.path_to_val_imgs[1]]
+        input_folders = [self.path_to_train_imgs, self.path_to_val_imgs[0], self.path_to_val_imgs[1]]
         output_folder = self.raw
         for input_folder in input_folders:
             for element in os.listdir(input_folder):
