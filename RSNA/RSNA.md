@@ -80,3 +80,17 @@ optionally, generating augmented images.
 specified folders and CSV files.
 
 - `main.py`
+
+## Usage
+1. First download RSNA dataset. Check if all files are in Downloads directory.
+2. Use the command cd to move inside the terminal and open ../boneageassessment/RSNA/
+
+```bash
+cd ../boneageassessment/RSNA/
+```
+3. Then use command line:
+
+```bash
+python3 main.py
+```
+4. Now dataset is in your desktop.
