@@ -199,8 +199,7 @@ class BalancingDataset:
 
         temp_df = pd.DataFrame({'id':temp_id,
                                 'boneage':temp_boneage,
-                                'gender':temp_gender,
-                                'boneage_normalized':temp_bn,
+                                'male':temp_gender,
                                 'angle':temp_angles})
 
         dataframe_aug = pd.concat([self.dataframe, temp_df], ignore_index=True)

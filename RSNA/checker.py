@@ -32,8 +32,8 @@ class Checker:
         info = extract_info()
         self.path_to_processed = info['processed']
         self.path_to_csv = info['labels']
-        self.default_dir = ['train', 'val', 'test']
-        self.default_csv = ['dataset.csv', 'train.csv', 'val.csv', 'test.csv']
+        self.default_dir = ['train', 'validation', 'test']
+        self.default_csv = ['train.csv', 'validation.csv', 'test.csv']
 
     def update_dir(self, new_default_dir):
         """
@@ -61,14 +61,18 @@ class Checker:
         the number of elements in each folder and the number of rows in
         each CSV file.
         """
-        list_of_folder = self.default_dir
-        list_of_csv = self.default_csv
+        folders = self.default_dir
+        csvs = self.default_csv
 
-        for element_csv in list_of_csv:
-            for element_folder in list_of_folder:
-                folder_path = os.path.join(self.path_to_processed, element_folder)
-                print(f'The {element_folder} folder contains {len(os.listdir(folder_path))} elements')
+        print('---')
+        for i in range(len(csvs)):
+            folder_path = os.path.join(self.path_to_processed, folders[i])
+            print(f'The {folders[i]} folder contains {len(os.listdir(folder_path))} elements')
 
-                csv_path = os.path.join(self.path_to_csv, element_csv)
-                df = pd.read_csv(csv_path)
-                print(f'The {element_csv} contains {df.shape[0]} elements')
+            csv_path = os.path.join(self.path_to_csv, csvs[i])
+            df = pd.read_csv(csv_path)
+            print(f'The {csvs[i]} contains {df.shape[0]} rows')
+            print('---')
+
+if __name__ == '__main__':
+    Checker().check()

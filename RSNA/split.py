@@ -110,16 +110,17 @@ class Split:
 
         # Better shuffle one more!
         ds_training_validation = ds_training_validation.sample(frac=1).reset_index(drop=True)
-        ds_training, ds_validation = ds_training_validation[:splitter_train], ds_training_validation[splitter_train:splitter_val]
+        ds_training = ds_training_validation[:splitter_train]
+        ds_validation = ds_training_validation[splitter_train:splitter_val+splitter_train]
 
         # Saving datasets ...
         ds_training.to_csv(os.path.join(self.labels, 'train.csv'), index=False)
-        ds_validation.to_csv(os.path.join(self.labels, 'val.csv'), index=False)
+        ds_validation.to_csv(os.path.join(self.labels, 'validation.csv'), index=False)
         ds_test.to_csv(os.path.join(self.labels, 'test.csv'), index=False)
 
         # Copying images to their respective directories
         train = os.path.join(self.processed, 'train')
-        val = os.path.join(self.processed, 'val')
+        val = os.path.join(self.processed, 'validation')
         test = os.path.join(self.processed, 'test')
 
         for element in tqdm(os.listdir(self.raw)):
