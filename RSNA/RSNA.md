@@ -24,7 +24,8 @@ If you have decided to download the entire RSNA dataset, as shown in figure belo
 2. A file named "train.csv" containing the labels for the training files.
 3. A folder named "Bone Age Validation Set" containing: "boneage-validation-dataset-1.zip", "boneage-validation-dataset-2.zip", and "Validation Dataset.csv".
 
-<img src="https://github.com/giuseppeantoniomotisi/boneageassessment/raw/main/RSNA/images/download_rsna.png" alt="drawing" width="200"/>
+<p align="center">
+<img src="https://github.com/giuseppeantoniomotisi/boneageassessment/raw/main/RSNA/images/download_rsna.png" alt="drawing" width="400"/>
 
 So the initial structure of RSNA is:
 ```bash
