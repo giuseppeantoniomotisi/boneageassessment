@@ -18,16 +18,16 @@ def merge_and_split():
     Function to merge and split datasets.
     """
     # Merge datasets
-    # Merge().merge()
+    Merge().merge()
     # Split datasets
-    # Split().splitting()
+    Split().splitting()
 
 def balance():
     """
     Function to balance the dataset.
     """
     # Balance the dataset, creating images if required
-    # BalancingDataset().balance(create_images=False)
+    BalancingDataset().balance(create_images=False)
 
 def check():
     """
