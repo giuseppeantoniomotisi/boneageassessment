@@ -46,7 +46,8 @@ from __init__ import extract_info
 
 class BalancingDataset:
     """
-    BalancingDataset class handles the process of balancing a dataset by augmenting the training data with
+    BalancingDataset class handles the process of balancing a dataset by augmenting the
+    training data with
     additional samples and creating balanced CSV and image files.
 
     Attributes:
@@ -60,7 +61,7 @@ class BalancingDataset:
         key_value (str): Column name for values used for categorization.
 
     Methods:
-        find_element(limit_value, num_classes) -> tuple: 
+        find_element(limit_value, num_classes) -> tuple:
             Categorizes elements in a DataFrame into classes based on their values, and calculates
             delta values
             based on the histogram of key_values column and limit_value.
@@ -73,12 +74,12 @@ class BalancingDataset:
             Rotates the image by a given angle.
 
         create_images():
-            Creates augmented images based on the balanced CSV file and saves them to the processed
-            training folder.
+            Creates augmented images based on the balanced CSV file and saves them to the
+            processed training folder.
 
         balance(create_images: bool = False):
-            Balances the dataset by creating a balanced CSV file and optionally generating augmented
-            images.
+            Balances the dataset by creating a balanced CSV file and optionally generating
+            augmented images.
 
     """
     def __init__(self):
@@ -98,15 +99,14 @@ class BalancingDataset:
 
         self.key_id = 'id'
         self.key_value = 'boneage'
-    
+
     def find_element(self, limit_value, num_classes) -> tuple:
         """
         Summary:
             The function find_element seems designed to categorize elements in a DataFrame into
-            classes based on
-            their values in a particular column, key_values. Additionally, it calculates the delta
-            values based on
-            the histogram of key_values column and limit_value
+            classes based on their values in a particular column, key_values.
+            Additionally, it calculates the delta values based on the histogram of key_values
+            column and limit_value.
 
         Args:
             dataframe (pd.DataFrame): A pandas DataFrame containing the data.
@@ -126,14 +126,16 @@ class BalancingDataset:
         Returns:
             tuple: A tuple containing a dictionary representing classes and an array representing
             the delta values.
-               - The dictionary (dict): Keys represent the classes, and values represent the elements
-               in each class.
+               - The dictionary (dict): Keys represent the classes, and values represent the
+               elements in each class.
                - The array (numpy.ndarray): Represents the difference between the limit_value and
                the histogram values.
         """
         # Check self.dataframe type
         if type(self.dataframe) != pd.DataFrame:
-            raise TypeError(f"self.dataframe's expeted type is <class 'pandas.core.frame.DataFrame'>,not {type(self.dataframe)}")
+            type_error = f"dataframe's expeted type is" + \
+            "<class 'pandas.core.frame.DataFrame'>,not {type(self.dataframe)}"
+            raise TypeError(type_error)
 
         # Check limit_value type
         if type(limit_value) != int:
@@ -162,14 +164,15 @@ class BalancingDataset:
         for i in range(len(self.dataframe)):
             for j in range(num_classes):
                 if edges[j] <= self.dataframe[self.key_value][i] <= edges[j + 1]:
-                    classes[j].append(self.dataframe[self.key_id][i])  # Adjusted the key from j + 1 to j
+                    classes[j].append(self.dataframe[self.key_id][i])
                     break
 
         return classes, delta_array
 
     def create_bal_csv(self):
         """
-        Creates a balanced CSV file by augmenting the training data with additional samples and saves it.
+        Creates a balanced CSV file by augmenting the training data with additional
+        samples and saves it.
         """
         num = 19
         limit = 1500

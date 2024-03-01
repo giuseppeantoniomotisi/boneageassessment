@@ -20,7 +20,7 @@ directory.
 - Histogram (hist):
 Generates a histogram for a specific column in a given DataFrame.
 Takes a DataFrame, column index, and the number of bins as arguments.
-Note: The provided code may have a couple of issues. The variable all_images_dir is used in the 
+Note: The provided code may have a couple of issues. The variable all_images_dir is used in the
 splitting method, but it's not defined within the class. Additionally, there's a typo in the hist
 method where it should be dataframe[col_index].hist(bins=nbins) instead of
 dataframe[col_index].histogram(bins=nbins).
@@ -30,7 +30,7 @@ Original splitting is set:
 - 20% for validation data,
 - 10% per test data.
 If you decide to change splitting ratio, first check dimension of dataset and then use the
-updat_split method.  
+updat_split method.
 """
 import os
 import shutil
@@ -77,7 +77,8 @@ class Split:
             new_test (float): New ratio for test data.
 
         Raises:
-            ValueError: If the sum of new_train, new_val, and new_test is not equal to 1, or if any of the ratios is not between 0 and 1.
+            ValueError: If the sum of new_train, new_val, and new_test is not equal to 1,
+            or if any of the ratios is not between 0 and 1.
             TypeError: If new_train, new_val, or new_test is not a float.
         """
         # Check if the sum of ratios is equal to 1
@@ -97,8 +98,8 @@ class Split:
     def splitting(self):
         """
         Splits the dataset into training, validation, and test sets, and organizes images into
-        separate directories. 
-        
+        separate directories.
+
         You must check dimension of dataframe before use it; then choose a proper splitter.
         """
         # Splitting dataset

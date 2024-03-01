@@ -4,7 +4,8 @@ specified folders and CSV files. Here's a breakdown of what each part of the cod
 
 • Initialization:
 When an instance of the Checker class is created, it extracts information from an initialization
-module (__init__) to set default paths and dependencies, such as paths to processed data and CSV files.
+module (__init__) to set default paths and dependencies, such as paths to processed data and CSV
+files.
 update_dir(new_default_dir) method:
 This method allows updating the default directories with a new list provided as an argument.
 update_csv(new_default_csv) method:
@@ -12,16 +13,21 @@ This method allows updating the default CSV file names with a new list provided 
 • check() method:
 This method performs the actual checking process.
 It iterates through the default directories and CSV files.
-For each directory, it prints the number of elements (files or subdirectories) contained within it.
-For each CSV file, it reads the file using Pandas and prints the number of rows (elements) in the CSV.
+For each directory, it prints the number of elements (files or subdirectories) contained within
+it.
+For each CSV file, it reads the file using Pandas and prints the number of rows (elements) in the
+CSV.
 Overall, the Checker class is designed to provide a simple mechanism for verifying the contents of
-specific folders and CSV files, which can be useful in various data processing and validation tasks.
+specific folders and CSV files, which can be useful in various data processing and validation
+tasks.
 """
 import os
 import pandas as pd
 from __init__ import extract_info
 
 class Checker:
+    """The class Checker is a simple class for evaluate dataset transformation.
+    """
     def __init__(self):
         """
         Initialize Checker class with default paths and dependencies.
@@ -65,13 +71,13 @@ class Checker:
         csvs = self.default_csv
 
         print('---')
-        for i in range(len(csvs)):
+        for i in enumerate(csvs):
             folder_path = os.path.join(self.path_to_processed, folders[i])
             print(f'The {folders[i]} folder contains {len(os.listdir(folder_path))} elements')
 
             csv_path = os.path.join(self.path_to_csv, csvs[i])
-            df = pd.read_csv(csv_path)
-            print(f'The {csvs[i]} contains {df.shape[0]} rows')
+            dataframe = pd.read_csv(csv_path)
+            print(f'The {csvs[i]} contains {dataframe.shape[0]} rows')
             print('---')
 
 if __name__ == '__main__':

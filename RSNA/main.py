@@ -1,3 +1,6 @@
+"""
+main.py is the script that must be run to obtain the new dataset structure.
+"""
 # Importing necessary modules
 from __init__ import create_directories, check_path
 from merge import Merge
@@ -12,6 +15,7 @@ def preparatory():
     # Create necessary directories
     create_directories()
     # Check if the path is valid
+    check_path()
 
 def merge_and_split():
     """
@@ -45,4 +49,3 @@ if __name__ == '__main__':
     balance()
     # Check the integrity of the dataset
     check()
-

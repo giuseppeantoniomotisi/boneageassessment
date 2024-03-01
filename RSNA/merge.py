@@ -64,14 +64,18 @@ class Merge:
     """
     def __init__(self):
         """
-        Initializes the Merge class with default attributes for paths to training and validation CSV files.
+        Initializes the Merge class with default attributes for paths to training and
+        validation CSV files.
         """
         info = extract_info()
         self.path_to_train = info['train.csv'][0]  # Default path to the training CSV file
-        self.path_to_train_imgs = info['train_images_path'][0]  # Default path to the training images folder
+        # Default path to the training images folder
+        self.path_to_train_imgs = info['train_images_path'][0]
         self.path_to_val = info['val.csv'][0]  # Default path to the validation CSV file
-        self.path_to_val_imgs = info['val_images_path']  # Default path to the validation images folder
-        self.main_dir = info['main_dir']  # Default path for the dataset project (Desktop/boneageassessment/)
+        # Default path to the validation images folder
+        self.path_to_val_imgs = info['val_images_path']
+        # Default path for the dataset project (Desktop/boneageassessment/)
+        self.main_dir = info['main_dir']
         self.raw = info['raw']
         self.labels = info['labels']
 
@@ -93,10 +97,11 @@ class Merge:
 
         # Concatenate training and validation datasets
         merged_dataset = pd.concat([train, val], ignore_index=True)
-  
+
         # Save the merged dataset CSV file
         merged_name = os.path.join(self.labels, 'dataset.csv')
-        merged_dataset['id'] = merged_dataset['id'].apply(lambda x: str(x) + '.png' if '.png' not in str(x) else str(x))
+        merged_dataset['id'] = merged_dataset['id'].apply(lambda x: \
+            str(x) + '.png' if '.png' not in str(x) else str(x))
         merged_dataset.to_csv(merged_name, index=False)
 
         # Remove CSV files for training and validation
@@ -107,7 +112,9 @@ class Merge:
         """
         Merges images from training and validation folders to a single folder.
         """
-        input_folders = [self.path_to_train_imgs, self.path_to_val_imgs[0], self.path_to_val_imgs[1]]
+        input_folders = [self.path_to_train_imgs,
+                         self.path_to_val_imgs[0],
+                         self.path_to_val_imgs[1]]
         output_folder = self.raw
         for input_folder in input_folders:
             for element in os.listdir(input_folder):
