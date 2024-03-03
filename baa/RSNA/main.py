@@ -2,7 +2,7 @@
 main.py is the script that must be run to obtain the new dataset structure.
 """
 # Importing necessary modules
-from __init__ import create_directories, check_path
+from __init__ import create_directories, check_path, clean_workspace
 from merge import Merge
 from split import Split
 from balancing import BalancingDataset
@@ -49,3 +49,5 @@ if __name__ == '__main__':
     balance()
     # Check the integrity of the dataset
     check()
+    # Now clean workspace
+    clean_workspace()

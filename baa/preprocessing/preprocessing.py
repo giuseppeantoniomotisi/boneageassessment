@@ -1,0 +1,281 @@
+"""
+After data manipulation and data augmentation, what we need to do is to preprocess our images.
+This is step has two main purposes: one is to reduce the dataset size and the second is to clean
+as much as possible the images, making the background black and our subjects (the hands) shiny,
+i.e. with a higher level of gray. This expedient would create a dataset that would be more readable
+for our deep learning networks.
+Let's start by importing all the packages that we need to perform our preprocessing and then we
+define the functions that we are going to use throughout this step.
+
+Requirements: os, csv, numpy, matplolib, cv2 and mediapipe
+"""
+import os
+import csv
+import numpy as np
+from matplotlib import pyplot as plt
+import cv2
+import sys
+sys.path.append(os.path.join(os.getcwd(),'baa'))
+# import mediapipe as mp
+import utils
+
+class Preprocessing:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def in_box(vertex_x:int, vertex_y:int, image_width:int, image_height:int) -> tuple:
+        """
+        Takes as input the x and y coordinates of a point and checks whether it is inside or
+        outside a rectangle (for example an image).
+        If the point is inside the box, the function returns a tuple containing the x coordinate
+        as the first element and the y coordinate as the second element. Otherwise, if the point
+        is outside the box, it gets redefined on the border of the box and then the function
+        returns the tuple with the corrected coordinates.
+
+        Args:
+            - vertex_x (int): x coordinate of point
+            - vertex_y (int): y cooridnate of point
+            - image_width (int): width of the box (image)
+            - image_hieght (int): height of the box (image)
+
+        Returns:
+            tuple (int, int): x and y coordinates of the point (may be corrected).
+        """
+        if vertex_x < 0:
+            vertex_x = 0
+        elif vertex_x >= image_width:
+            vertex_x = image_width - 1
+        if vertex_y < 0:
+            vertex_y = 0
+        elif vertex_y >= image_height:
+            vertex_y = image_height - 1
+
+        vertex = (vertex_x, vertex_y)
+
+        return vertex
+
+    def rectangle(self,frame:np.ndarray, coord:list):
+        """
+        Takes as input a 2-D array (e.g. an image) and a 2-D list contianing the x and y
+        coordinates of two points, the upper left and the bottom right vertex of a rectangle.
+        Starting from this two points, it moves them by a fraction of the frame shape (frac)
+        and then with the in_box function check if they are inside frame (if they are not,
+        the function changes their coordinates). Returns two tuples, the first containing x
+        and y cooridnates of the top left vertex of an enlarged rectangle and the second one 
+        are the x and y coordinates of the bottom right vertex of the same rectangle.
+
+        Args:
+            - frame (np.ndarray): 2-D array (image)
+            - coord (list): 2-D list containing x and y coordinates of top left and bottom right vertex
+
+        Returns: 
+            tuple (int, int), tuple (int, int): coordinates of 'enlarged' vertices of rectangle
+        """
+        image_height = frame.shape[0]
+        image_width = frame.shape[1]
+        frac = 0.15
+        elong = image_height*frac
+        widen = image_width*frac
+        top_left_x = int(min(coord[0])-widen)
+        top_left_y = int(max(coord[1])+elong)
+        top_left = self.in_box(top_left_x, top_left_y, image_width, image_height)
+        bottom_right_x = int(max(coord[0])+widen)
+        bottom_right_y = int(min(coord[1])-elong)
+        bottom_right = self.in_box(bottom_right_x, bottom_right_y, image_width, image_height)
+
+        return top_left, bottom_right
+
+    @staticmethod
+    def cut_peak(h:np.ndarray, index:int, frac:float, filename:str) -> int:
+        """
+        Finds index corresponding to approximate end of background contribution in an X-ray image.
+        It takes as inputs the array histogram of the image, the index to which correpsonds the
+        maximum of the histogram, the peak fraction where to cut the maximum peak and the name of
+        the image file. By descending along the peak to its right side (therefore by assuming that
+        the maximum of the histogram is in the black shade region) the algorithm finds the index
+        (new_index) where the histogram value is less than the maximum of the histogram divided
+        by the peak fraction chosen. If the new_index is further than 10 levels of gray,it is
+        automatically set as index + 5 levels of gray. The code also checks if the index found is
+        too large (larger than the array size) and if it is the case, it puts the new_index = 0
+        and prints the name of the problematic image.
+
+        Args:
+            - h (np.ndarray): histogram array of some image
+             - index (int): index (and gray level) corresponding to histogram maximum
+            - frac (float): fraction of the histogram maximum where background ends
+            - filename (str): name of the image file
+
+        Returns:
+            int: the index found, corresponding to the last level of background
+        """
+        i = 1
+        if(index+i >= h.size):
+            print(filename)
+            return 0
+        while(h[index+i] > h[index]/frac):
+            i += 1
+            if(index+i >= h.size):
+                i = -index
+                print(filename)
+                break
+        new_index = index + i
+        if(new_index > 10 + index):
+            new_index = index + 5
+        return new_index
+
+    @staticmethod
+    def square(image:np.ndarray) -> np.ndarray:
+        """
+        It takes as input an image and outputs the image with same height and width,
+        by choosing as the square length side the greater between height and width
+        of the original image. The image is centered and where there is no original
+        image, the new image is black (gray level = 0).
+
+        Arg:
+            - image (np.ndarray): array of the input image
+
+        Returns:
+            np.ndarray: squared image
+         """
+        im_height = image.shape[0]
+        im_width = image.shape[1]
+        if(im_height >= im_width):
+            dim = im_height
+            canvas = np.zeros((dim, dim, 3))
+            canvas[:im_height, int(0.5*(dim-im_width)):int(0.5*(dim+im_width)), :] = image
+        else:
+            dim = im_width
+            canvas = np.zeros((dim, dim, 3))
+            canvas[int(0.5*(dim-im_height)):int(0.5*(dim+im_height)), :image.shape[1], :] = image
+        return canvas
+
+    @staticmethod
+    def resize(image:np.ndarray, dimension: tuple) -> np.ndarray:
+        """See documentation of OpenCV cv2.resize function
+        """
+        return cv2.resize(image, dimension)
+
+    @staticmethod
+    def histogram_equalization(image:np.ndarray) -> np.ndarray:
+        """Performs the histogram equalization of some image.
+        It takes as input an image and equalizes its histogram with the method 
+        presented here: https://en.wikipedia.org/wiki/Histogram_equalization.
+
+        Args:
+            - image (np.ndarray): array of some image
+
+        Returns:
+            np.ndarray: array of equalized image
+        """
+        histim = image.reshape(image.size)
+        h,e, = np.histogram(histim, range(0,256))
+        cdf = np.cumsum(h)
+        cdf_min = np.min(cdf[np.nonzero(cdf)])
+        cdf = np.append(cdf, 0.)
+        eq_im = np.round((cdf[image.astype(int)] - cdf_min)/(image.size - cdf_min) * 255)
+
+        return eq_im
+
+    @staticmethod
+    def brightness_aug(self,image:np.ndarray, filename) -> np.ndarray:
+        """This function was only used for augmented images (rotated), in order to
+        remove the white frame and the black background that was originated from the
+        rotation operation. The background gets set at the most occurred gray level
+        excluding pitch black (gray level = 0) and complete white (gray level = 255).
+
+        Args:
+            - image (np.ndarray): array of augmented image
+            - filename (str): name of the image file
+
+        Returns:
+            np.ndarray: array of corrected image
+        """
+
+        brighter = image.copy()
+        histim = brighter.reshape(brighter.size)
+        h, e = np.histogram(histim, range=(1,254), bins=253)
+        index = self.cut_peak(h, np.where(h==max(h))[0][0], 10., filename)
+
+        the_mask = image > index
+        mask = image < 255
+        brighter[~mask] = np.where(h==max(h))[0][0]
+        brighter[~the_mask] = np.where(h==max(h))[0][0]
+
+        return brighter
+
+    @staticmethod
+    def brightness(self,image:np.ndarray,filename) -> np.ndarray:
+        """Remove the background from the hand X-ray image we are delaing with.
+        By using the cut_peak function finds the index corresponding to the right
+        base of the higher peak of the image histogram (by assuming that this
+        peak is always corresponding to the background pixels). Then every pixel
+        value that is less than the found index or greater than 254 is set to 0.
+
+        Args:
+            - image (np.ndarray): array of some image
+            - filename (str): name of the image file
+
+        Returns:
+            np.ndarray: array of corrected image
+        """
+        histim = image.reshape(image.size)
+        h,e  = np.histogram(histim, range=(0,256), bins=256)
+        index = self.cut_peak(h, np.where(h==max(h))[0][0], 10., filename)
+
+        mask1 = image < 254
+        mask2 = image > index
+
+        brighter = image.copy()
+        brighter[~mask1] = 0
+        brighter[~mask2] = 0
+
+        return brighter
+
+    #def hand_recognition():
+
+if __name__ == '__main__':
+    print(os.getcwd())
+# #Path of to-be-processed images
+# path = "/boneageassessment/IMAGES/raw/train/"
+# #Destination path of processed images
+# to_path = "/boneageassessment/IMAGES/processed/train/" 
+# #Number of detected hands
+# hands = 0
+# mp_hands = mp.solutions.hands
+# hand = mp_hands.Hands()
+# #Creating csv file to register uncropped images
+# csv_file = 'uncropped.csv'
+# f = open(to_path+csv_file, 'w')
+# spamwriter = csv.writer(f, delimiter=';')
+# coord = [[],[]]
+# for filename in os.listdir(path):
+#     from_path = os.path.join(path, filename)
+#     frame = cv2.imread(from_path)
+#     image_width = frame.shape[1]
+#     image_height = frame.shape[0]
+#     results = hand.process(frame)
+#     hand_landmark = results.multi_hand_landmarks
+#     #If one is detected tha landmark coordinates are saved
+#     if hand_landmark:
+#       hands += 1
+#       for landmarks in hand_landmark:
+#         # Here is How to Get All the Coordinates
+#         for ids, landmrk in enumerate(landmarks.landmark):
+#           coord[0].append(landmrk.x * image_width)
+#           coord[1].append(landmrk.y * image_height)
+#       #Here we crop and process the image and then save it
+#       top_left, bottom_right = rectangle(frame, coord)
+#       cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
+#       processed_frame = preprocessing_image(cropped_frame, filename)
+#       cv2.imwrite(to_path+filename, processed_frame)
+#     else:
+#       #If no hand gets detected, the image only gets processed
+#       processed_frame = preprocessing_image(frame, filename)
+#       cv2.imwrite(to_path+filename, processed_frame)
+#       #Here we save all the uncropped images names
+#       spamwriter.writerow([f'{filename}'])
+#     coord = [[],[]]
+# f.close()
+# #The number of detected hands gets printed
+# print(f'Number of detected hands: {hands}')

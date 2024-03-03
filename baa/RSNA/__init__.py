@@ -51,7 +51,7 @@ def create_directories():
     """
     Create necessary directories.
     """
-    open_desktop()
+    open_downloads()
     current_dir = os.getcwd()
 
     # Creating directories
@@ -106,8 +106,8 @@ def check_path():
     """
     Check and update the RSNA paths.
     """
-    open_desktop()
-    path_file = os.path.join(os.getcwd(), 'boneageassessment', 'original_rsna_paths.txt')
+    open_downloads()
+    path_file = os.path.join(os.getcwd(), 'dataset', 'original_rsna_paths.txt')
     if os.path.exists(path_file):
         os.remove(path_file)
     with open(path_file, 'a') as input_file:
@@ -156,8 +156,8 @@ def extract_info() -> dict:
     - output_dict (dict): A dictionary containing paths to different datasets.
     """
     # Open the Desktop directory
-    open_desktop()
-    main = os.path.join(os.getcwd(),'boneageassessment')
+    open_downloads()
+    main = os.path.join(os.getcwd(),'dataset')
 
     # Get the path of the original RSNA paths file
     input_file = os.path.join(main, 'original_rsna_paths.txt')
@@ -192,7 +192,21 @@ def extract_info() -> dict:
 
     return output_dict
 
+def clean_workspace():
+    """Remove old directories from Documents folder.
+    """
+    open_downloads()
+
+    directories = ['Bone Age Validation Set','boneage-training-dataset']
+    for directory in directories:
+        path_to_remove = os.path.join(os.getcwd(),directory)
+        os.remove(path_to_remove)
+
+    path_file = os.path.join(os.getcwd(), 'dataset', 'original_rsna_paths.txt')
+    os.remove(path_file)
+
 if __name__ == '__main__':
-    #create_directories()
-    #check_path()
-    print(extract_info())
+    create_directories()
+    check_path()
+
+    clean_workspace()
