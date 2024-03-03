@@ -42,7 +42,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import cv2 as cv
-from __init__ import extract_info
+from tools import extract_info
 
 class BalancingDataset:
     """

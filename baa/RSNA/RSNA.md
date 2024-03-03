@@ -43,9 +43,9 @@ Starting from this structure, we want to obtain a more organized hierarchical st
 - The possibility to experiment with other subdivisions of the initial dataset.
 
 Files in RSNA directory:
-- `__init__.py`
+- `tools.py`
 
-`__init__.py` is used to create folders so that the correct paths used by the application can be constructed. Specifically, it switches from the subdivision proposed by RSNA (training, validation-1, validation-2), to a hierarchical structure of the type:
+`tools.py` is used to create folders so that the correct paths used by the application can be constructed. Specifically, it switches from the subdivision proposed by RSNA (training, validation-1, validation-2), to a hierarchical structure of the type:
 
 ```bash
 -- desktop

@@ -23,7 +23,7 @@ tasks.
 """
 import os
 import pandas as pd
-from __init__ import extract_info
+from tools import extract_info
 
 class Checker:
     """The class Checker is a simple class for evaluate dataset transformation.

@@ -36,7 +36,7 @@ import os
 import shutil
 import pandas as pd
 from tqdm import tqdm
-from __init__ import extract_info
+from tools import extract_info
 
 class Split:
     """
