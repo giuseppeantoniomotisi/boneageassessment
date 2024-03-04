@@ -171,6 +171,17 @@ class BoneAgeAssessment():
         self.batch_size = new_batch_size
     
     def __get_dataframe__(self,kind:str):
+        """Get a dataframe selecting a key.
+
+        Args:
+            kind (str): Type of data preparation.
+
+        Raises:
+            KeyError: Raised if the selected key is not allowed.
+
+        Returns:
+            pandas.DataFrame: Traininig or validation or test dataframe  
+        """
         if kind not in self.opts:
             raise KeyError(f"the selected key is not allowed. Chooices: {self.opts}")
         else:
@@ -182,7 +193,8 @@ class BoneAgeAssessment():
                 return self.test_df
                 
     def __get_generator__(self,kind:str):
-        """Prepare data generators for training, validation, or test.
+        """Get a generator selecting a key. If key is 'test', the function
+        returns images and labels.
 
         Args:
             kind (str): Type of data preparation.
@@ -191,7 +203,7 @@ class BoneAgeAssessment():
             KeyError: Raised if the selected key is not allowed.
 
         Returns:
-            _type_: Data generator or test data.
+            keras.generator: Data generator or test data.
         """
         if kind.isinstance(self.opts):
             raise KeyError(f"the selected key is not allowed. Chooices: {self.opts}")
@@ -227,6 +239,8 @@ class BoneAgeAssessment():
             return next(generator)
     
     def preparatory(self):
+        """Prepare data generators for training, validation, or test.
+        """
         self.train_generator = self.__get_generator__('train')
         self.validation_generator = self.__get_generator__('validation')
     
@@ -241,26 +255,7 @@ class BoneAgeAssessment():
         keras.Model: Compiled model.
         """
         optim = Adam(learning_rate=lr)
-        return model.compile(optimizer=optim,loss='mse',metrics=['mae', self.r_squared])
-    
-    def callbacks(self) -> list:
-        """Get a list of callbacks for model training.
-
-        Returns:
-            list: List of callbacks.
-        """
-        path = self.weights
-        checkpoint = ModelCheckpoint(path,
-                                     monitor='val_loss',
-                                     verbose=1,
-                                     save_best_only=True,
-                                     save_weights_only=True,
-                                     mode='min')
-    
-        early = EarlyStopping(monitor="val_loss",
-                              mode="min",
-                              patience=5)
-        return [checkpoint, early]
+        return model.compile(optimizer=optim,loss='mse',metrics=['mae', r_squared],run_eagerly=True)
     
     def loader(self, model, weight_name: str) -> keras.Model:
         """Load pre-trained weights into the model.
@@ -284,6 +279,18 @@ class BoneAgeAssessment():
         Returns:
             History: Training history.
         """
+        path = os.path.join(self.weights,'model.keras')
+        checkpoint = ModelCheckpoint(path,
+                                     monitor='val_loss',
+                                     verbose=1,
+                                     save_best_only=True,
+                                     save_weights_only=True,
+                                     mode='min')
+    
+        early = EarlyStopping(monitor="val_loss",
+                              mode="min",
+                              patience=5)
+        
         self.preparatory()
         history = model.fit(self.train_generator,
                             steps_per_epoch=len(self.train_df['id']) // self.batch_size[0],
@@ -291,7 +298,7 @@ class BoneAgeAssessment():
                             validation_data=self.validation_generator,
                             validation_steps=len(self.validation_df['id']) // self.batch_size[1],
                             epochs=num_epochs,
-                            callbacks=self.callbacks)
+                            callbacks=[checkpoint,early])
         model.save(os.path.join())
         return history
     
@@ -476,7 +483,7 @@ class Model:
             model.summary()
 
         return model
-    
+
     def vgg16regression_atn(self):
         """Create VGG16 regression model with attention mechanism.
 
@@ -521,7 +528,7 @@ class Model:
             model.summary()
 
         return model
-    
+
     def vgg16regression_atn_l1(self,reg_factor):
         """Create VGG16 regression model with attention mechanism and L1 regularization.
 
@@ -563,7 +570,7 @@ class Model:
             model.summary()
 
         return model, attn_layer
-    
+
     def vgg16regression_atn_l2(self,reg_factor):
         """Create VGG16 regression model with attention mechanism and L2 regularization.
 
@@ -605,7 +612,6 @@ class Model:
             model.summary()
 
         return model, attn_layer
-        
 
 if __name__ == '__main__':
     print(0)
