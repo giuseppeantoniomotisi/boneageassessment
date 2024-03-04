@@ -69,6 +69,20 @@ sys.path.append(sys.path[0].replace('age','preprocessing'))
 from utils import extract_info
 import preprocessing
 
+
+def r_squared(y_true, y_pred):
+    """Calculate R-squared metric.
+
+     Args:
+        y_true (tensor): True values.
+        y_pred (tensor): Predicted values.
+
+    Returns:
+        tensor: R-squared value.
+    """
+    SS_res = K.sum(K.square(y_true - y_pred)) 
+    SS_tot = K.sum(K.square(y_true - K.mean(y_true)))
+    return (1 - SS_res / (SS_tot + K.epsilon()))
 class BoneAgeAssessment():
     """Class for Bone Age Assessment model.
 
@@ -145,6 +159,8 @@ class BoneAgeAssessment():
         self.batch_size = (32,32,1396) #batch size for training, validation and test
         self.opts = ['train','validation','test']
         self.weights = os.path.join(extract_info('age'),'weights')
+        self.train_generator = 0
+        self.validation_generator = 0
     
     def update_batch_size(self,new_batch_size:tuple):
         """Update the batch size for training, validation, and test.
@@ -153,8 +169,19 @@ class BoneAgeAssessment():
             new_batch_size (tuple): New batch size values.
         """
         self.batch_size = new_batch_size
-        
-    def preparation(self,kind:str):
+    
+    def __get_dataframe__(self,kind:str):
+        if kind not in self.opts:
+            raise KeyError(f"the selected key is not allowed. Chooices: {self.opts}")
+        else:
+            if kind == 'train':
+                return self.train_df
+            elif kind == 'validation':
+                return self.validation_df
+            elif kind == 'test':
+                return self.test_df
+                
+    def __get_generator__(self,kind:str):
         """Prepare data generators for training, validation, or test.
 
         Args:
@@ -171,12 +198,15 @@ class BoneAgeAssessment():
         if kind == 'train':
             dataframe, directory = self.train_df, self.train
             batch_size = self.batch_size[0]
+            sort = True
         elif kind == 'validation':
             dataframe, directory = self.validation_df, self.validation
             batch_size = self.batch_size[1]
+            sort = True
         elif kind == 'test':
             dataframe, directory = self.test_df, self.test
             batch_size = self.batch_size[2]
+            sort = False
 
         dataframe_generator = ImageDataGenerator(rescale=1/255.)
         generator = dataframe_generator.flow_from_dataframe(
@@ -186,7 +216,7 @@ class BoneAgeAssessment():
             y_col= 'boneage',
             batch_size = batch_size,
             seed = 42,
-            shuffle = True,
+            shuffle = sort,
             class_mode= 'other',
             color_mode = 'rgb',
             target_size = self.image_size)
@@ -195,20 +225,10 @@ class BoneAgeAssessment():
         else:
             # If we work with test folder, it's better to return test_x and test_y
             return next(generator)
-
-    def r_squared(y_true, y_pred):
-        """Calculate R-squared metric.
-
-        Args:
-            y_true (tensor): True values.
-            y_pred (tensor): Predicted values.
-
-        Returns:
-            tensor: R-squared value.
-        """
-        SS_res = K.sum(K.square(y_true - y_pred)) 
-        SS_tot = K.sum(K.square(y_true - K.mean(y_true)))
-        return (1 - SS_res / (SS_tot + K.epsilon()))
+    
+    def preparatory(self):
+        self.train_generator = self.__get_generator__('train')
+        self.validation_generator = self.__get_generator__('validation')
     
     def compiler(self, model, lr: float = 0.0001):
         """Compile the model with specified optimizer and loss function.
@@ -264,12 +284,11 @@ class BoneAgeAssessment():
         Returns:
             History: Training history.
         """
-        train_generator = self.preparation('training')
-        validation_generator = self.preparation('validation')
-        history = model.fit(train_generator,
+        self.preparatory()
+        history = model.fit(self.train_generator,
                             steps_per_epoch=len(self.train_df['id']) // self.batch_size[0],
                             batch_size=self.batch_size[0],
-                            validation_data=validation_generator,
+                            validation_data=self.validation_generator,
                             validation_steps=len(self.validation_df['id']) // self.batch_size[1],
                             epochs=num_epochs,
                             callbacks=self.callbacks)
