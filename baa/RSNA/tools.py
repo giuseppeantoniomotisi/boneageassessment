@@ -8,7 +8,6 @@ validation-1, validation-2), to a hierarchical structure of the type:
     |-- IMAGES
         |-- labels
         |-- processed
-            |-- all-images
             |-- test
             |-- train
             |-- validation

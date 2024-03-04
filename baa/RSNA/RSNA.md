@@ -53,7 +53,6 @@ Files in RSNA directory:
     |-- IMAGES
         |-- labels
         |-- processed
-            |-- all-images
             |-- test
             |-- train
             |-- validation
