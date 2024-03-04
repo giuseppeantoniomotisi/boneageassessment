@@ -3,15 +3,15 @@ __init__.py is used to create folders so that the correct paths used by the appl
 be constructed. Specifically, it switches from the subdivision proposed by RSNA (training,
 validation-1, validation-2), to a hierarchical structure of the type:
 
-../Desktop
--- boneageassessment
+../Downloads
+-- dataset
     |-- IMAGES
         |-- labels
         |-- processed
             |-- all-images
             |-- test
             |-- train
-            |-- val
+            |-- validation
         |-- raw
 
 You can easily find your new dataset in the desktop!
