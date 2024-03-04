@@ -48,7 +48,7 @@ Files in RSNA directory:
 `tools.py` is used to create folders so that the correct paths used by the application can be constructed. Specifically, it switches from the subdivision proposed by RSNA (training, validation-1, validation-2), to a hierarchical structure of the type:
 
 ```bash
--- desktop
+-- downloads
   | -- boneageassesment
     |-- IMAGES 
       |-- labels
