@@ -16,12 +16,18 @@ from matplotlib import pyplot as plt
 import cv2
 import sys
 sys.path.append(os.path.join(os.getcwd(),'baa'))
-# import mediapipe as mp
-import utils
+import mediapipe as mp
+from utils import extract_info
 
 class Preprocessing:
     def __init__(self):
-        pass
+        self.main = extract_info('main')
+        self.baa = extract_info('baa')
+        self.raw = extract_info('raw')
+        self.labels = extract_info('labels')
+        self.train = extract_info('train')
+        self.validation = extract_info('validation')
+        self.test = extract_info('test')
 
     @staticmethod
     def in_box(vertex_x:int, vertex_y:int, image_width:int, image_height:int) -> tuple:
@@ -72,8 +78,7 @@ class Preprocessing:
         Returns: 
             tuple (int, int), tuple (int, int): coordinates of 'enlarged' vertices of rectangle
         """
-        image_height = frame.shape[0]
-        image_width = frame.shape[1]
+        image_height, image_width = frame.shape[0], frame.shape[1]
         frac = 0.15
         elong = image_height*frac
         widen = image_width*frac
@@ -177,7 +182,6 @@ class Preprocessing:
 
         return eq_im
 
-    @staticmethod
     def brightness_aug(self,image:np.ndarray, filename) -> np.ndarray:
         """This function was only used for augmented images (rotated), in order to
         remove the white frame and the black background that was originated from the
@@ -204,7 +208,6 @@ class Preprocessing:
 
         return brighter
 
-    @staticmethod
     def brightness(self,image:np.ndarray,filename) -> np.ndarray:
         """Remove the background from the hand X-ray image we are delaing with.
         By using the cut_peak function finds the index corresponding to the right
@@ -231,11 +234,99 @@ class Preprocessing:
         brighter[~mask2] = 0
 
         return brighter
+        
+    def preprocessing_image(self,image_name:str,show:bool,save:bool):
+        """_summary_
 
-    #def hand_recognition():
+        Args:
+            image_name (str): _description_
+            show (bool): _description_
+            save (bool): _description_
+
+        Raises:
+            Warning: _description_
+        """
+        # Source path of raw image in boneageassessment/dataset/IMAGES/raw/
+        from_path = os.path.join(self.raw,image_name)
+        # Destination path of processed image in boneageassessment/dataset/IMAGES/processed/train/
+        to_path = os.path.join(self.train,image_name)
+        
+        mp_hands = mp.solutions.hands
+        hand = mp_hands.Hands()
+
+        coord = [[],[]]
+
+        frame = cv2.imread(from_path)
+        image_width = frame.shape[1]
+        image_height = frame.shape[0]
+        results = hand.process(frame)
+        hand_landmark = results.multi_hand_landmarks
+
+        # If one is detected tha landmark coordinates are saved
+        if hand_landmark:
+            for landmarks in hand_landmark:
+                # Here is How to Get All the Coordinates
+                for ids, landmrk in enumerate(landmarks.landmark):
+                    coord[0].append(landmrk.x * image_width)
+                    coord[1].append(landmrk.y * image_height)
+                    # Here we crop and process the image and then save it
+                    top_left, bottom_right = self.rectangle(frame, coord)
+                    cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
+                    processed_frame = self.preprocessing_image(cropped_frame, from_path)
+                    if save:
+                        cv2.imwrite(to_path, processed_frame)
+                    if show:
+                        cv2.imshow(processed_frame)
+        else:
+            raise Warning(f"in {frame}, mediapipe didn't find a hand.")
+        
+    def preprocessing_directory(self,image_name:str,show:bool,save:bool):
+        """_summary_
+
+        Args:
+            image_name (str): _description_
+            show (bool): _description_
+            save (bool): _description_
+
+        Raises:
+            Warning: _description_
+        """
+        # Source path of raw image in boneageassessment/dataset/IMAGES/raw/
+        from_path = os.path.join(self.raw,image_name)
+        # Destination path of processed image in boneageassessment/dataset/IMAGES/processed/train/
+        to_path = os.path.join(self.train,image_name)
+        
+        mp_hands = mp.solutions.hands
+        hand = mp_hands.Hands()
+
+        coord = [[],[]]
+
+        frame = cv2.imread(from_path)
+        image_width = frame.shape[1]
+        image_height = frame.shape[0]
+        results = hand.process(frame)
+        hand_landmark = results.multi_hand_landmarks
+
+        # If one is detected tha landmark coordinates are saved
+        if hand_landmark:
+            for landmarks in hand_landmark:
+                # Here is How to Get All the Coordinates
+                for ids, landmrk in enumerate(landmarks.landmark):
+                    coord[0].append(landmrk.x * image_width)
+                    coord[1].append(landmrk.y * image_height)
+                    # Here we crop and process the image and then save it
+                    top_left, bottom_right = self.rectangle(frame, coord)
+                    cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
+                    processed_frame = self.preprocessing_image(cropped_frame, from_path)
+                    if save:
+                        cv2.imwrite(to_path, processed_frame)
+                    if show:
+                        cv2.imshow(processed_frame)
+        else:
+            raise Warning(f"in {frame}, mediapipe didn't find a hand.")
 
 if __name__ == '__main__':
-    print(os.getcwd())
+    Preprocessing().preprocessing_image('1377.png')
 # #Path of to-be-processed images
 # path = "/boneageassessment/IMAGES/raw/train/"
 # #Destination path of processed images
