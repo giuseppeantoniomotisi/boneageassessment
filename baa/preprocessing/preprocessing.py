@@ -321,9 +321,6 @@ class Preprocessing:
         process method to the cropped images; finally it saves them. Alternatively, if 
         it cannot find hands, it just applies the process method to the image and then 
         it saves it.
-
-
-
         """
         # Source path of raw image in boneageassessment/dataset/IMAGES/raw/
         loading_path = self.raw

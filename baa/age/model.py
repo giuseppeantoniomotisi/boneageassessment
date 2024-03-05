@@ -69,7 +69,15 @@ sys.path.append(sys.path[0].replace('age','preprocessing'))
 from utils import extract_info
 import preprocessing
 
+def mean_absolute_error(y_true,y_pred):
+    error = y_true - y_pred
+    return np.sum(np.abs(error)) / len(error)
 
+def mean_absolute_deviation(y_true,y_pred):
+    error = y_true - y_pred
+    return np.sum(np.abs(error - np.mean(error))) / len(error)
+
+@keras.saving.register_keras_serializable()
 def r_squared(y_true, y_pred):
     """Calculate R-squared metric.
 
@@ -149,6 +157,7 @@ class BoneAgeAssessment():
         self.IMAGES = extract_info('IMAGES')
         self.labels = extract_info('labels')
         self.processed = extract_info('processed')
+        self.age = extract_info('age')
         self.train = extract_info('train')
         self.train_df = pd.read_csv(os.path.join(self.labels, 'train_bal.csv'))
         self.validation = extract_info('validation')
@@ -161,14 +170,48 @@ class BoneAgeAssessment():
         self.weights = os.path.join(extract_info('age'),'weights')
         self.train_generator = 0
         self.validation_generator = 0
+        self.lr = 1e-05
+        self.reg_factor = 1e-03
+        self.EPOCHS = 5
     
-    def update_batch_size(self,new_batch_size:tuple):
+    def __update_batch_size__(self,new_batch_size,key:str):
         """Update the batch size for training, validation, and test.
 
         Args:
-            new_batch_size (tuple): New batch size values.
+            new_batch_size (int ot tuple): New batch size value if key is in
+            ['train','validation','test]. New batch size values if key is 'all'.
         """
-        self.batch_size = new_batch_size
+        new_opts = (self.opts()).append('all')
+        if key not in self.opts():
+            raise KeyError(f"the selected key is not allowed. Chooices: {new_opts}")
+        if key == 'train':
+            self.batch_size[0] = new_batch_size
+        if key == 'validation':
+            self.batch_size[1] = new_batch_size
+        if key == 'test':
+            self.batch_size[2] = new_batch_size
+        elif key == 'all':
+            if type(new_batch_size) != type([]):
+                raise TypeError('if you select the option all, your input is a tuple')
+            else:
+                self.batch_size = new_batch_size
+        
+    def __update_lr__(self,new_lr):
+        self.lr = new_lr
+    
+    def __update_reg_factor__(self,new_reg_factor):
+        self.lr = new_reg_factor
+    
+    def __update_epochs__(self,new_num_epochs):
+        self.EPOCHS = new_num_epochs
+    
+    def __show_info__(self):
+        return {'image size':self.image_size,
+                'batch size':self.batch_size,
+                'learning rate':self.lr,
+                'reg factor':self.reg_factor,
+                'number of epochs':self.EPOCHS,
+                'weights loc':self.weights}
     
     def __get_dataframe__(self,kind:str):
         """Get a dataframe selecting a key.
@@ -237,14 +280,14 @@ class BoneAgeAssessment():
         else:
             # If we work with test folder, it's better to return test_x and test_y
             return next(generator)
-    
+
     def preparatory(self):
         """Prepare data generators for training, validation, or test.
         """
         self.train_generator = self.__get_generator__('train')
         self.validation_generator = self.__get_generator__('validation')
-    
-    def compiler(self, model, lr: float = 0.0001):
+
+    def compiler(self,model):
         """Compile the model with specified optimizer and loss function.
 
         Args:
@@ -254,10 +297,10 @@ class BoneAgeAssessment():
         Returns:
         keras.Model: Compiled model.
         """
-        optim = Adam(learning_rate=lr)
+        optim = Adam(learning_rate=self.lr)
         return model.compile(optimizer=optim,loss='mse',metrics=['mae', r_squared],run_eagerly=True)
-    
-    def loader(self, model, weight_name: str) -> keras.Model:
+
+    def loader(self,model,weight_name:str) -> keras.Model:
         """Load pre-trained weights into the model.
 
         Args:
@@ -267,9 +310,9 @@ class BoneAgeAssessment():
         Returns:
             keras.Model: Model with loaded weights.
         """
-        return model.load_weights(os.path.join(self.weights, weight_name))
-    
-    def fitter(self, model, num_epochs: int):
+        return model.load_weights(os.path.join(self.weights,weight_name))
+
+    def fitter(self, model):
         """Train the model and return training history.
 
         Args:
@@ -286,22 +329,41 @@ class BoneAgeAssessment():
                                      save_best_only=True,
                                      save_weights_only=True,
                                      mode='min')
-    
+
         early = EarlyStopping(monitor="val_loss",
                               mode="min",
                               patience=5)
-        
+
         self.preparatory()
         history = model.fit(self.train_generator,
                             steps_per_epoch=len(self.train_df['id']) // self.batch_size[0],
                             batch_size=self.batch_size[0],
                             validation_data=self.validation_generator,
                             validation_steps=len(self.validation_df['id']) // self.batch_size[1],
-                            epochs=num_epochs,
+                            epochs=self.EPOCHS,
                             callbacks=[checkpoint,early])
         model.save(os.path.join())
         return history
-    
+
+    def fitter_dummy(self, model, train_generator, validation_generator):
+        """Train the model and return training history without callbacks.
+
+        Args:
+            model (keras.Model): The model to be trained.
+            num_epochs (int): Number of epochs for training.
+            train_generator(keras.generator): Keras training dataset generator.
+            validation_generator(keras.generator): Keras validation dataset generator.
+        Returns:
+            History: Training history.
+        """
+        history = model.fit(train_generator,
+                            steps_per_epoch=len(self.train_df['id']) // self.batch_size[0],
+                            batch_size=self.batch_size[0],
+                            validation_data=validation_generator,
+                            validation_steps=len(self.validation_df['id']) // self.batch_size[1],
+                            epochs=self.EPOCHS)
+        return history
+
     def get_attention_map_model(self, model):
         """Extract the attention layer from the model.
 
@@ -370,8 +432,8 @@ class BoneAgeAssessment():
         Args:
             weight (str): Name of the pre-trained weight file.
         """
-        test_x, test_y = self.preparation('test')
-        model = keras.models.load_model(os.path.join(self.weights,weight))
+        test_x, test_y = self.__get_generator__('test')
+        model = keras.models.load_model(os.path.join(self.weights,weight),safe_mode=False)
         predictions = (model.predict(test_x, steps = len(test_x))).flatten()
 
         test_evaluation = pd.DataFrame({'id':self.test_df['id'],
@@ -409,6 +471,13 @@ class BoneAgeAssessment():
         axs[1].set_ylabel('Occurences')
 
         plt.show()
+
+        results = pd.DataFrame({'MAE(months)':mean_absolute_error(test_y,predictions),
+                               'MAD(months)':mean_absolute_deviation(test_y,predictions),
+                               'Smaller abs error(months)':np.max(np.abs(predictions-test_y)),
+                               'Max error(months)':np.max(predictions-test_y),
+                               'Min error(months)':np.min(predictions-test_y)},dtype=float,index=[0])
+        results.to_csv(os.path.join(self.age,'results.csv'),index=False)
 
 class Model:
     """Class for Bone Age Assessment model creation.
