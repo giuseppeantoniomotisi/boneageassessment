@@ -10,7 +10,7 @@ define the functions that we are going to use throughout this step.
 Requirements: os, csv, numpy, matplolib, cv2 and mediapipe
 """
 import os
-import csv
+#import csv
 import numpy as np
 from matplotlib import pyplot as plt
 import cv2
@@ -182,7 +182,7 @@ class Preprocessing:
 
         return eq_im
 
-    def brightness_aug(self,image:np.ndarray, filename) -> np.ndarray:
+    def brightness_aug(self,image:np.ndarray, filename:str) -> np.ndarray:
         """This function was only used for augmented images (rotated), in order to
         remove the white frame and the black background that was originated from the
         rotation operation. The background gets set at the most occurred gray level
@@ -208,7 +208,7 @@ class Preprocessing:
 
         return brighter
 
-    def brightness(self,image:np.ndarray,filename) -> np.ndarray:
+    def brightness(self,image:np.ndarray,filename:str) -> np.ndarray:
         """Remove the background from the hand X-ray image we are delaing with.
         By using the cut_peak function finds the index corresponding to the right
         base of the higher peak of the image histogram (by assuming that this
@@ -235,16 +235,43 @@ class Preprocessing:
 
         return brighter
         
+    def process(self, image:np.ndarray, filename:str):
+        """This function makes use of brightness, histogram_equalization,
+        square and resize functions to preprocess the image. This is the optimized
+        sequence that gives back an approximately segmented hand X-ray image.
+
+        Args:
+        - image (np.ndarray): array of image to preprocess
+        - filename (str): name of the image file
+
+        Returns:
+        np.ndarray: array of preprocessed image
+        """
+        image_ = np.copy(image)
+        #image_ = brightness_aug(image_, filename)
+        image_ = self.brightness(image_, filename)
+        image_ = self.histogram_equalization(image_)
+        image_ = self.square(image_)
+        image_ = self.resize(image_, (399, 399)) 
+
+        return image_
+
+
     def preprocessing_image(self,image_name:str,show:bool,save:bool):
-        """_summary_
+        """Takes the hand x-ray image as input and makes use of mediapipe package
+        in order to find the hand in the image. If found, first crops the image with
+        a bounding box around the hand and then applies the process method to the
+        cropped image; finally it shows/saves it. Alternatively, if it cannot find 
+        hands, it just applies the process method to the image and then it shows/saves
+        it.
 
         Args:
-            image_name (str): _description_
-            show (bool): _description_
-            save (bool): _description_
+            image_name (str): name of the image file
+            show (bool): True if user wants the image to be shown, False otherwise
+            save (bool): True if user wants the image to be saved, False otherwise
 
         Raises:
-            Warning: _description_
+            Warning: if image doesn't get cropped, the program gives a warning.
         """
         # Source path of raw image in boneageassessment/dataset/IMAGES/raw/
         from_path = os.path.join(self.raw,image_name)
@@ -272,101 +299,78 @@ class Preprocessing:
                     # Here we crop and process the image and then save it
                     top_left, bottom_right = self.rectangle(frame, coord)
                     cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
-                    processed_frame = self.preprocessing_image(cropped_frame, from_path)
+                    processed_frame = self.process(cropped_frame, from_path)
                     if save:
                         cv2.imwrite(to_path, processed_frame)
                     if show:
                         cv2.imshow(processed_frame)
         else:
-            raise Warning(f"in {frame}, mediapipe didn't find a hand.")
+            print('The image was not cropped since no hand was detected!')
+            processed_frame = self.process(frame, image_name)
+            if save: 
+                cv2.imwrite(to_path, processed_frame)
+            if show:
+                cv2.imshow(processed_frame)
+
+        return 0
         
-    def preprocessing_directory(self,image_name:str,show:bool,save:bool):
-        """_summary_
+    def preprocessing_directory(self):
+        """Takes the hand x-ray images contained in some directory as input and makes
+        use of mediapipe package in order to find the hand in the images. If found, 
+        first crops the images with a bounding box around the hand and then applies the
+        process method to the cropped images; finally it saves them. Alternatively, if 
+        it cannot find hands, it just applies the process method to the image and then 
+        it saves it.
 
-        Args:
-            image_name (str): _description_
-            show (bool): _description_
-            save (bool): _description_
 
-        Raises:
-            Warning: _description_
+
         """
         # Source path of raw image in boneageassessment/dataset/IMAGES/raw/
-        from_path = os.path.join(self.raw,image_name)
+        loading_path = self.raw
         # Destination path of processed image in boneageassessment/dataset/IMAGES/processed/train/
-        to_path = os.path.join(self.train,image_name)
+        saving_path = self.train
         
         mp_hands = mp.solutions.hands
         hand = mp_hands.Hands()
+        hands = 0
 
         coord = [[],[]]
 
-        frame = cv2.imread(from_path)
-        image_width = frame.shape[1]
-        image_height = frame.shape[0]
-        results = hand.process(frame)
-        hand_landmark = results.multi_hand_landmarks
+        for filename in os.listdir(loading_path):
 
-        # If one is detected tha landmark coordinates are saved
-        if hand_landmark:
-            for landmarks in hand_landmark:
-                # Here is How to Get All the Coordinates
-                for ids, landmrk in enumerate(landmarks.landmark):
-                    coord[0].append(landmrk.x * image_width)
-                    coord[1].append(landmrk.y * image_height)
-                    # Here we crop and process the image and then save it
-                    top_left, bottom_right = self.rectangle(frame, coord)
-                    cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
-                    processed_frame = self.preprocessing_image(cropped_frame, from_path)
-                    if save:
+            from_path = os.path.join(loading_path, filename)
+            to_path = os.path.join(saving_path, filename)
+            frame = cv2.imread(from_path)
+            image_width = frame.shape[1]
+            image_height = frame.shape[0]
+            results = hand.process(frame)
+            hand_landmark = results.multi_hand_landmarks
+
+        
+            # If one is detected tha landmark coordinates are saved
+            if hand_landmark:
+                hands += 1
+                for landmarks in hand_landmark:
+                    # Here is How to Get All the Coordinates
+                    for ids, landmrk in enumerate(landmarks.landmark):
+                        coord[0].append(landmrk.x * image_width)
+                        coord[1].append(landmrk.y * image_height)
+                        # Here we crop and process the image and then save it
+                        top_left, bottom_right = self.rectangle(frame, coord)
+                        cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
+                        processed_frame = self.process(cropped_frame, from_path)
                         cv2.imwrite(to_path, processed_frame)
-                    if show:
-                        cv2.imshow(processed_frame)
-        else:
-            raise Warning(f"in {frame}, mediapipe didn't find a hand.")
+            else:
+                #If no hand gets detected, the image only gets processed
+                processed_frame = self.process(frame, filename)
+                cv2.imwrite(to_path, processed_frame)
+            coord = [[],[]]
+            print(f'{hands} hands images were correctly found and cropped \n /
+                  Total number of images = {len(os.listdir(loading_path))} \n /
+                  Percentage of cropped images = {100*hands/len(os.listdir(loading_path))}%')
+
+        return 0
 
 if __name__ == '__main__':
     Preprocessing().preprocessing_image('1377.png')
-# #Path of to-be-processed images
-# path = "/boneageassessment/IMAGES/raw/train/"
-# #Destination path of processed images
-# to_path = "/boneageassessment/IMAGES/processed/train/" 
-# #Number of detected hands
-# hands = 0
-# mp_hands = mp.solutions.hands
-# hand = mp_hands.Hands()
-# #Creating csv file to register uncropped images
-# csv_file = 'uncropped.csv'
-# f = open(to_path+csv_file, 'w')
-# spamwriter = csv.writer(f, delimiter=';')
-# coord = [[],[]]
-# for filename in os.listdir(path):
-#     from_path = os.path.join(path, filename)
-#     frame = cv2.imread(from_path)
-#     image_width = frame.shape[1]
-#     image_height = frame.shape[0]
-#     results = hand.process(frame)
-#     hand_landmark = results.multi_hand_landmarks
-#     #If one is detected tha landmark coordinates are saved
-#     if hand_landmark:
-#       hands += 1
-#       for landmarks in hand_landmark:
-#         # Here is How to Get All the Coordinates
-#         for ids, landmrk in enumerate(landmarks.landmark):
-#           coord[0].append(landmrk.x * image_width)
-#           coord[1].append(landmrk.y * image_height)
-#       #Here we crop and process the image and then save it
-#       top_left, bottom_right = rectangle(frame, coord)
-#       cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
-#       processed_frame = preprocessing_image(cropped_frame, filename)
-#       cv2.imwrite(to_path+filename, processed_frame)
-#     else:
-#       #If no hand gets detected, the image only gets processed
-#       processed_frame = preprocessing_image(frame, filename)
-#       cv2.imwrite(to_path+filename, processed_frame)
-#       #Here we save all the uncropped images names
-#       spamwriter.writerow([f'{filename}'])
-#     coord = [[],[]]
-# f.close()
-# #The number of detected hands gets printed
-# print(f'Number of detected hands: {hands}')
+
