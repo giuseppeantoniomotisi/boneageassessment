@@ -397,6 +397,13 @@ class BoneAgeAssessment():
         plt.colorbar()
         plt.show()
 
+    def training_evaluation(self, model):
+        """Evaluate and visualize the training process.
+
+        Args:
+            model (keras.Model): The trained model.
+            num_epochs (int): Number of epochs used for training.
+        """
         path_ckpnt = os.path.join(self.weights,'ckpnt','checkpoint_epoch_{epoch:02d}_model.keras')
         path_best = os.path.join(self.weights,'best_model.keras')
         checkpoint = ModelCheckpoint(path_ckpnt,
@@ -426,27 +433,28 @@ class BoneAgeAssessment():
         model.save(os.path.join(self.age,'last_model.keras'))
         self.model = model
 
+        epochs = np.arange(0,len(history('loss')),step=1)+1
         fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(15, 15))
-        axs[0, 0].plot(history['loss'])
-        axs[0, 0].plot(history['val_loss'])
+        axs[0, 0].plot(epochs,history['loss'])
+        axs[0, 0].plot(epochs,history['val_loss'])
         axs[0, 0].set_title('Model loss')
         axs[0, 0].set_ylabel('Loss')
         axs[0, 0].set_xlabel('Epoch')
-        axs[0, 0].legend(['train', 'val'], loc='upper left', fontsize=14)
+        axs[0, 0].legend(['train', 'val'], loc='upper left')
 
-        axs[0, 1].plot(history['mae'])
-        axs[0, 1].plot(history['val_mae'])
+        axs[0, 1].plot(epochs,history['mae'])
+        axs[0, 1].plot(epochs,history['val_mae'])
         axs[0, 1].set_title('Model MAE')
         axs[0, 1].set_ylabel('MAE')
         axs[0, 1].set_xlabel('Epoch')
-        axs[0, 1].legend(['train', 'val'], loc='upper left', fontsize=14)
+        axs[0, 1].legend(['train', 'val'], loc='upper left')
 
-        axs[1, 0].plot(history['r_squared'])
-        axs[1, 0].plot(history['val_r_squared'])
+        axs[1, 0].plot(epochs,history['r_squared'])
+        axs[1, 0].plot(epochs,history['val_r_squared'])
         axs[1, 0].set_title('Model $R^2$')
         axs[1, 0].set_ylabel('$R^2$')
         axs[1, 0].set_xlabel('Epoch')
-        axs[1, 0].legend(['train', 'val'], loc='upper left', fontsize=14)
+        axs[1, 0].legend(['train', 'val'], loc='upper left')
 
         axs[1, 1].axis('off')
         save_fig = os.path.join(self.results,'training_evaluation.png')
