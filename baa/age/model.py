@@ -98,8 +98,8 @@ class BoneAgeAssessment():
     evaluation, and visualization.
 
     Attributes:
-        main (str): Path to the main directory.
-        baa (str): Path to the Bone Age Assessment directory.
+        main (str): Path to the boneageassessment directory.
+        baa (str): Path to the baa directory.
         IMAGES (str): Path to the images directory.
         labels (str): Path to the labels directory.
         processed (str): Path to the processed data directory.
@@ -168,21 +168,21 @@ class BoneAgeAssessment():
         self.batch_size = (32,32,1396) #batch size for training, validation and test
         self.opts = ['train','validation','test']
         self.weights = os.path.join(extract_info('age'),'weights')
+        self.results = os.path.join(extract_info('age'),'weights')
         self.train_generator = 0
         self.validation_generator = 0
-        self.lr = 1e-05
-        self.reg_factor = 1e-03
-        self.EPOCHS = 5
+        self.lr = 1e-04
+        self.EPOCHS = 20
     
-    def __update_batch_size__(self,new_batch_size,key:str):
+    def __update_batch_size__(self,new_batch_size:int,key:str) -> None:
         """Update the batch size for training, validation, and test.
 
         Args:
             new_batch_size (int ot tuple): New batch size value if key is in
             ['train','validation','test]. New batch size values if key is 'all'.
         """
-        new_opts = (self.opts()).append('all')
-        if key not in self.opts():
+        new_opts = ['train','validation','test','all']
+        if key not in new_opts:
             raise KeyError(f"the selected key is not allowed. Chooices: {new_opts}")
         if key == 'train':
             self.batch_size[0] = new_batch_size
@@ -191,29 +191,25 @@ class BoneAgeAssessment():
         if key == 'test':
             self.batch_size[2] = new_batch_size
         elif key == 'all':
-            if type(new_batch_size) != type([]):
+            if type(new_batch_size) != type((0,0)):
                 raise TypeError('if you select the option all, your input is a tuple')
             else:
                 self.batch_size = new_batch_size
         
-    def __update_lr__(self,new_lr):
+    def __update_lr__(self,new_lr:float) -> None:
         self.lr = new_lr
     
-    def __update_reg_factor__(self,new_reg_factor):
-        self.lr = new_reg_factor
-    
-    def __update_epochs__(self,new_num_epochs):
+    def __update_epochs__(self,new_num_epochs:int) -> None:
         self.EPOCHS = new_num_epochs
     
-    def __show_info__(self):
+    def __show_info__(self) -> dict:
         return {'image size':self.image_size,
                 'batch size':self.batch_size,
                 'learning rate':self.lr,
-                'reg factor':self.reg_factor,
                 'number of epochs':self.EPOCHS,
                 'weights loc':self.weights}
     
-    def __get_dataframe__(self,kind:str):
+    def __get_dataframe__(self,kind:str) -> pd.DataFrame:
         """Get a dataframe selecting a key.
 
         Args:
@@ -246,7 +242,10 @@ class BoneAgeAssessment():
             KeyError: Raised if the selected key is not allowed.
 
         Returns:
-            keras.generator: Data generator or test data.
+            keras.generator: A DataFrameIterator yielding tuples of (x, y) where x is a
+            numpy array containing a batch of images with shape (batch_size, *target_size,
+            channels) and y is a numpy array of corresponding labels. If key is 'test', it
+            returns test_x and test_y.
         """
         if kind.isinstance(self.opts):
             raise KeyError(f"the selected key is not allowed. Chooices: {self.opts}")
@@ -281,8 +280,14 @@ class BoneAgeAssessment():
             # If we work with test folder, it's better to return test_x and test_y
             return next(generator)
 
+    def __change_training__(self,balanced:bool=True):
+        if balanced:
+            self.train_df = pd.read_csv(os.path.join(self.labels, 'train_bal.csv'))
+        else:
+            self.train_df = pd.read_csv(os.path.join(self.labels, 'train.csv'))
+
     def preparatory(self):
-        """Prepare data generators for training, validation, or test.
+        """Prepare data generators for training and validation.
         """
         self.train_generator = self.__get_generator__('train')
         self.validation_generator = self.__get_generator__('validation')
@@ -364,7 +369,7 @@ class BoneAgeAssessment():
                             epochs=self.EPOCHS)
         return history
 
-    def get_attention_map_model(self, model):
+    def get_attention_map_model(self, model:keras.models):
         """Extract the attention layer from the model.
 
         Args:
@@ -392,14 +397,35 @@ class BoneAgeAssessment():
         plt.colorbar()
         plt.show()
 
-    def training_evaluation(self, model, num_epochs: int):
-        """Evaluate and visualize the training process.
+        path_ckpnt = os.path.join(self.weights,'ckpnt','checkpoint_epoch_{epoch:02d}_model.keras')
+        path_best = os.path.join(self.weights,'best_model.keras')
+        checkpoint = ModelCheckpoint(path_ckpnt,
+                                     monitor='val_loss',
+                                     verbose=0,
+                                     save_best_only=True,
+                                     save_weights_only=True,
+                                     mode='min')
+        save_best = ModelCheckpoint(path_best,
+                                     monitor='val_loss',
+                                     verbose=1,
+                                     save_best_only=True,
+                                     mode='min')
+    
+        early = EarlyStopping(monitor="val_loss",
+                              mode="min",
+                              patience=10)
+        
+        self.preparatory()
+        history = model.fit(self.train_generator,
+                            steps_per_epoch=len(self.train_df['id']) // self.batch_size[0],
+                            batch_size=self.batch_size[0],
+                            validation_data=self.validation_generator,
+                            validation_steps=len(self.validation_df['id']) // self.batch_size[1],
+                            epochs=self.epochs,
+                            callbacks=[checkpoint,early,save_best])
+        model.save(os.path.join(self.age,'last_model.keras'))
+        self.model = model
 
-        Args:
-            model (keras.Model): The trained model.
-            num_epochs (int): Number of epochs used for training.
-        """
-        history = self.fitter(model, num_epochs)
         fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(15, 15))
         axs[0, 0].plot(history['loss'])
         axs[0, 0].plot(history['val_loss'])
@@ -423,17 +449,27 @@ class BoneAgeAssessment():
         axs[1, 0].legend(['train', 'val'], loc='upper left', fontsize=14)
 
         axs[1, 1].axis('off')
+        save_fig = os.path.join(self.results,'training_evaluation.png')
+        plt.savefig(fname=save_fig)
+        plt.close()
 
-        plt.show()
-
-    def model_evaluation(self,weight:str):
+    def model_evaluation(self,training:bool=True,weight:str=None):
         """Evaluate the model on the test set.
 
         Args:
-            weight (str): Name of the pre-trained weight file.
+            training (bool): if True, load the just trained model. Else
+                             load the weight specified by the input path,.
+            weight (str, optional): Name of the pre-trained weight file.
         """
         test_x, test_y = self.__get_generator__('test')
-        model = keras.models.load_model(os.path.join(self.weights,weight),safe_mode=False)
+        if training:
+            model = self.model
+        else:
+            if not weight is None:
+                model = keras.models.load_model(os.path.join(self.weights,weight),safe_mode=False)
+            else:
+                raise ValueError("you must specify the path to the weights!")
+
         predictions = (model.predict(test_x, steps = len(test_x))).flatten()
 
         test_evaluation = pd.DataFrame({'id':self.test_df['id'],
@@ -456,30 +492,35 @@ class BoneAgeAssessment():
                 axs[i][j].set_title(f"Real Age (months): {real_age[i][j]}\n" + \
                                     f"Predicted Age (months): {round(pred_age[i][j])}")
                 axs[i][j].axis('off')
-        plt.show()
-        
+        save_fig1 = os.path.join(self.results,'predictions.png')
+        plt.savefig(fname=save_fig1)
+        plt.close()
+
         fig2, axs = plt.subplots(2,1,figsize=(12,12))
-        axs[0].plot(test_y, predictions,'.','Predicted age')
-        axs[0].set_title('Prediction results with augmented datatraining')
+        axs[0].plot(test_y, predictions,'.',label='Predicted age')
+        axs[0].set_title('Predicted age vs real age')
         axs[0].plot(test_y, test_y, color='tab:red', label='Real age')
         axs[0].set_xlabel('Real age [months]')
         axs[0].set_ylabel('Predicted age [months]')
+        axs[0].legend(loc="upper left",fontsize=12)
 
         h, e, _ = axs[1].hist(test_evaluation['error'], bins=120, range=(-60,60))
-        axs[1].set_title('Predicted age error histogram (augmented datatraining)')
+        axs[1].set_title('Predicted age error histogram')
         axs[1].set_xlabel('Predicted age error [months]')
         axs[1].set_ylabel('Occurences')
-
-        plt.show()
+        axs[1].legend(loc="upper left",fontsize=12)
+        save_fig2 = os.path.join(self.results,'model_results.png')
+        plt.savefig(fname=save_fig2)
+        plt.close()
 
         results = pd.DataFrame({'MAE(months)':mean_absolute_error(test_y,predictions),
                                'MAD(months)':mean_absolute_deviation(test_y,predictions),
                                'Smaller abs error(months)':np.max(np.abs(predictions-test_y)),
                                'Max error(months)':np.max(predictions-test_y),
                                'Min error(months)':np.min(predictions-test_y)},dtype=float,index=[0])
-        results.to_csv(os.path.join(self.age,'results.csv'),index=False)
+        results.to_csv(os.path.join(self.results,'results.csv'),index=False)
 
-class Model:
+class BaaModel:
     """Class for Bone Age Assessment model creation.
 
     This class provides methods for creating different variations of
@@ -501,6 +542,9 @@ class Model:
 
         vgg16regression_atn_l2(reg_factor):
             Create VGG16 regression model with attention mechanism and L2 regularization.
+            
+        vgg16regression_l2(reg_factor):
+            Create VGG16 regression model with L2 regularization.
 
     """
     def __init__(self,input_size:tuple=(399,399,3),summ:bool=True):
@@ -520,7 +564,7 @@ class Model:
         self.input_size = input_size
         self.summ = summ
 
-    def vgg16regression(self):
+    def vgg16regression(self) -> keras.src.engine.functional.Functional:
         """Create a simplified VGG16 regression model.
 
         Returns:
@@ -553,7 +597,7 @@ class Model:
 
         return model
 
-    def vgg16regression_atn(self):
+    def vgg16regression_atn(self) -> keras.src.engine.functional.Functional:
         """Create VGG16 regression model with attention mechanism.
 
         Returns:
@@ -598,7 +642,7 @@ class Model:
 
         return model
 
-    def vgg16regression_atn_l1(self,reg_factor):
+    def vgg16regression_atn_l1(self,reg_factor:float) -> keras.src.engine.functional.Functional:
         """Create VGG16 regression model with attention mechanism and L1 regularization.
 
         Returns:
@@ -640,7 +684,7 @@ class Model:
 
         return model, attn_layer
 
-    def vgg16regression_atn_l2(self,reg_factor):
+    def vgg16regression_atn_l2(self,reg_factor:float) -> keras.src.engine.functional.Functional:
         """Create VGG16 regression model with attention mechanism and L2 regularization.
 
         Returns:
@@ -681,6 +725,63 @@ class Model:
             model.summary()
 
         return model, attn_layer
+    
+    def vgg16regression_l2(self, reg_factor:float) -> keras.src.engine.functional.Functional:
+        """Create VGG16 regression model with L2 regularization.
+
+        Returns:
+            keras.Model: VGG16 regression model.
+        """
+        # Define input layer
+        in_layer = Input(self.input_size)
+        # Load VGG16 model with pre-trained weights
+        base_model = VGG16(weights="imagenet", include_top=False, input_shape=self.input_size)
+        base_model.trainable = True
+
+        # Obtain features from VGG16 base
+        pt_features = base_model(in_layer)
+
+        # Apply global average pooling to the features
+        gap_features = GlobalAveragePooling2D()(pt_features)
+        gap_dr = Dropout(0.5)(gap_features)
+        dr_steps = Dropout(0.25)(Dense(1024, activation='elu', kernel_regularizer=l2(reg_factor))(gap_dr))
+        out_layer = Dense(1, activation='linear', kernel_regularizer=l2(reg_factor))(dr_steps)
+
+        # Compile the model
+        model = Model(inputs=[in_layer], outputs=[out_layer], name='regularized_VGG16')
+
+        # Show summary if summ flag is True
+        if self.summ:
+            model.summary()
+
+        return model
 
 if __name__ == '__main__':
-    print(0)
+    # Hyperparameters
+    LR = 1e-04
+    L2 = 1e-03
+    BATCH_SIZE = (32,32,1396)
+    EPOCHS = 20
+    
+    # Updates hyperparameters
+    BoneAgeAssessment().__update_batch_size__(BATCH_SIZE,'all')
+    BoneAgeAssessment().__update_epochs__(EPOCHS)
+    BoneAgeAssessment().__update_lr__(LR)
+    
+    # Show info
+    BoneAgeAssessment().__show_info__()
+    
+    # Now create the model
+    model = BaaModel(summ=False).vgg16regression_l2(L2)
+
+    # Compile the model
+    BoneAgeAssessment().compiler(model)
+
+    # Start training
+    BoneAgeAssessment().training_evaluation(model)
+
+    # Test the model with best weights of last model
+    WEIGHTS_NAME = 'model.keras'
+    PATH_TO_WEIGHTS = os.path.join(extract_info('main'),'baa','age','weights',WEIGHTS_NAME)
+    BoneAgeAssessment().model_evaluation(PATH_TO_WEIGHTS)
+
