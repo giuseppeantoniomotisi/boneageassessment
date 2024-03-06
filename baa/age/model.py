@@ -247,7 +247,7 @@ class BoneAgeAssessment():
             channels) and y is a numpy array of corresponding labels. If key is 'test', it
             returns test_x and test_y.
         """
-        if kind.isinstance(self.opts):
+        if kind not in self.opts:
             raise KeyError(f"the selected key is not allowed. Chooices: {self.opts}")
         if kind == 'train':
             dataframe, directory = self.train_df, self.train
