@@ -312,7 +312,7 @@ class Preprocessing:
             if show:
                 cv2.imshow(processed_frame)
 
-        return 0
+        return processed_frame
         
     def preprocessing_directory(self):
         """Takes the hand x-ray images contained in some directory as input and makes
@@ -362,12 +362,6 @@ class Preprocessing:
                 processed_frame = self.process(frame, filename)
                 cv2.imwrite(to_path, processed_frame)
             coord = [[],[]]
-            print(f'{hands} hands images were correctly found and cropped \n /
-                  Total number of images = {len(os.listdir(loading_path))} \n /
-                  Percentage of cropped images = {100*hands/len(os.listdir(loading_path))}%')
-
-        return 0
-
-if __name__ == '__main__':
-    Preprocessing().preprocessing_image('1377.png')
-
+            print(f'- {hands} hands images were correctly found and cropped')
+            print(f'- Total number of images = {len(os.listdir(loading_path))}')
+            print(f'- Percentage of cropped images = {100*hands/len(os.listdir(loading_path))}%')

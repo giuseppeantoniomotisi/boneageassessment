@@ -36,6 +36,7 @@ Methods include:
 - Model variations such as vgg16regression, vgg16regression_atn, vgg16regression_atn_l1, and
 vgg16regression_atn_l2.
 """
+import time
 import os
 import numpy as np
 import pandas as pd
@@ -67,7 +68,7 @@ import sys
 sys.path.append(sys.path[0].replace('/age',''))
 sys.path.append(sys.path[0].replace('age','preprocessing'))
 from utils import extract_info
-import preprocessing
+from preprocessing import preprocessing
 
 def mean_absolute_error(y_true,y_pred):
     error = y_true - y_pred
@@ -423,7 +424,7 @@ class BoneAgeAssessment():
                               patience=10)
         
         self.preparatory()
-        history = model.fit(self.train_generator,
+        history_class = model.fit(self.train_generator,
                             steps_per_epoch=len(self.train_df['id']) // self.batch_size[0],
                             batch_size=self.batch_size[0],
                             validation_data=self.validation_generator,
@@ -433,24 +434,34 @@ class BoneAgeAssessment():
         model.save(os.path.join(self.age,'last_model.keras'))
         self.model = model
 
-        epochs = np.arange(0,len(history('loss')),step=1)+1
+        epochs = np.arange(0,len(history_class.history('loss')),step=1)+1
+        loss, val_loss = history_class.history['loss'], history_class.history['val_loss']
+        mae, val_mae = history_class.history['mae'], history_class.history['val_mae']
+        r_squared_ = history_class.history['r_squared']
+        val_r_squared = history_class.history['val_r_squared']
+        filename = os.path.join(self.results,'history.txt')
+        with open(filename,'w') as fp:
+            fp.write("#epochs, loss, val_loss, mae, val_mae, r_squared, val_r_squared")
+            for i in range(len(epochs)):
+                fp.write(f"{epochs[i]}, {loss[i]}, {val_loss[i]}, {mae[i]}, {val_mae[i]}, {r_squared_[i]}, {val_r_squared[i]}\n")
+        
         fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(15, 15))
-        axs[0, 0].plot(epochs,history['loss'])
-        axs[0, 0].plot(epochs,history['val_loss'])
+        axs[0, 0].plot(epochs,loss)
+        axs[0, 0].plot(epochs,val_loss)
         axs[0, 0].set_title('Model loss')
         axs[0, 0].set_ylabel('Loss')
         axs[0, 0].set_xlabel('Epoch')
         axs[0, 0].legend(['train', 'val'], loc='upper left')
 
-        axs[0, 1].plot(epochs,history['mae'])
-        axs[0, 1].plot(epochs,history['val_mae'])
+        axs[0, 1].plot(epochs,mae)
+        axs[0, 1].plot(epochs,val_mae)
         axs[0, 1].set_title('Model MAE')
         axs[0, 1].set_ylabel('MAE')
         axs[0, 1].set_xlabel('Epoch')
         axs[0, 1].legend(['train', 'val'], loc='upper left')
 
-        axs[1, 0].plot(epochs,history['r_squared'])
-        axs[1, 0].plot(epochs,history['val_r_squared'])
+        axs[1, 0].plot(epochs,r_squared_)
+        axs[1, 0].plot(epochs,val_r_squared)
         axs[1, 0].set_title('Model $R^2$')
         axs[1, 0].set_ylabel('$R^2$')
         axs[1, 0].set_xlabel('Epoch')
@@ -527,6 +538,44 @@ class BoneAgeAssessment():
                                'Max error(months)':np.max(predictions-test_y),
                                'Min error(months)':np.min(predictions-test_y)},dtype=float,index=[0])
         results.to_csv(os.path.join(self.results,'results.csv'),index=False)
+        self.error = results['MAD(months)']
+    
+    def prediction(self,image:np.ndarray,show:bool=True,save:bool=True,image_id:int=0) -> float:
+        """Make prediction on an image and visualize the result.
+
+        Args:
+            image (np.ndarray): The input image array.
+            show (bool, optional): Whether to display the prediction plot. Defaults to True.
+            save (bool, optional): Whether to save the prediction plot. Defaults to True.
+            image_id (int, optional): Identifier for the image. Defaults to 0.
+
+        Returns:
+            float: Predicted age.
+        """
+        # First load the best weights for the model
+        weights = os.path.join(self.weights,'best_model.keras')
+        model = keras.models.load_model(weights,safe_mode=False)
+        # Now make prediction
+        pred = model.predict(image, steps = 1)
+        error = self.error # As error we use MAD in months
+
+        fig, ax = plt.subplots(figsize=(10,10))
+        z = ax.imshow(image,cmap='gray')
+        ax.set_title(f'Predicted age: {pred}$\pm${error}') # Results is shown as title
+        ax.axis('off')
+        plt.colorbar(z, ax=ax)
+        # Show flag, default if True
+        if show:
+            plt.show()
+            time.sleep(60) # It shows the image for 60 seconds, then close window
+            plt.close()
+        # Save flag, default if True
+        if save:
+            save_fig = os.path.join(os.getcwd(),'predictions',f'prediction_{image_id}.png')
+            plt.savefig(save_fig)
+            plt.close()
+
+        return f'Predicted age is {pred}$\pm${error}.'
 
 class BaaModel:
     """Class for Bone Age Assessment model creation.
@@ -733,7 +782,7 @@ class BaaModel:
             model.summary()
 
         return model, attn_layer
-    
+
     def vgg16regression_l2(self, reg_factor:float) -> keras.src.engine.functional.Functional:
         """Create VGG16 regression model with L2 regularization.
 
@@ -763,33 +812,3 @@ class BaaModel:
             model.summary()
 
         return model
-
-if __name__ == '__main__':
-    # Hyperparameters
-    LR = 1e-04
-    L2 = 1e-03
-    BATCH_SIZE = (32,32,1396)
-    EPOCHS = 20
-    
-    # Updates hyperparameters
-    BoneAgeAssessment().__update_batch_size__(BATCH_SIZE,'all')
-    BoneAgeAssessment().__update_epochs__(EPOCHS)
-    BoneAgeAssessment().__update_lr__(LR)
-    
-    # Show info
-    BoneAgeAssessment().__show_info__()
-    
-    # Now create the model
-    model = BaaModel(summ=False).vgg16regression_l2(L2)
-
-    # Compile the model
-    BoneAgeAssessment().compiler(model)
-
-    # Start training
-    BoneAgeAssessment().training_evaluation(model)
-
-    # Test the model with best weights of last model
-    WEIGHTS_NAME = 'model.keras'
-    PATH_TO_WEIGHTS = os.path.join(extract_info('main'),'baa','age','weights',WEIGHTS_NAME)
-    BoneAgeAssessment().model_evaluation(PATH_TO_WEIGHTS)
-
