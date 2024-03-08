@@ -356,7 +356,7 @@ class BoneAgeAssessment():
                               patience=5)
 
         self.preparatory()
-        history = model.fit(self.train_generator,
+        histo = model.fit(self.train_generator,
                             steps_per_epoch=len(self.train_df['id']) // self.batch_size[0],
                             batch_size=self.batch_size[0],
                             validation_data=self.validation_generator,
@@ -364,7 +364,7 @@ class BoneAgeAssessment():
                             epochs=self.EPOCHS,
                             callbacks=[checkpoint,early])
         model.save(os.path.join())
-        return history
+        return histo.history
 
     def fitter_dummy(self, model, train_generator, validation_generator):
         """Train the model and return training history without callbacks.
@@ -377,13 +377,13 @@ class BoneAgeAssessment():
         Returns:
             History: Training history.
         """
-        history = model.fit(train_generator,
+        histo = model.fit(train_generator,
                             steps_per_epoch=len(self.train_df['id']) // self.batch_size[0],
                             batch_size=self.batch_size[0],
                             validation_data=validation_generator,
                             validation_steps=len(self.validation_df['id']) // self.batch_size[1],
                             epochs=self.EPOCHS)
-        return history
+        return histo.history
 
     def get_attention_map_model(self, model:keras.models):
         """Extract the attention layer from the model.
