@@ -150,30 +150,45 @@ class BoneAgeAssessment():
             Evaluate the model on the test set.
 
     """
-    def __init__(self):
-        """_summary_
+    def __init__(self, image_size: tuple = (399, 399), batch_size: tuple = (32, 32, 1396), epochs: int = 20, lr: float = 1e-05, balanced: bool = True):
+        """Initialize the class with necessary parameters.
+
+        Args:
+            image_size (tuple, optional): Size of the images. Defaults to (399,399).
+            batch_size (tuple, optional): Batch size for training, validation, and test sets. Defaults to (32, 32, 1396).
+            epochs (int, optional): Number of epochs for training. Defaults to 20.
+            lr (float, optional): Learning rate. Defaults to 1e-05.
+            balanced (bool, optional): Flag indicating whether to use balanced datasets. Defaults to True.
         """
+        # Path to directories
         self.main = extract_info('main')
         self.baa = extract_info('baa')
         self.IMAGES = extract_info('IMAGES')
         self.labels = extract_info('labels')
         self.processed = extract_info('processed')
         self.age = extract_info('age')
+        self.weights = os.path.join(extract_info('age'), 'weights')
+        self.results = os.path.join(extract_info('age'), 'weights')
+
+        # Training, validation and test folders and labels
         self.train = extract_info('train')
-        self.train_df = pd.read_csv(os.path.join(self.labels, 'train_bal.csv'))
+        if balanced:
+            self.train_df = pd.read_csv(os.path.join(self.labels, 'train_bal.csv'))
+        else:
+            self.train_df = pd.read_csv(os.path.join(self.labels, 'train.csv'))
         self.validation = extract_info('validation')
         self.validation_df = pd.read_csv(os.path.join(self.labels, 'validation.csv'))
         self.test = extract_info('test')
         self.test_df = pd.read_csv(os.path.join(self.labels, 'test.csv'))
-        self.image_size = (399,399)
-        self.batch_size = (32,32,1396) #batch size for training, validation and test
-        self.opts = ['train','validation','test']
-        self.weights = os.path.join(extract_info('age'),'weights')
-        self.results = os.path.join(extract_info('age'),'weights')
-        self.train_generator = 0
-        self.validation_generator = 0
-        self.lr = 1e-04
-        self.EPOCHS = 20
+
+        # Instance BoneAgeAssessment() variables
+        self.image_size = image_size
+        self.batch_size = batch_size  # batch size for training, validation, and test
+        self.lr = lr
+        self.EPOCHS = epochs
+
+        # Utils
+        self.opts = ['train', 'validation', 'test']  # List of options for data sets
     
     def __update_batch_size__(self,new_batch_size:int,key:str) -> None:
         """Update the batch size for training, validation, and test.
@@ -434,11 +449,11 @@ class BoneAgeAssessment():
         model.save(os.path.join(self.age,'last_model.keras'))
         self.model = model
 
-        epochs = np.arange(0,len(history_class.history('loss')),step=1)+1
         loss, val_loss = history_class.history['loss'], history_class.history['val_loss']
         mae, val_mae = history_class.history['mae'], history_class.history['val_mae']
         r_squared_ = history_class.history['r_squared']
         val_r_squared = history_class.history['val_r_squared']
+        epochs = np.arange(0,len(loss),step=1)+1
         filename = os.path.join(self.results,'history.txt')
         with open(filename,'w') as fp:
             fp.write("#epochs, loss, val_loss, mae, val_mae, r_squared, val_r_squared")
@@ -534,7 +549,7 @@ class BoneAgeAssessment():
 
         results = pd.DataFrame({'MAE(months)':mean_absolute_error(test_y,predictions),
                                'MAD(months)':mean_absolute_deviation(test_y,predictions),
-                               'Smaller abs error(months)':np.max(np.abs(predictions-test_y)),
+                               'Smaller abs error(months)':np.min(np.abs(predictions-test_y)),
                                'Max error(months)':np.max(predictions-test_y),
                                'Min error(months)':np.min(predictions-test_y)},dtype=float,index=[0])
         results.to_csv(os.path.join(self.results,'results.csv'),index=False)

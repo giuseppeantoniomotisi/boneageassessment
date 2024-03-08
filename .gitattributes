@@ -7,3 +7,5 @@ baa/age/results/example/ filter=lfs diff=lfs merge=lfs -text
 baa/age/weights/case_b/best_model.keras filter=lfs diff=lfs merge=lfs -text
 baa/age/weights/case_b/ckpnt/ filter=lfs diff=lfs merge=lfs -text
 baa/age/weights/case_b/last_model.keras filter=lfs diff=lfs merge=lfs -text
+baa/age/weights/case_d/ filter=lfs diff=lfs merge=lfs -text
+baa/age/weights/case_a/ filter=lfs diff=lfs merge=lfs -text

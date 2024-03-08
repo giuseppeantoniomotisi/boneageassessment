@@ -29,26 +29,26 @@ def process(**params: dict):
             'Batch size': (32, 32, 1396),
             'Number of epochs': 20}
     # Updates hyperparameters
-    BoneAgeAssessment_instance = BoneAgeAssessment()
-    BoneAgeAssessment_instance.__update_batch_size__(params.get('Batch size', ()))
-    BoneAgeAssessment_instance.__update_epochs__(params.get('Number of epochs', 0))
+    baa_instance = BoneAgeAssessment()
+    baa_instance.__update_batch_size__(params.get('Batch size', ()))
+    baa_instance.__update_epochs__(params.get('Number of epochs', 0))
 
     # Show info
-    BoneAgeAssessment_instance.__show_info__()
+    baa_instance.__show_info__()
 
     # Now create the model
     model = BaaModel(summ=False).vgg16regression_l2(params.get('Regularization factor', 0.0))
 
     # Compile the model
-    BoneAgeAssessment_instance.compiler(model)
+    baa_instance.compiler(model)
 
     # Start training
-    BoneAgeAssessment_instance.training_evaluation(model)
+    baa_instance.training_evaluation(model)
 
     # Test the model with best weights of last model
     WEIGHTS_NAME = 'best_model.keras'
     PATH_TO_WEIGHTS = os.path.join(extract_info('main'), 'baa', 'age', 'weights', WEIGHTS_NAME)
-    BoneAgeAssessment_instance.model_evaluation(PATH_TO_WEIGHTS)
+    baa_instance.model_evaluation(PATH_TO_WEIGHTS)
 
 if __name__ == '__main__':
     # Define your parameters
