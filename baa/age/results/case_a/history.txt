@@ -1,4 +1,4 @@
-# Epoch, Loss, Val Loss, MAE, Val MAE, R Squared, Val R Squared
+# epochs, loss, val_loss, mae, val_mae, r_squared, val_r_squared
 1, 1311.8752, 290.44885, 25.3773, 13.6709, 0.6848, 0.8191
 2, 314.2900, 236.75728, 13.5961, 12.3849, 0.9232, 0.8530
 3, 225.3698, 174.40236, 11.5792, 10.2794, 0.9448, 0.8856

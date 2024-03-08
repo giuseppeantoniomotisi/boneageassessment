@@ -456,11 +456,11 @@ class BoneAgeAssessment():
         epochs = np.arange(0,len(loss),step=1)+1
         filename = os.path.join(self.results,'history.txt')
         with open(filename,'w') as fp:
-            fp.write("#epochs, loss, val_loss, mae, val_mae, r_squared, val_r_squared")
+            fp.write("# epochs, loss, val_loss, mae, val_mae, r_squared, val_r_squared")
             for i in range(len(epochs)):
                 fp.write(f"{epochs[i]}, {loss[i]}, {val_loss[i]}, {mae[i]}, {val_mae[i]}, {r_squared_[i]}, {val_r_squared[i]}\n")
         
-        fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(15, 15))
+        fig, axs = plt.subplots(nrows=2, ncols=2, sharex=True,frameon=True,figsize=(10,6))
         axs[0, 0].plot(epochs,loss)
         axs[0, 0].plot(epochs,val_loss)
         axs[0, 0].set_title('Model loss')
