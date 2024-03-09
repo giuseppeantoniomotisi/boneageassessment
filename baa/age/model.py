@@ -455,7 +455,7 @@ class BoneAgeAssessment():
         val_r_squared = history_class.history['val_r_squared']
         epochs = np.arange(0,len(loss),step=1)+1
         filename = os.path.join(self.results,'history.txt')
-        with open(filename,'w') as fp:
+        with open(filename,'w+') as fp:
             fp.write("# epochs, loss, val_loss, mae, val_mae, r_squared, val_r_squared")
             for i in range(len(epochs)):
                 fp.write(f"{epochs[i]}, {loss[i]}, {val_loss[i]}, {mae[i]}, {val_mae[i]}, {r_squared_[i]}, {val_r_squared[i]}\n")
@@ -510,7 +510,7 @@ class BoneAgeAssessment():
                                 'boneage_real':self.test_df['boneage'],
                                 'boneage_predict':predictions,
                                 'error':(predictions-test_y)})
-        test_evaluation.to_csv(os.path.join(self.age,'predicted_age.csv'))
+        test_evaluation.to_csv(os.path.join(self.results,'predicted_age.csv'))
 
         idx = np.random.randint(0,1396, size=(8,8))
         delta = 50
