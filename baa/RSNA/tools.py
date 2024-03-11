@@ -54,7 +54,7 @@ def create_directories():
     current_dir = os.getcwd()
 
     # Creating directories
-    main_baa_dir = os.path.join(current_dir, 'boneageassessment')
+    main_baa_dir = os.path.join(current_dir, 'dataset')
     os.makedirs(main_baa_dir, exist_ok=True)
 
     images_dir = os.path.join(main_baa_dir, 'IMAGES')
@@ -125,7 +125,6 @@ def check_path():
                 for content in contents:
                     content = os.path.join(element, content)
                     if '.zip' in content:
-                        print(content)
                         unzip_folder(content)
                         with open(path_file, 'a') as input_file:
                             input_file.write(f'{os.path.join(element, content[:-4])}\n')
@@ -162,9 +161,9 @@ def extract_info() -> dict:
     input_file = os.path.join(main, 'original_rsna_paths.txt')
 
     # Initialize the output dictionary with empty lists for different paths
-    output_dict = {'train.csv' : [],
-                   'train_images_path' : [],
-                   'val.csv' : [],
+    output_dict = {'train.csv' : '..',
+                   'train_images_path' : '..',
+                   'val.csv' : '..',
                    'val_images_path' : [],
                    'main_dir' : main,
                    'IMAGES' : os.path.join(main,'IMAGES'),
@@ -172,24 +171,37 @@ def extract_info() -> dict:
                    'raw' : os.path.join(main,'IMAGES','raw'),
                    'processed' : os.path.join(main,'IMAGES','processed')}
 
-    # Read lines from the input file and store them in a temporary list
-    temp = []
-    with open(input_file, 'r') as input:
-        temp = input.readlines()
+    if os.path.exists(input_file):
+        # Read lines from the input file and store them in a temporary list
+        temp = []
+        with open(input_file, 'r') as input:
+            temp = input.readlines()
 
-    # Iterate through each line in the temporary list
-    for line in temp:
-        # Check for keywords in each line and append paths accordingly to the output dictionary
-        if 'train.csv' in line:
-            output_dict['train.csv'].append(line.replace('\n', ''))
-        if 'boneage-training-dataset' in line:
-            output_dict['train_images_path'].append(line.replace('\n', ''))
-        if 'boneage-validation-dataset' in line:
-            output_dict['val_images_path'].append(line.replace('\n', ''))
-        if 'Validation Dataset.csv' in line:
-            output_dict['val.csv'].append(line.replace('\n', ''))
+        # Iterate through each line in the temporary list
+        for line in temp:
+            # Check for keywords in each line and append paths accordingly to the output dictionary
+            if 'train.csv' in line:
+                output_dict['train.csv'] = line.replace('\n', '')
+            if 'boneage-training-dataset' in line:
+                output_dict['train_images_path'] = line.replace('\n', '')
+            if 'boneage-validation-dataset' in line:
+                output_dict['val_images_path'].append(line.replace('\n', ''))
+            if 'Validation Dataset.csv' in line:
+                output_dict['val.csv'] = line.replace('\n', '')
 
-    return output_dict
+        return output_dict
+    else:
+        output_dict = {'train.csv' : '../dataset/IMAGES/labels/train.csv',
+                   'train_images_path' : '../dataset/IMAGES/processed/train',
+                   'val.csv' : '../dataset/IMAGES/labels/validation.csv',
+                   'val_images_path' : '../dataset/IMAGES/processed/validation',
+                   'main_dir' : '../dataset',
+                   'IMAGES' : os.path.join('../dataset','IMAGES'),
+                   'labels' : os.path.join('../dataset','IMAGES','labels'),
+                   'raw' : os.path.join('../dataset','IMAGES','raw'),
+                   'processed' : os.path.join('../dataset','IMAGES','processed')}
+        return output_dict
+        
 
 def clean_workspace():
     """Remove old directories from Documents folder.
@@ -198,14 +210,18 @@ def clean_workspace():
 
     directories = ['Bone Age Validation Set','boneage-training-dataset']
     for directory in directories:
-        path_to_remove = os.path.join(os.getcwd(),directory)
-        os.remove(path_to_remove)
-
+        if os.path.exists(path_to_remove):
+            path_to_remove = os.path.join(os.getcwd(),directory)
+            os.remove(path_to_remove)
+        else:
+            pass
     path_file = os.path.join(os.getcwd(), 'dataset', 'original_rsna_paths.txt')
-    os.remove(path_file)
+    if os.path.exists(path_file):
+        os.remove(path_file)
+    else:
+        pass
 
 if __name__ == '__main__':
     create_directories()
     check_path()
-
     clean_workspace()

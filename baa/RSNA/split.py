@@ -34,6 +34,7 @@ updat_split method.
 """
 import os
 import shutil
+import unittest
 import pandas as pd
 from tqdm import tqdm
 from tools import extract_info
@@ -59,9 +60,10 @@ class Split:
         self.labels = info['labels']
         self.processed = info['processed']
 
-        self.dataset = pd.read_csv(os.path.join(self.labels, 'dataset.csv'))
-        # Better shuffle dataset by rows!
-        self.dataset = self.dataset.sample(frac=1).reset_index(drop=True)
+        if os.path.exists(os.path.join(self.labels, 'dataset.csv')):
+            self.dataset = pd.read_csv(os.path.join(self.labels, 'dataset.csv'))
+            # Better shuffle dataset by rows!
+            self.dataset = self.dataset.sample(frac=1).reset_index(drop=True)
 
         self.train = 0.7  # training
         self.val = 0.2 # validation
@@ -93,6 +95,8 @@ class Split:
         if not all(isinstance(ratio, float) for ratio in (new_train, new_val, new_test)):
             raise TypeError("Ratios must be floats.")
 
+        self.train = new_train
+        self.val = new_val
         self.test = new_test
 
     def splitting(self):

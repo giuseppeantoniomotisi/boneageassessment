@@ -93,12 +93,18 @@ class BalancingDataset:
         self.path_to_train = os.path.join(info['processed'],'train')
         self.csv_name = 'train.csv'
 
-        dataframe = pd.read_csv(os.path.join(self.path_to_csv, self.csv_name))
-        dataframe.loc[:,'angle'] = np.zeros(dataframe.shape[0])
-        self.dataframe = dataframe
+        if os.path.exists(os.path.join(self.path_to_csv, self.csv_name)):
+            dataframe = pd.read_csv(os.path.join(self.path_to_csv, self.csv_name))
+            dataframe.loc[:,'angle'] = np.zeros(dataframe.shape[0])
+            self.dataframe = dataframe
 
         self.key_id = 'id'
         self.key_value = 'boneage'
+        
+    def __update_df__(self, new_dataframe_path):
+        dataframe = pd.read_csv(new_dataframe_path)
+        dataframe.loc[:,'angle'] = np.zeros(dataframe.shape[0])
+        self.dataframe = dataframe
 
     def find_element(self, limit_value, num_classes) -> tuple:
         """
@@ -169,13 +175,12 @@ class BalancingDataset:
 
         return classes, delta_array
 
-    def create_bal_csv(self):
+    def create_bal_csv(self, limit):
         """
         Creates a balanced CSV file by augmenting the training data with additional
         samples and saves it.
         """
         num = 19
-        limit = 1500
         list_of_names, delta_balanced = self.find_element(limit, num)
 
         temp_id, temp_boneage, temp_gender, temp_bn, temp_angles = [], [], [], [], []
@@ -239,8 +244,7 @@ class BalancingDataset:
         dataframe_aug_name = os.path.join(self.path_to_csv, 'augmented.csv')
         dataframe = pd.read_csv(dataframe_aug_name)
         iterations = dataframe.shape[0]
-        
-        
+
         for i in tqdm(range(iterations)):
             name = dataframe['id'][i]
             input_path = os.path.join(from_directory, name)
@@ -283,7 +287,7 @@ class BalancingDataset:
             create_images (bool): If True, generates and saves augmented images.
         """
         # First create csv file
-        self.create_bal_csv()
+        self.create_bal_csv(limit=1500)
         
         # Then creates image
         if create_images:

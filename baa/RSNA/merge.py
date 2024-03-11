@@ -68,10 +68,10 @@ class Merge:
         validation CSV files.
         """
         info = extract_info()
-        self.path_to_train = info['train.csv'][0]  # Default path to the training CSV file
+        self.path_to_train = info['train.csv']  # Default path to the training CSV file
         # Default path to the training images folder
-        self.path_to_train_imgs = info['train_images_path'][0]
-        self.path_to_val = info['val.csv'][0]  # Default path to the validation CSV file
+        self.path_to_train_imgs = info['train_images_path']
+        self.path_to_val = info['val.csv']  # Default path to the validation CSV file
         # Default path to the validation images folder
         self.path_to_val_imgs = info['val_images_path']
         # Default path for the dataset project (Desktop/boneageassessment/)
@@ -92,8 +92,9 @@ class Merge:
         val = pd.read_csv(self.path_to_val)
 
         # Switch columns and change column names for validation data
-        val = switch_columns(val, 'male', 'Bone Age (months)')
-        change_columns_names(val, ['id', 'boneage', 'male'])
+        if list(val.columns) == ['Image ID', 'male', 'Bone Age (months)']:
+            val = switch_columns(val, 'male', 'Bone Age (months)')
+            change_columns_names(val, ['id', 'boneage', 'male'])
 
         # Concatenate training and validation datasets
         merged_dataset = pd.concat([train, val], ignore_index=True)
