@@ -1,0 +1,6 @@
+{
+ "Learning rate": 1e-05,
+ "Regularization factor": 1e-04,
+ "Batch size": [32, 32, 1396],
+ "Number of epochs": 50
+}

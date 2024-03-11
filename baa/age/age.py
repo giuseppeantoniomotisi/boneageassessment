@@ -1,6 +1,13 @@
+import argparse
+import json
+import logging
 import os
 from model import BoneAgeAssessment, BaaModel
 from utils import extract_info
+
+# Configure logging
+logging.basicConfig(level=logging.WARNING, format='%(levelname)s: %(message)s')
+logger = logging.getLogger(__name__)
 
 def process(**params: dict):
     """Process function for hyperparameter tuning, model creation, training, and evaluation.
@@ -29,21 +36,21 @@ def process(**params: dict):
             'Batch size': (32, 32, 1396),
             'Number of epochs': 20}
     # Updates hyperparameters
-    baa_instance = BoneAgeAssessment()
-    baa_instance.__update_batch_size__(params.get('Batch size', ()))
-    baa_instance.__update_epochs__(params.get('Number of epochs', 0))
+    baa = BoneAgeAssessment()
+    baa.__update_batch_size__(params.get('Batch size', ()))
+    baa.__update_epochs__(params.get('Number of epochs', 0))
 
     # Show info
-    baa_instance.__show_info__()
+    baa.__show_info__()
 
     # Now create the model
     model = BaaModel(summ=False).vgg16regression_l2(params.get('Regularization factor', 0.0))
 
     # Compile the model
-    baa_instance.compiler(model)
+    baa.compiler(model)
 
     # Start training
-    baa_instance.training_evaluation(model)
+    baa.training_evaluation(model)
 
     # Test the model with best weights of last model
     WEIGHTS_NAME = 'best_model.keras'
@@ -51,16 +58,33 @@ def process(**params: dict):
     baa_instance.model_evaluation(PATH_TO_WEIGHTS)
 
 if __name__ == '__main__':
-    # Define your parameters
-    parameters = {
-        'Learning rate': ...,  # Fill in your learning rate
-        'Regularization factor': ...,  # Fill in your regularization factor
-        'Batch size': (..., ..., ...),  # Fill in your batch sizes
-        'Number of epochs': ...  # Fill in your number of epochs
-    }
+    # Example of parameters structure
+    # parameters = {
+    #   'Learning rate': ...,  # Fill in your learning rate
+    #   'Regularization factor': ...,  # Fill in your regularization factor
+    #   'Batch size': (..., ..., ...),  # Fill in your batch sizes
+    #   'Number of epochs': ...  # Fill in your number of epochs
+    #    }
+
+    parser = argparse.ArgumentParser(description='Bone Age Assessment Process')
+    parser.add_argument('--params_file', type=str, help='Path to the parameters JSON file')
+    parser.add_argument('--keyboard_input', action='store_true', help='Input parameters via keyboard')
+
+    args = parser.parse_args()
+
+    if args.params_file:
+        with open(args.params_file, 'r') as file:
+            parameters = json.load(file)
+    elif args.keyboard_input:
+        parameters = {
+            'Learning rate': float(input("Enter Learning rate: ")),
+            'Regularization factor': float(input("Enter Regularization factor: ")),
+            'Batch size': tuple(map(int, input("Enter Batch size (comma separated): ").split(','))),
+            'Number of epochs': int(input("Enter Number of epochs: "))
+        }
+    else:
+        parameters = None
+        logger.warning("No input method specified. Default values are used.")
 
     # Call the process function with the defined parameters
     process(**parameters)
-
-
-

@@ -78,6 +78,21 @@ def mean_absolute_deviation(y_true,y_pred):
     error = y_true - y_pred
     return np.sum(np.abs(error - np.mean(error))) / len(error)
 
+def lr_scheduler(epoch, initial_lr=1e-04, decay_rate=0.95):
+    """
+    Learning rate schedule function with exponential decay.
+
+    Parameters:
+    - epoch: Current epoch number
+    - initial_lr: Initial learning rate
+    - decay_rate: Rate of decay
+
+    Returns:
+    - lr: Updated learning rate
+    """
+    lr = initial_lr * np.power(decay_rate, epoch)
+    return lr
+
 @keras.saving.register_keras_serializable()
 def r_squared(y_true, y_pred):
     """Calculate R-squared metric.
@@ -433,7 +448,15 @@ class BoneAgeAssessment():
                                      verbose=1,
                                      save_best_only=True,
                                      mode='min')
-    
+        # differential_lr = ReduceLROnPlateau(monitor="val_loss",
+        #                                     factor=0.1,
+        #                                     patience=3,
+        #                                     verbose=1,
+        #                                     mode="auto",
+        #                                     min_delta=0.0001,
+        #                                     cooldown=0,
+        #                                     min_lr=1e-05)
+        schedule = LearningRateScheduler(lr_scheduler)
         early = EarlyStopping(monitor="val_loss",
                               mode="min",
                               patience=10)
@@ -445,7 +468,7 @@ class BoneAgeAssessment():
                             validation_data=self.validation_generator,
                             validation_steps=len(self.validation_df['id']) // self.batch_size[1],
                             epochs=self.epochs,
-                            callbacks=[checkpoint,early,save_best])
+                            callbacks=[checkpoint,early,save_best,schedule])
         model.save(os.path.join(self.age,'last_model.keras'))
         self.model = model
 
