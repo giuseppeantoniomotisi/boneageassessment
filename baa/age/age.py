@@ -55,7 +55,7 @@ def process(**params: dict):
     # Test the model with best weights of last model
     WEIGHTS_NAME = 'best_model.keras'
     PATH_TO_WEIGHTS = os.path.join(extract_info('main'), 'baa', 'age', 'weights', WEIGHTS_NAME)
-    baa_instance.model_evaluation(PATH_TO_WEIGHTS)
+    baa.model_evaluation(PATH_TO_WEIGHTS)
 
 if __name__ == '__main__':
     # Example of parameters structure
