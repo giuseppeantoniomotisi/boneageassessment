@@ -533,7 +533,7 @@ class BoneAgeAssessment():
                                 'boneage_real':self.test_df['boneage'],
                                 'boneage_predict':predictions,
                                 'error':(predictions-test_y)})
-        test_evaluation.to_csv(os.path.join(self.results,'predicted_age.csv'))
+        test_evaluation.to_csv(os.path.join(self.results,'predicted_age.csv'),index=False)
 
         idx = np.random.randint(0,1396, size=(8,8))
         delta = 50
