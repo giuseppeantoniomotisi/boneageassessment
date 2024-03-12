@@ -24,7 +24,7 @@ separate files into a single dataset file and consolidating images into a single
 """
 import os
 import pandas as pd
-from tools import extract_info
+from tools_rsna import extract_info
 
 def switch_columns(dataframe: pd.DataFrame, column_name1: str, column_name2: str) -> pd.DataFrame:
     """

@@ -36,7 +36,6 @@ Methods include:
 - Model variations such as vgg16regression, vgg16regression_atn, vgg16regression_atn_l1, and
 vgg16regression_atn_l2.
 """
-import time
 import os
 import numpy as np
 import pandas as pd
@@ -66,9 +65,9 @@ import keras.backend as K
 
 import sys
 sys.path.append(sys.path[0].replace('/age',''))
-sys.path.append(sys.path[0].replace('age','preprocessing'))
+sys.path.append(sys.path[0].replace('/age','/preprocessing'))
 from utils import extract_info
-from preprocessing import preprocessing
+from preprocessing import tools
 
 def mean_absolute_error(y_true,y_pred):
     error = y_true - y_pred
@@ -576,9 +575,8 @@ class BoneAgeAssessment():
                                'Max error(months)':np.max(predictions-test_y),
                                'Min error(months)':np.min(predictions-test_y)},dtype=float,index=[0])
         results.to_csv(os.path.join(self.results,'results.csv'),index=False)
-        self.error = results['MAD(months)']
     
-    def prediction(self,image:np.ndarray,show:bool=True,save:bool=True,image_id:int=0) -> float:
+    def prediction(self, image:np.ndarray, show:bool=True, save:bool=True, image_id:int=0) -> float:
         """Make prediction on an image and visualize the result.
 
         Args:
@@ -592,10 +590,11 @@ class BoneAgeAssessment():
         """
         # First load the best weights for the model
         weights = os.path.join(self.weights,'best_model.keras')
-        model = keras.models.load_model(weights,safe_mode=False)
+        model = keras.models.load_model(weights, safe_mode=False)
         # Now make prediction
         pred = model.predict(image, steps = 1)
-        error = self.error # As error we use MAD in months
+        results = pd.read_csv(os.path.join(self.results,'results.csv'))
+        error = results['MAD(months)'] # As error we use MAD in months
 
         fig, ax = plt.subplots(figsize=(10,10))
         z = ax.imshow(image,cmap='gray')
@@ -605,10 +604,9 @@ class BoneAgeAssessment():
         # Show flag, default if True
         if show:
             plt.show()
-            time.sleep(60) # It shows the image for 60 seconds, then close window
-            plt.close()
         # Save flag, default if True
         if save:
+            os.makedirs(os.path.join(os.getcwd(),'predictions'), exist_ok=True)
             save_fig = os.path.join(os.getcwd(),'predictions',f'prediction_{image_id}.png')
             plt.savefig(save_fig)
             plt.close()

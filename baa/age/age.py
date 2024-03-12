@@ -9,7 +9,7 @@ from utils import extract_info
 logging.basicConfig(level=logging.WARNING, format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 
-def process(**params: dict):
+def process(params: dict):
     """Process function for hyperparameter tuning, model creation, training, and evaluation.
 
     This function performs the following steps:
@@ -29,7 +29,7 @@ def process(**params: dict):
     Returns:
         None
     """
-    if params is None:
+    if params == None:
         params = {
             'Learning rate': 1e-05,
             'Regularization factor': 1e-04,
@@ -66,14 +66,14 @@ if __name__ == '__main__':
     #   'Number of epochs': ...  # Fill in your number of epochs
     #    }
 
-    parser = argparse.ArgumentParser(description='Bone Age Assessment Process')
-    parser.add_argument('--params_file', type=str, help='Path to the parameters JSON file')
+    parser = argparse.ArgumentParser(description='Bone Age Assessment Process - ML module')
+    parser.add_argument('--macro', type=str, help='Path to the parameters JSON file')
     parser.add_argument('--keyboard_input', action='store_true', help='Input parameters via keyboard')
 
     args = parser.parse_args()
 
-    if args.params_file:
-        with open(args.params_file, 'r') as file:
+    if args.macro:
+        with open(args.macro, 'r') as file:
             parameters = json.load(file)
     elif args.keyboard_input:
         parameters = {
@@ -87,4 +87,4 @@ if __name__ == '__main__':
         logger.warning("No input method specified. Default values are used.")
 
     # Call the process function with the defined parameters
-    process(**parameters)
+    process(parameters)

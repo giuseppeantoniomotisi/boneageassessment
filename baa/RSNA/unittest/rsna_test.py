@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 sys.path.append(sys.path[0].replace('/unittest',''))
-import tools
+import baa.RSNA.tools_rsna as tools_rsna
 import merge
 import split
 import balancing
@@ -17,20 +17,20 @@ class TestTools(unittest.TestCase):
     def test_open_desktop(self):
         # This is a basic test to check if open_desktop changes directory
         # We assume that the function is correctly implemented
-        tools.open_desktop()
+        tools_rsna.open_desktop()
         # Assert that the current directory is now the Desktop directory
         self.assertEqual(os.getcwd(), os.path.expanduser("~/Desktop"))
 
     def test_open_downloads(self):
         # This is a basic test to check if open_downloads changes directory
         # We assume that the function is correctly implemented
-        tools.open_downloads()
+        tools_rsna.open_downloads()
         # Assert that the current directory is now the Downloads directory
         self.assertEqual(os.getcwd(), os.path.expanduser("~/Downloads"))
 
     def test_create_directories(self):
         # Test if the directories are created properly
-        tools.create_directories()
+        tools_rsna.create_directories()
         # Check if the directories exist
         self.assertTrue(os.path.exists("dataset"))
         self.assertTrue(os.path.exists("dataset/IMAGES"))
@@ -47,7 +47,7 @@ class TestTools(unittest.TestCase):
         with zipfile.ZipFile("test.zip", 'w') as zip_file:
             zip_file.write("test.txt")
         # Call the function to be tested
-        tools.unzip_folder("test.zip")
+        tools_rsna.unzip_folder("test.zip")
         # Check if the zip file is successfully unzipped
         self.assertFalse(os.path.exists("test.zip"))
         self.assertTrue(os.path.exists("test"))

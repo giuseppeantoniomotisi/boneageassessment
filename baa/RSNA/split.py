@@ -37,7 +37,7 @@ import shutil
 import unittest
 import pandas as pd
 from tqdm import tqdm
-from tools import extract_info
+from tools_rsna import extract_info
 
 class Split:
     """

@@ -1,10 +1,10 @@
 import argparse
 import os
 from utils import extract_info
-from preprocessing.preprocessing import Preprocessing
-from age.model import BoneAgeAssessment, BaaModel
+from preprocessing.tools import Preprocessing
+from age.model import BoneAgeAssessment
 
-def prediction(**args: dict) -> str:
+def process(image_name:str, image_path:str, save:bool=True) -> str:
     """Predict the age of an individual based on an input image.
 
     This function performs the following steps:
@@ -12,35 +12,31 @@ def prediction(**args: dict) -> str:
     2. Loads the Bone Age Assessment model and makes a prediction based on the preprocessed image.
 
     Args:
-        **args (dict): A dictionary containing the following parameters:
-            - 'image name': String representing the name of the input image file.
-            - 'path_to_image': String representing the path to the input image file.
-            - 'save': Boolean indicating whether to save the preprocessed image.
+        image_name (str): String representing the name of the input image file.
+        image_path (str): String representing the path to the input image file.
+        save (str, optional): Boolean indicating whether to save the preprocessed image.
 
     Returns:
         str: A string representing the prediction result.
     """
-    if args is None:
-        raise ValueError("**args is a dictionary containing: image name','path_to_image','save'")
-    image = os.path.join(args['path name'], args['image name'])
+    image = os.path.join(image_path, image_name)
 
     # First preprocess the image
     prep_instance = Preprocessing()
-    preprocessed_image = prep_instance.preprocessing_image(image_name=image, save=args['save'])
+    preprocessed_image = prep_instance.preprocessing_image(image_name=image, save=save)
 
     # Now load model and make prediction
     baa_instance = BoneAgeAssessment()
-    prediction = baa_instance.prediction(preprocessed_image, show=True, save=True, image_id=2)
+    prediction = baa_instance.prediction(preprocessed_image, show=True, save=save, image_id=image_name[:-4])
     # prediction uses the best_model.keras
     return prediction
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Predict the age of an individual based on an input image.')
     parser.add_argument('image_name', type=str, help='Name of the input image file')
-    parser.add_argument('path_to_image', type=str, help='Path to the input image file')
-    parser.add_argument('--save', action='store_true', help='Whether to save the preprocessed image')
+    parser.add_argument('image_path', type=str, help='Path to the input image file')
+    parser.add_argument('--save', action='store_true', help='Indicate whether to save the preprocessed image')
 
     args = parser.parse_args()
-
-    prediction_result = prediction(args.image_name, args.path_to_image, args.save)
-    print(prediction_result)
+    prediction = process(args.image_name, args.image_path, args.save)
+    print(prediction)
