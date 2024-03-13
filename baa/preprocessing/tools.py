@@ -107,7 +107,7 @@ class Preprocessing:
 
         Args:
             - h (np.ndarray): histogram array of some image
-             - index (int): index (and gray level) corresponding to histogram maximum
+            - index (int): index (and gray level) corresponding to histogram maximum
             - frac (float): fraction of the histogram maximum where background ends
             - filename (str): name of the image file
 
@@ -284,6 +284,8 @@ class Preprocessing:
         coord = [[],[]]
 
         frame = cv2.imread(from_path)
+        if type(frame) is not np.ndarray:
+            raise TypeError(f'{image_name} was not correctly converted in a numpy array!')
         image_width = frame.shape[1]
         image_height = frame.shape[0]
         results = hand.process(frame)
@@ -338,6 +340,8 @@ class Preprocessing:
             from_path = os.path.join(loading_path, filename)
             to_path = os.path.join(saving_path, filename)
             frame = cv2.imread(from_path)
+            if type(frame) is not np.ndarray:
+                raise TypeError(f'{filename} was not correctly converted in a numpy array!')
             image_width = frame.shape[1]
             image_height = frame.shape[0]
             results = hand.process(frame)
