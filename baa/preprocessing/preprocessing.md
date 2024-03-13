@@ -1,6 +1,6 @@
 # Dataset: image preprocessing
 
-After data manipulation and data augmentation, what we need to do is to preprocess our images. This is step has two main purposes: one is to reduce the dataset size and the second is to clean as much as possible the images, making the background black and our subjects (the hands) shiny, i.e. with a higher level of gray. This expedient would create a dataset that would be more readable for our deep learning networks.
+After data manipulation and data augmentation, what we need to do is to preprocess our images. This step has two main purposes: one is to reduce the dataset size and the second is to clean as much as possible the images, making the background black and our subjects (the hands) shiny, i.e. with a higher level of gray. This expedient would create a dataset that would be more readable for our deep learning networks.
 Let's start by importing all the packages that we need to perform our preprocessing and then we define the functions that we are going to use throughout this step.
 
 Requirements: os, csv, numpy, matplolib, cv2 and mediapipe
