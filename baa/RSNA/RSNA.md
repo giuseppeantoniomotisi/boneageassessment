@@ -1,4 +1,4 @@
-# RSNA dataset
+# The `RSNA` dataset
 
 **Overview**
 - Dimension: 10.93 GB
@@ -29,7 +29,7 @@ If you have decided to download the entire RSNA dataset, as shown in figure belo
 
 So the initial structure of RSNA is:
 ```bash
--- downloads
+../Downloads
   |-- boneage-training-dataset
   |-- train.csv 
   |-- Bone\ Age\ Validation\ Set
@@ -92,6 +92,6 @@ cd ../boneageassessment/RSNA/
 3. Then use command line:
 
 ```bash
-python3 main.py
+python3 rsna.py
 ```
-4. Now dataset is in your desktop.
+4. Now dataset is in Downloads.

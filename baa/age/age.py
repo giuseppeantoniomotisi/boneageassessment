@@ -1,8 +1,33 @@
+"""
+This Python script is designed for Bone Age Assessment in Machine Learning. It uses a
+combination of hyperparameter tuning, model creation, training, and evaluation processes.
+Here's a breakdown of what the code does:
+
+1. Imports: The script imports necessary modules such as argparse for parsing command-line
+arguments, json for handling JSON files, logging for logging messages, os for operating
+system-related functionalities, and modules from the local project (model.py and utils.py).
+2. Configuration: Sets up logging configurations to control the verbosity and format of log
+messages.
+3. Process Function: Defines a function named process that takes a dictionary of parameters
+as input. This function handles the entire workflow including hyperparameter tuning, model
+creation, training, and evaluation.
+4. Argument Parsing: Parses command-line arguments using argparse. The script can accept
+parameters either from a JSON file (--macro) or through keyboard input (--keyboard_input).
+If neither option is provided, it uses default values.
+5. Parameter Handling: Reads parameters from either a JSON file or keyboard input, or uses
+default values if no input method is specified.
+6. Execution: Calls the process function with the parameters obtained from the argument parsing
+step.
+
+In summary, this script provides a streamlined workflow for Bone Age Assessment, allowing for
+easy experimentation with different hyperparameters and input methods.
+"""
 import argparse
 import json
 import logging
 import os
-from model import BoneAgeAssessment, BaaModel
+from model import BoneAgeAssessment
+from model import BaaModel
 from utils import extract_info
 
 # Configure logging
@@ -29,12 +54,13 @@ def process(params: dict):
     Returns:
         None
     """
-    if params == None:
+    if params is None:
         params = {
             'Learning rate': 1e-05,
             'Regularization factor': 1e-04,
             'Batch size': (32, 32, 1396),
             'Number of epochs': 20}
+
     # Updates hyperparameters
     baa = BoneAgeAssessment()
     baa.__update_batch_size__(params.get('Batch size', ()))
@@ -53,9 +79,9 @@ def process(params: dict):
     baa.training_evaluation(model)
 
     # Test the model with best weights of last model
-    WEIGHTS_NAME = 'best_model.keras'
-    PATH_TO_WEIGHTS = os.path.join(extract_info('main'), 'baa', 'age', 'weights', WEIGHTS_NAME)
-    baa.model_evaluation(PATH_TO_WEIGHTS)
+    weights_name = 'best_model.keras'
+    path_to_weights = os.path.join(extract_info('main'), 'baa', 'age', 'weights', weights_name)
+    baa.model_evaluation(path_to_weights)
 
 if __name__ == '__main__':
     # Example of parameters structure

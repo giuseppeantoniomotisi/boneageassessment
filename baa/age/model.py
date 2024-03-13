@@ -41,22 +41,21 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-import keras
+from tensorflow.python import keras
 from keras.preprocessing.image import ImageDataGenerator
 from keras.applications.vgg16 import VGG16
 from keras.layers import (GlobalAveragePooling2D,
                           Dense,
                           Dropout,
-                          Flatten,
                           Input,
                           Conv2D,
                           multiply,
                           LocallyConnected2D,
                           Lambda,
                           BatchNormalization)
-from keras.models import Model, Sequential
+from keras.models import Model
 from keras.optimizers import Adam
-from keras.regularizers import l2,l1
+from keras.regularizers import l2
 from keras.callbacks import (ModelCheckpoint,
                              LearningRateScheduler,
                              EarlyStopping,
@@ -92,7 +91,7 @@ def lr_scheduler(epoch, initial_lr=1e-04, decay_rate=0.95):
     lr = initial_lr * np.power(decay_rate, epoch)
     return lr
 
-@keras.saving.register_keras_serializable()
+# @keras.saving.register_keras_serializable()
 def r_squared(y_true, y_pred):
     """Calculate R-squared metric.
 
@@ -227,12 +226,33 @@ class BoneAgeAssessment():
                 self.batch_size = new_batch_size
         
     def __update_lr__(self,new_lr:float) -> None:
+        """Update learning rate attribute.
+
+        Args:
+            new_lr (float): new learning rate for Adam optmizer.
+        """
         self.lr = new_lr
     
     def __update_epochs__(self,new_num_epochs:int) -> None:
+        """Update number of epochs attribute.
+
+        Args:
+            new_num_epochs (int): new number of epochs for training.
+        """
         self.EPOCHS = new_num_epochs
     
     def __show_info__(self) -> dict:
+        """Show attributes of BoneAgeAssessment class. If you create an instance,
+        this method returns attributes for your instance.
+
+        Returns:
+            dict: dictionary which coinaints useful information like:
+                    - 'image size': size of input images
+                    - 'batch size': size of batches images
+                    - 'learning rate': choosen learning rate
+                    - 'number of epochs': number of epochs for training
+                    - 'weights loc': where weights are saved.
+        """
         return {'image size':self.image_size,
                 'batch size':self.batch_size,
                 'learning rate':self.lr,
@@ -311,6 +331,14 @@ class BoneAgeAssessment():
             return next(generator)
 
     def __change_training__(self,balanced:bool=True):
+        """Change attribute training. The options are True (if you want to use balanced dataset),
+        and False (if you do not want to use balanced dataset). The False option is not suggested,
+        because better results can be achived with artificial balanced dataset.
+
+        Args:
+            balanced (bool, optional): boolean key for selecting between balanced/unbalanced.
+            Defaults to True.
+        """
         if balanced:
             self.train_df = pd.read_csv(os.path.join(self.labels, 'train_bal.csv'))
         else:
@@ -657,7 +685,7 @@ class BaaModel:
         self.input_size = input_size
         self.summ = summ
 
-    def vgg16regression(self) -> keras.src.engine.functional.Functional:
+    def vgg16regression(self):
         """Create a simplified VGG16 regression model.
 
         Returns:
@@ -682,7 +710,7 @@ class BaaModel:
         out_layer = Dense(1, activation='linear')(gap_dr)
 
         # Compile the model
-        model = Model(inputs=[in_layer], outputs=[out_layer], name='RVGG16')
+        model = Model(inputs=[in_layer], outputs=[out_layer], name='rVGG16')
 
         # Show summary if summ flag is True
         if self.summ:
@@ -690,7 +718,37 @@ class BaaModel:
 
         return model
 
-    def vgg16regression_atn(self) -> keras.src.engine.functional.Functional:
+    def vgg16regression_l2(self, reg_factor:float):
+        """Create VGG16 regression model with L2 regularization.
+
+        Returns:
+            keras.Model: VGG16 regression model.
+        """
+        # Define input layer
+        in_layer = Input(self.input_size)
+        # Load VGG16 model with pre-trained weights
+        base_model = VGG16(weights="imagenet", include_top=False, input_shape=self.input_size)
+        base_model.trainable = True
+
+        # Obtain features from VGG16 base
+        pt_features = base_model(in_layer)
+
+        # Apply global average pooling to the features
+        gap_features = GlobalAveragePooling2D()(pt_features)
+        gap_dr = Dropout(0.5)(gap_features)
+        dr_steps = Dropout(0.25)(Dense(1024, activation='elu', kernel_regularizer=l2(reg_factor))(gap_dr))
+        out_layer = Dense(1, activation='linear', kernel_regularizer=l2(reg_factor))(dr_steps)
+
+        # Compile the model
+        model = Model(inputs=[in_layer], outputs=[out_layer], name='rVGG16_L2')
+
+        # Show summary if summ flag is True
+        if self.summ:
+            model.summary()
+
+        return model
+    
+    def vgg16regression_atn(self):
         """Create VGG16 regression model with attention mechanism.
 
         Returns:
@@ -717,67 +775,24 @@ class BaaModel:
                     activation='linear',use_bias=False,weights=[up_c2_w])
         up_c2.trainable = False
         attn_layer = up_c2(attn_layer)
-        mask_features = multiply([attn_layer,bn_features])
+        mask_features = multiply([attn_layer, bn_features])
         gap_features = GlobalAveragePooling2D()(mask_features)
         gap_mask = GlobalAveragePooling2D()(attn_layer)
-        gap = Lambda(lambda x: x[0]/x[1],name='RescaleGAP')([gap_features,gap_mask])
+        gap = Lambda(lambda x: x[0]/x[1], name='RescaleGAP')([gap_features,gap_mask])
         gap_dr = Dropout(0.5)(gap)
-        dr_steps = Dropout(0.25)(Dense(1024,activation='elu')(gap_dr))
-        out_layer = Dense(1,activation='linear')(dr_steps)
+        dr_steps = Dropout(0.25)(Dense(1024, activation='elu')(gap_dr))
+        out_layer = Dense(1, activation='linear')(dr_steps)
 
         # Compile the model
-        model = Model(inputs=[in_layer],outputs=[out_layer],
-                      name='attention_RVGG16')
+        model = Model(inputs=[in_layer], outputs=[out_layer], name='rVGG16_atn')
 
         # Show summary if summ flag is True
         if self.summ:
             model.summary()
 
         return model
-
-    def vgg16regression_atn_l1(self,reg_factor:float) -> keras.src.engine.functional.Functional:
-        """Create VGG16 regression model with attention mechanism and L1 regularization.
-
-        Returns:
-            keras.Model: VGG16 regression model with attention.
-        """
-        # Define input layer
-        in_layer = Input(self.input_size)
-        # Load VGG16 model with pre-trained weights
-        base_model = VGG16(weights="imagenet", include_top=False, input_shape=self.input_size)
-        base_model.trainable = True
-
-        # Obtain features from VGG16 base
-        pt_features = base_model(in_layer)
-
-        # Apply attention mechanism
-        bn_features = BatchNormalization()(pt_features)
-        attn_layer = Conv2D(64, kernel_size=(1, 1), padding='same', activation='relu')(bn_features)
-        attn_layer = Conv2D(16, kernel_size=(1, 1), padding='same', activation='relu')(attn_layer)
-        attn_layer = LocallyConnected2D(1, kernel_size=(1, 1), padding='valid', activation='sigmoid')(attn_layer)
-        pt_depth = base_model.layers[-1].output_shape[-1]  # Update to use dynamic shape
-        up_c2_w = np.ones((1, 1, 1, pt_depth))
-        up_c2 = Conv2D(pt_depth, kernel_size=(1, 1), padding='same', activation='linear', use_bias=False, weights=[up_c2_w])
-        up_c2.trainable = False
-        attn_layer = up_c2(attn_layer)
-        mask_features = multiply([attn_layer, bn_features])
-        gap_features = GlobalAveragePooling2D()(mask_features)
-        gap_mask = GlobalAveragePooling2D()(attn_layer)
-        gap = Lambda(lambda x: x[0] / x[1], name='RescaleGAP')([gap_features, gap_mask])
-        gap_dr = Dropout(0.5)(gap)
-        dr_steps = Dropout(0.25)(Dense(1024, activation='elu', kernel_regularizer=l1(reg_factor))(gap_dr))
-        out_layer = Dense(1, activation='linear', kernel_regularizer=l1(reg_factor))(dr_steps)
-
-        # Compile the model
-        model = Model(inputs=[in_layer], outputs=[out_layer], name='attention_regularizer_RVGG16')
-
-        # Show summary if summ flag is True
-        if self.summ:
-            model.summary()
-
-        return model, attn_layer
-
-    def vgg16regression_atn_l2(self,reg_factor:float) -> keras.src.engine.functional.Functional:
+    
+    def vgg16regression_atn_l2(self, reg_factor:float):
         """Create VGG16 regression model with attention mechanism and L2 regularization.
 
         Returns:
@@ -790,6 +805,7 @@ class BaaModel:
         base_model.trainable = True
 
         # Obtain features from VGG16 base
+        pt_depth = base_model.layers[-1].output_shape[3]
         pt_features = base_model(in_layer)
 
         # Apply attention mechanism
@@ -811,40 +827,13 @@ class BaaModel:
         out_layer = Dense(1, activation='linear', kernel_regularizer=l2(reg_factor))(dr_steps)
 
         # Compile the model
-        model = Model(inputs=[in_layer], outputs=[out_layer], name='attention_regularizer_RVGG16')
-
-        # Show summary if summ flag is True
-        if self.summ:
-            model.summary()
-
-        return model, attn_layer
-
-    def vgg16regression_l2(self, reg_factor:float) -> keras.src.engine.functional.Functional:
-        """Create VGG16 regression model with L2 regularization.
-
-        Returns:
-            keras.Model: VGG16 regression model.
-        """
-        # Define input layer
-        in_layer = Input(self.input_size)
-        # Load VGG16 model with pre-trained weights
-        base_model = VGG16(weights="imagenet", include_top=False, input_shape=self.input_size)
-        base_model.trainable = True
-
-        # Obtain features from VGG16 base
-        pt_features = base_model(in_layer)
-
-        # Apply global average pooling to the features
-        gap_features = GlobalAveragePooling2D()(pt_features)
-        gap_dr = Dropout(0.5)(gap_features)
-        dr_steps = Dropout(0.25)(Dense(1024, activation='elu', kernel_regularizer=l2(reg_factor))(gap_dr))
-        out_layer = Dense(1, activation='linear', kernel_regularizer=l2(reg_factor))(dr_steps)
-
-        # Compile the model
-        model = Model(inputs=[in_layer], outputs=[out_layer], name='regularized_VGG16')
+        model = Model(inputs=[in_layer], outputs=[out_layer], name='rVGG16_L2_atn')
 
         # Show summary if summ flag is True
         if self.summ:
             model.summary()
 
         return model
+
+if __name__ == '__main__':
+    print(sys.path)

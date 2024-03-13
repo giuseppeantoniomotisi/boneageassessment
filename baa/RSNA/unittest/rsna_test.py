@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 sys.path.append(sys.path[0].replace('/unittest',''))
-import baa.RSNA.tools_rsna as tools_rsna
+import tools_rsna
 import merge
 import split
 import balancing
