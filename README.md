@@ -30,17 +30,22 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 ## Dataset
 - Dimensions: 10.93 GB
 - All images: 14036 images
-- Training : 12,613 images
-- Validation : 801 images
-- Test : 626 images
+- Training : 9824 images
+- Validation : 2816 images
+- Test : 1396 images
 - Avaibility: free
+>[!NOTE]
+>
+>The dataset is available only for academic and research purposes.
 
 <p align="center">
-<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/piechart_rsna_dataset.png" width=50% height=50%>
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/piechart_dataset.png" width=50% height=50%>
 </p>
 
-### Training dataset
-First of all, the training dataset is preliminarily analyzed. The preliminary analysis is divided into:
+This dataset splitting is not the one provided by RSNA. For more information, [RSNA documentation](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/fe9983fb9211d5209c455c57918fba75577d5ce0/documentation/markdown/RSNA.md).
+
+### Dataset
+First of all, the dataset is preliminarily analyzed. The preliminary analysis is divided into:
 
 - **Gender assessment**
 
@@ -54,50 +59,20 @@ First of all, the training dataset is preliminarily analyzed. The preliminary an
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/training_boneage.png" width=50% height=50%>
 </p>
 
- <!--
-- **Distribution of z score over all images and by gender**
-**z score of boneage**
-$$z_{score}(x_i, \bar{x}, \sigma_x) = \frac{x_i-\bar{x}}{\sigma_x}$$
-The introduction of the z score is explained in that models perform better when features are normalized to have zero mean and unity standard deviation.
+-- **Training, validation and test dataset distribution**
 
 <p align="center">
-<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/training_zscore.png" width=50% height=50%>
-</p>
--->
-
--**Violin plot**
-<p align="center">
-<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/training_violin.png" width=50% height=50%>
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/321be465407ec1bce45a51403e7b12b13606c927/documentation/images/dataset_dist.png" width=50% height=50%>
 </p>
 
-### Validation dataset
-In agreement with what was done before:
-- **Gender assessment**
-<p align="center">
-<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/validation_gender_counter.png" width=50% height=50%>
-</p>
+-- **Balanced vs unbalanced training dataset**
 
-- **Annual bone age distribution over all images and by gender**
 <p align="center">
-<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/validation_boneage.png" width=50% height=50%>
-</p>
-
-<!--
-- **Distribution of z score over all images and by gender**
-<p align="center">
-<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/dataset/images/validation_zscore.png" width=50% height=50%>
-</p>
- -->
-
-- **Violin plot**
-<p align="center">
-<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/validation_violin.png" width=50% height=50%>
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/321be465407ec1bce45a51403e7b12b13606c927/documentation/images/balanced_ds.png" width=50% height=50%>
 </p>
 
 ## Methods
 
 ## Results
-
-[! [Build Status](https: //travis-ci.org/joenccann/dillinger.svg?bra nch=main)](https://travis-ci.org/joemccann/dillinger)
 
 ## References
