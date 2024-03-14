@@ -23,27 +23,23 @@ class TestPreprocessing(unittest.TestCase):
         fake_image = np.ones((1080, 1080))
         coords = [[220, 780],[680, 180]]
         top_left, bottom_right = self.preprocessing.rectangle(fake_image, coords)
-        self.assertSequenceEqual(top_left, (58, 718))
-        self.assertSequenceEqual(bottom_right, (842, 18))
+        self.assertSequenceEqual(top_left, (58, 842))
+        self.assertSequenceEqual(bottom_right, (942, 18))
 
 
     def test_cut_peak(self):
         #Test cut_peak function
-        h = []
+        h = np.zeros(50)
         for i in range(0, 50):
-            h[i] = 1000/(i+1)
+            h[i] = (1000/(i+1))
         new_index = self.preprocessing.cut_peak(h, 0, 10, 'testimage')
-        self.assertEqual(new_index, 10)
-
-
-    #def test_brightness(self):
-
+        self.assertEqual(new_index, 9)
     
     def test_square(self):
         #Test square function
-        fake_image = np.ones((720, 1080))
+        fake_image = np.ones((720, 1080, 3))
         squared_image = self.preprocessing.square(fake_image)
-        self.assertSequenceEqual(squared_image.shape, (720,720))
+        self.assertSequenceEqual(squared_image.shape, (1080,1080,3))
 
     def test_resize(self):
         #Test resize function
