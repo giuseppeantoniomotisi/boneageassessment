@@ -56,7 +56,7 @@ First of all, the dataset is preliminarily analyzed. The preliminary analysis is
 - **Annual bone age distribution over all images and by gender**
 
 <p align="center">
-<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/training_boneage.png" width=50% height=50%>
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/boneage_dist.png" width=50% height=50%>
 </p>
 
 -- **Training, validation and test dataset distribution**
