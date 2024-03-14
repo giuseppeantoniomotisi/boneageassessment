@@ -78,10 +78,4 @@ First of all, the dataset is preliminarily analyzed. The preliminary analysis is
 
 ### Model
 
-## Results
-
-### Training: cases
-
-### Model Evaluation
-
 ## References
