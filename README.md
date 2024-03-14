@@ -98,4 +98,6 @@ In agreement with what was done before:
 
 ## Results
 
+[! [Build Status](https: //travis-ci.org/joenccann/dillinger.svg?bra nch=main)](https://travis-ci.org/joemccann/dillinger)
+
 ## References
