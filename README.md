@@ -27,7 +27,10 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 | 9        | lbicfigraz        | 4.881        |
 | 10       | jcrayan           | 4.907        |
 
-## Dataset
+## Usage
+
+## Methods
+### Dataset
 - Dimensions: 10.93 GB
 - All images: 14036 images
 - Training : 9824 images
@@ -59,20 +62,26 @@ First of all, the dataset is preliminarily analyzed. The preliminary analysis is
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/boneage_dist.png" width=50% height=50%>
 </p>
 
--- **Training, validation and test dataset distribution**
+- **Training, validation and test dataset distribution**
 
 <p align="center">
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/321be465407ec1bce45a51403e7b12b13606c927/documentation/images/dataset_dist.png" width=50% height=50%>
 </p>
 
--- **Balanced vs unbalanced training dataset**
+- **Balanced vs unbalanced training dataset**
 
 <p align="center">
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/321be465407ec1bce45a51403e7b12b13606c927/documentation/images/balanced_ds.png" width=50% height=50%>
 </p>
 
-## Methods
+### Preprocessing
+
+### Model
 
 ## Results
+
+### Training: cases
+
+### Model Evaluation
 
 ## References
