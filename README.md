@@ -42,7 +42,7 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 </p>
 
 > [!IMPORTANT]
-> Key information users need to know to achieve their goal.This dataset splitting is not the one provided by RSNA. For more information, [RSNA documentation](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/fe9983fb9211d5209c455c57918fba75577d5ce0/documentation/markdown/RSNA.md).
+> This dataset splitting is not the one provided by RSNA. For more information, [RSNA documentation](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/fe9983fb9211d5209c455c57918fba75577d5ce0/documentation/markdown/RSNA.md).
 
 ### Dataset
 First of all, the dataset is preliminarily analyzed. The preliminary analysis is divided into:
