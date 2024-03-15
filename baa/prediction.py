@@ -1,3 +1,5 @@
+"""Predict the age of an individual based on an input image.
+"""
 import argparse
 import os
 from utils import extract_info
@@ -30,6 +32,7 @@ def process(image_name:str, image_path:str, save:bool=True) -> str:
     prediction = baa_instance.prediction(preprocessed_image, show=True, save=save, image_id=image_name[:-4])
     # prediction uses the best_model.keras
     return prediction
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Predict the age of an individual based on an input image.')

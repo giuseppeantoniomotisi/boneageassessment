@@ -1,4 +1,4 @@
-"""Big brother is watching you!
+"""Some useful functions.
 """
 import os
 import pwd
@@ -8,7 +8,10 @@ from csv import reader
 from tqdm import tqdm
 
 def open_boneageassessment():
-   os.chdir(os.getcwd())
+    """
+    Open boneageassessment directory.
+    """
+    os.chdir(os.getcwd())
 
 def open_downloads():
     """
@@ -61,6 +64,7 @@ def houdini():
 
 def write_info():
     """
+    Write paths of main directories in boneageassessment.
     """
     open_boneageassessment()
     main_baa_dir = os.getcwd()
@@ -97,8 +101,8 @@ def write_info():
             #'app':app,
             }
 
-    filename = os.path.join(baa_dir,'info.csv')
-    with open(filename,'w') as fp:
+    filename = os.path.join(baa_dir, 'info.csv')
+    with open(filename, 'w+', newline='\n') as fp:
         fp.write("Dictionary key,Path to folder\n")
         for key in info.keys():
             fp.write(f"{key},{info[key]}\n")

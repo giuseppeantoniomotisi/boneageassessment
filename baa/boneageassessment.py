@@ -1,4 +1,19 @@
 """
+Bone Age Assessment System
+
+This script provides a modular system for Bone Age Assessment (BAA). 
+It integrates various modules such as data preprocessing, machine learning, and prediction. 
+Users can configure the behavior of the system using a JSON configuration file.
+
+Usage:
+    python script.py --macro <path_to_parameters_json>
+
+Parameters:
+    --macro <path_to_parameters_json>: Path to the JSON configuration file containing parameters
+    for the BAA process.
+
+Example:
+    python script.py --macro config.json
 """
 import argparse
 import json
@@ -16,13 +31,14 @@ from age import age
 import prediction
 
 def preprocessing_module(opt:bool):
-    """_summary_
+    """
+    Executes data preprocessing tasks.
 
     Args:
-        opt (bool): _description_
+        opt (bool): If True, executes preprocessing tasks.
 
     Raises:
-        FileNotFoundError: _description_
+        FileNotFoundError: If required files/folders are not found.
     """
     print("Preliminary operation module is running. Please wait.")
     utils.write_info()
@@ -47,10 +63,11 @@ def preprocessing_module(opt:bool):
     print("Done!")
 
 def machinelearning_module(opt:bool):
-    """_summary_
+    """
+    Executes machine learning tasks.
 
     Args:
-        opt (bool): _description_
+        opt (bool): If True, executes machine learning tasks.
     """
     if opt:
         print("Machine Learning module is running. Please wait.")
@@ -60,15 +77,16 @@ def machinelearning_module(opt:bool):
         pass
 
 def prediction_module(opt:bool,name:str,path:str):
-    """_summary_
+    """
+    Executes prediction tasks.
 
     Args:
-        opt (bool): _description_
-        name (str): _description_
-        path (str): _description_
+        opt (bool): If True, executes prediction tasks.
+        name (str): Name of the image file.
+        path (str): Path to the image file.
 
     Returns:
-        _type_: _description_
+        prediction_result (type): The result of prediction.
     """
     if opt:
         if not os.path.exists(os.path.join(path, name)):
@@ -80,7 +98,11 @@ def prediction_module(opt:bool,name:str,path:str):
         pass
 
 def baa(info_json):
-    """_summary_
+    """
+    Executes the complete Bone Age Assessment process.
+
+    Args:
+        info_json (dict): Dictionary containing configuration parameters.
     """
     if info_json == None:
         info_json = {
@@ -94,6 +116,7 @@ def baa(info_json):
     machinelearning_module(info_json['training'])
     image, path = info_json['image'], info_json['path_to_image']
     prediction_module(info_json['prediction'], image, path)
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Bone Age Assessment Process')
