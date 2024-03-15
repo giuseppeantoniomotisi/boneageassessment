@@ -28,10 +28,20 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 | 10       | jcrayan           | 4.907        |
 
 ## Usage
+This project presents a non-trivial structure. Indeed, within the "baa" application, there are three modules:
 
-Structure of the project:
+1. `RSNA`: for preparing the raw RSNA dataset. For detailed instructions on usage, please refer to the [RSNA module documentation](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/c073291d7423c9fc34a752ee4eb1b61f99ede6ef/baa/RSNA/RSNA.md).
+2. `preprocessing`: for preprocessing the images provided by RSNA. To delve deeper into its usage guidelines, consult the [preprocessing module documentation](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/c073291d7423c9fc34a752ee4eb1b61f99ede6ef/baa/preprocessing/preprocessing.md).
+3. `age`: for determining bone age through Deep Learning methods. Explore detailed usage instructions in the  [age module documentation](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/c073291d7423c9fc34a752ee4eb1b61f99ede6ef/baa/age/age.md).
+
+Additionally, it features two fundamental functions:
+
+4. `utils.py`: containing important bridging functions between various parts of the code.
+5. `predictions.py`: a script capable of making new predictions on a new image using the best model.
+
+Finally, the `boneageassessment.py` application orchestrates the smooth operation of the entire codebase through a straightforward logic. Below is a schematic representation of the project's structure:
 ```
-boneageassessment
+..boneageassessment
 ├── LICENSE
 ├── README.md
 ├── baa
@@ -41,13 +51,19 @@ boneageassessment
 │   │   ├── balancing.py
 │   │   ├── checker.py
 │   │   ├── images
-│   │   │   └── download_rsna.png
 │   │   ├── merge.py
 │   │   ├── rsna.py
 │   │   ├── split.py
 │   │   ├── tests
 │   │   │   └── rsna_test.py
 │   │   └── tools_rsna.py
+│   ├── preprocessing
+│   │   ├── __init__.py
+│   │   ├── preprocessing.md
+│   │   ├── preprocessing.py
+│   │   └── tools.py
+│   │   ├── tests
+│   │       └── preprocessing_test.py
 │   ├── age
 │   │   ├── __init__.py
 │   │   ├── age.md
@@ -55,60 +71,37 @@ boneageassessment
 │   │   ├── age_macro.json
 │   │   ├── model.py
 │   │   ├── results
-│   │   │   ├── case_a
-│   │   │   │   ├── history.txt
-│   │   │   │   ├── model_results.png
-│   │   │   │   ├── predicted_age.csv
-│   │   │   │   ├── predictions.png
-│   │   │   │   ├── results.csv
-│   │   │   │   └── training_evaluation.png
-│   │   │   ├── case_b
-│   │   │   │   ├── history.txt
-│   │   │   │   ├── model_results.png
-│   │   │   │   ├── predicted_age.csv
-│   │   │   │   ├── predictions.png
-│   │   │   │   ├── results.csv
-│   │   │   │   └── training_evaluation.png
-│   │   │   ├── case_d
-│   │   │   │   ├── history.txt
-│   │   │   │   ├── model_results.png
-│   │   │   │   ├── predicted_age.csv
-│   │   │   │   ├── predictions.png
-│   │   │   │   ├── results.csv
-│   │   │   │   └── training_evaluation.png
-│   │   │   ├── case_e
-│   │   │   │   ├── history.txt
-│   │   │   │   ├── model_results.png
-│   │   │   │   ├── predicted_age.csv
-│   │   │   │   ├── predictions.png
-│   │   │   │   ├── results.csv
-│   │   │   │   └── training_evaluation.png
-│   │   │   └── example
-│   │   │       ├── example_batch.png
-│   │   │       ├── example_model_evaluation.png
-│   │   │       ├── example_predicted_age.csv
-│   │   │       ├── example_predictions.png
-│   │   │       └── example_results.csv
 │   │   └── tests
 │   │       └── age_test.py
-│   ├── boneageassessment.py
 │   ├── info.csv
 │   ├── macro.json
 │   ├── prediction.py
-│   ├── preprocessing
-│   │   ├── __init__.py
-│   │   ├── preprocessing.md
-│   │   ├── preprocessing.py
-│   │   ├── tests
-│   │   │   └── preprocessing_test.py
-│   │   └── tools.py
-│   └── utils.py
+│   ├── utils.py
+│   └── boneageassessment.py
 ├── dataset
 │   └── link_to_dataset.txt
 └── documentation
     └── images
 ```
+### `boneageassessment.py`
+This script provides a modular system for Bone Age Assessment (BAA). It integrates various modules such as data preprocessing, machine learning, and prediction. Users can configure the behavior of the system using a JSON configuration file.
+```json
+/*macro.json*/
 
+{
+ "RSNA": true/false, //RSNA key
+ "Training and testing model": true/false, //ML key
+ "New prediction": true/false, // Prediction key
+ "New image name": "image.png", // New image name
+ "Path to new image": "../" // Path to new image
+}
+```
+After selecting the opportune keys in `macro.json` script, you can easily run the application with the bash command:
+```bash
+cd <path to boneageassessment>
+python3 baa/boneageassessment.py --macro baa/macro.json
+```
+Check if you are running the code in `boneageassessment` directory.
 ## Methods
 ### Dataset
 - Dimensions: 10.93 GB
