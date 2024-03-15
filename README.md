@@ -161,4 +161,8 @@ Our model for estimating pediatric bone age in months integrates a CNN's feature
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/02a75d80e85895106d27f6594d2ebbfbf2a4d4e9/documentation/images/model_graph_short_h.png">
 </p>
 
+<p align="center">
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/vgg16_regression_model.png">
+</p>
+
 ## References
