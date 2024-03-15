@@ -42,7 +42,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import cv2 as cv
-from tools_rsna import extract_info
+from tools_rsna import extract_info_as_dict
 
 class BalancingDataset:
     """
@@ -87,7 +87,7 @@ class BalancingDataset:
         Initializes BalancingDataset class with default paths and dependencies.
         """
         # find all dependicies
-        info = extract_info()
+        info = extract_info_as_dict()
         self.path_to_csv = info['labels']
         self.path_to_images = info['raw']
         self.path_to_train = os.path.join(info['processed'],'train')

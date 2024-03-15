@@ -29,6 +29,86 @@ As mentioned above, bone age assessment is a technique prone to human error, the
 
 ## Usage
 
+Structure of the project:
+```
+boneageassessment
+├── LICENSE
+├── README.md
+├── baa
+│   ├── RSNA
+│   │   ├── RSNA.md
+│   │   ├── __init__.py
+│   │   ├── balancing.py
+│   │   ├── checker.py
+│   │   ├── images
+│   │   │   └── download_rsna.png
+│   │   ├── merge.py
+│   │   ├── rsna.py
+│   │   ├── split.py
+│   │   ├── tests
+│   │   │   └── rsna_test.py
+│   │   └── tools_rsna.py
+│   ├── age
+│   │   ├── __init__.py
+│   │   ├── age.md
+│   │   ├── age.py
+│   │   ├── age_macro.json
+│   │   ├── model.py
+│   │   ├── results
+│   │   │   ├── case_a
+│   │   │   │   ├── history.txt
+│   │   │   │   ├── model_results.png
+│   │   │   │   ├── predicted_age.csv
+│   │   │   │   ├── predictions.png
+│   │   │   │   ├── results.csv
+│   │   │   │   └── training_evaluation.png
+│   │   │   ├── case_b
+│   │   │   │   ├── history.txt
+│   │   │   │   ├── model_results.png
+│   │   │   │   ├── predicted_age.csv
+│   │   │   │   ├── predictions.png
+│   │   │   │   ├── results.csv
+│   │   │   │   └── training_evaluation.png
+│   │   │   ├── case_d
+│   │   │   │   ├── history.txt
+│   │   │   │   ├── model_results.png
+│   │   │   │   ├── predicted_age.csv
+│   │   │   │   ├── predictions.png
+│   │   │   │   ├── results.csv
+│   │   │   │   └── training_evaluation.png
+│   │   │   ├── case_e
+│   │   │   │   ├── history.txt
+│   │   │   │   ├── model_results.png
+│   │   │   │   ├── predicted_age.csv
+│   │   │   │   ├── predictions.png
+│   │   │   │   ├── results.csv
+│   │   │   │   └── training_evaluation.png
+│   │   │   └── example
+│   │   │       ├── example_batch.png
+│   │   │       ├── example_model_evaluation.png
+│   │   │       ├── example_predicted_age.csv
+│   │   │       ├── example_predictions.png
+│   │   │       └── example_results.csv
+│   │   └── tests
+│   │       └── age_test.py
+│   ├── boneageassessment.py
+│   ├── info.csv
+│   ├── macro.json
+│   ├── prediction.py
+│   ├── preprocessing
+│   │   ├── __init__.py
+│   │   ├── preprocessing.md
+│   │   ├── preprocessing.py
+│   │   ├── tests
+│   │   │   └── preprocessing_test.py
+│   │   └── tools.py
+│   └── utils.py
+├── dataset
+│   └── link_to_dataset.txt
+└── documentation
+    └── images
+```
+
 ## Methods
 ### Dataset
 - Dimensions: 10.93 GB

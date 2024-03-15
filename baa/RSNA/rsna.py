@@ -1,5 +1,5 @@
 """
-main.py is the script that must be run to obtain the new dataset structure.
+rsna.py is the main script that must be run to obtain the new dataset structure.
 """
 from tools_rsna import create_directories, clean_workspace, check_path
 from merge import Merge

@@ -34,10 +34,9 @@ updat_split method.
 """
 import os
 import shutil
-import unittest
 import pandas as pd
 from tqdm import tqdm
-from tools_rsna import extract_info
+from tools_rsna import extract_info_as_dict
 
 class Split:
     """
@@ -55,7 +54,7 @@ class Split:
         """
         Initializes the Split class with default attributes and loads the dataset.
         """
-        info = extract_info()
+        info = extract_info_as_dict()
         self.raw = info['raw']
         self.labels = info['labels']
         self.processed = info['processed']

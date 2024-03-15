@@ -23,7 +23,7 @@ tasks.
 """
 import os
 import pandas as pd
-from tools_rsna import extract_info
+from tools_rsna import extract_info_as_dict
 
 class Checker:
     """The class Checker is a simple class for evaluate dataset transformation.
@@ -35,7 +35,7 @@ class Checker:
         The class extracts information from the initialization module (__init__)
         and sets default directories and CSV file names.
         """
-        info = extract_info()
+        info = extract_info_as_dict()
         self.path_to_processed = info['processed']
         self.path_to_csv = info['labels']
         self.default_dir = ['train', 'validation', 'test']

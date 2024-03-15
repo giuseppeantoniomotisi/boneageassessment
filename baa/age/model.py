@@ -66,7 +66,6 @@ import sys
 sys.path.append(sys.path[0].replace('/age',''))
 sys.path.append(sys.path[0].replace('/age','/preprocessing'))
 from utils import extract_info
-from preprocessing import tools
 
 def mean_absolute_error(y_true,y_pred):
     error = y_true - y_pred
@@ -91,7 +90,7 @@ def lr_scheduler(epoch, initial_lr=1e-04, decay_rate=0.95):
     lr = initial_lr * np.power(decay_rate, epoch)
     return lr
 
-# @keras.saving.register_keras_serializable()
+@keras.saving.register_keras_serializable()
 def r_squared(y_true, y_pred):
     """Calculate R-squared metric.
 
@@ -105,6 +104,7 @@ def r_squared(y_true, y_pred):
     SS_res = K.sum(K.square(y_true - y_pred)) 
     SS_tot = K.sum(K.square(y_true - K.mean(y_true)))
     return (1 - SS_res / (SS_tot + K.epsilon()))
+
 class BoneAgeAssessment():
     """Class for Bone Age Assessment model.
 
@@ -834,6 +834,3 @@ class BaaModel:
             model.summary()
 
         return model
-
-if __name__ == '__main__':
-    print(sys.path)

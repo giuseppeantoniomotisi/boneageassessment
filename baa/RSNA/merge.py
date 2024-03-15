@@ -24,7 +24,7 @@ separate files into a single dataset file and consolidating images into a single
 """
 import os
 import pandas as pd
-from tools_rsna import extract_info
+from tools_rsna import extract_info_as_dict
 
 def switch_columns(dataframe: pd.DataFrame, column_name1: str, column_name2: str) -> pd.DataFrame:
     """
@@ -67,7 +67,7 @@ class Merge:
         Initializes the Merge class with default attributes for paths to training and
         validation CSV files.
         """
-        info = extract_info()
+        info = extract_info_as_dict()
         self.path_to_train = info['train.csv']  # Default path to the training CSV file
         # Default path to the training images folder
         self.path_to_train_imgs = info['train_images_path']

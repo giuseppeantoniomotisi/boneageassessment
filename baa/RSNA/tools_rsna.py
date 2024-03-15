@@ -146,7 +146,7 @@ def check_path():
         else:
             raise FileNotFoundError(f"{element} is not in the Download directory!")
 
-def extract_info() -> dict:
+def extract_info_as_dict() -> dict:
     """
     Assigns paths to various datasets from the original RSNA paths file.
 
