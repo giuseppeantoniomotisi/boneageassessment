@@ -127,7 +127,7 @@ First of all, the dataset is preliminarily analyzed. The preliminary analysis is
 - **Gender assessment**
 
 <p align="center">
-<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/training_gender_counter.png" width=50% height=50%>
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/gender.png" width=50% height=50%>
 </p>
 
 - **Annual bone age distribution over all images and by gender**
