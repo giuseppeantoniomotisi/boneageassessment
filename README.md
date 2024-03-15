@@ -89,11 +89,11 @@ This script provides a modular system for Bone Age Assessment (BAA). It integrat
 /*macro.json*/
 
 {
- "RSNA": true/false, //RSNA key
- "Training and testing model": true/false, //ML key
- "New prediction": true/false, // Prediction key
- "New image name": "image.png", // New image name
- "Path to new image": "../" // Path to new image
+ "RSNA": true, // false
+ "Training and testing model": true, // false
+ "New prediction": true, // false
+ "New image name": "image.png",
+ "Path to new image": "../"
 }
 ```
 After selecting the opportune keys in `macro.json` script, you can easily run the application with the bash command:
