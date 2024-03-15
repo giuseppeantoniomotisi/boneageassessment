@@ -62,7 +62,7 @@ def preprocessing_module(opt:bool):
     utils.houdini()
     print("Done!")
 
-def machinelearning_module(opt:bool):
+def machinelearning_module(opt:bool, hyperparameters_json):
     """
     Executes machine learning tasks.
 
@@ -71,7 +71,8 @@ def machinelearning_module(opt:bool):
     """
     if opt:
         print("Machine Learning module is running. Please wait.")
-        age.process()
+        hyper = json.load(hyperparameters_json)
+        age.process(hyper)
         print("Done!")
     else:
         pass

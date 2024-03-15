@@ -91,6 +91,7 @@ This script provides a modular system for Bone Age Assessment (BAA). It integrat
 {
  "RSNA": true, // false
  "Training and testing model": true, // false
+ "Path to hyperparameters.json": "../baa/age/macro_age.json",
  "New prediction": true, // false
  "New image name": "image.png",
  "Path to new image": "../"
