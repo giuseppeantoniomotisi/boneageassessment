@@ -103,6 +103,11 @@ cd <path to boneageassessment>
 python3 baa/boneageassessment.py --macro baa/macro.json
 ```
 Check if you are running the code in `boneageassessment` directory.
+
+<p align="center">
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/baa_workflow.png">
+</p>
+
 ## Methods
 ### Dataset
 - Dimensions: 10.93 GB
@@ -151,5 +156,9 @@ First of all, the dataset is preliminarily analyzed. The preliminary analysis is
 ### Preprocessing
 
 ### Model
+Our model for estimating pediatric bone age in months integrates a CNN's feature extraction with linear regression. Initially, rVGG16 combined VGG16 with a regression head, but proved slow and lacked generalization. Dropout layers were added, offering minimal improvement. L2 regularization was then implemented to mitigate overfitting, resulting in enhanced performance. The model's [architecture](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/model_graph_short_h.png), aimed to balance complexity and computational efficiency, leveraging pre-trained `ImageNet` weights for transfer learning potential. However, explainability remains a challenge, prompting consideration of attention layers to elucidate CNN feature extraction. Despite this, time constraints prevented evaluation of the proposed rVGG16-L2-ATN model.
+<p align="center">
+<img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/321be465407ec1bce45a51403e7b12b13606c927/documentation/images/balanced_ds.png" width=50% height=50%, label=architecture>
+</p>
 
 ## References
