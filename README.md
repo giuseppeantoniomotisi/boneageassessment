@@ -1,9 +1,3 @@
-
----
-bibliography: https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/bba.bib
----
-
-
 # Bone Age Assessment
 This project aims to determine through machine learning methods the bone age from digital radiographs of patients aged 0 to 228 months. The challenge and the dataset can be found on the RSNA website at the following link: (https://www.rsna.org/rsnai/ai-image-challenge/RSNA-Pediatric-Bone-Age-Challenge-2017).
 
