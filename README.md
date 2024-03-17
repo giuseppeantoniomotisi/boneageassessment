@@ -7,13 +7,13 @@ It is the standard method used from doctors in order to estimate the maturity of
 ### Why it is so important? 
 Bone age can reflect the level and maturity of human growth and development. Bone age assessment is widely used in clinical medicine, forensic medicine, sports medicine and other fields. In clinical medicine, skeletal development can lead to the diagnosis of endocrine, developmental and nutritional disorders. Through bone age, it is possible to determine the appropriate time for orthopaedic surgery (like teeth or nasal cavity) and provide a basis for predicting the adult height of the patient. In forensic science, bone age can estimate the real birth date of an individual and provide legal basis for criminal identification. Moreover, the information about bone maturity can guide the selection of athletes more scientifically.
 
-### How ML methods could achive bettere results?
-As mentioned above, bone age assessment is a technique prone to human error, therefore, with the popularization and development of coputer technology, machine learning-based bone age prediction has become a research hotspot in recent years. First of all, machine learning solves the problems of subjective factors linked to the doctors' interpretation, and at the same time reduces the prediction time. From 2007, a lot of ML algorithms for bone age assessment were developed, improving precision over and over and reaching an impressive result of a mean absolute error of 5.46 months. [quotation]
+### How ML methods could achieve better results?
+As mentioned above, bone age assessment is a technique prone to human error, therefore, with the popularization and development of computer technology, machine learning-based bone age prediction has become a research hotspot in recent years. First of all, machine learning solves the problems of subjective factors linked to the doctors' interpretation, and at the same time reduces the prediction time. From 2007, a lot of ML algorithms for bone age assessment were developed, improving precision over and over and reaching an impressive result of a mean absolute error of 5.46 months. [quotation]
 
 <p align="center">
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/13196.png" width=50% height=50%>
 
-### Challange results
+### Challenge results
 | Position | Team              | MAD (months) |
 | :------: | :---------------: | :----------: |
 | 1        | 16 Bit Inc.       | 4.265        |
@@ -153,7 +153,15 @@ First of all, the dataset is preliminarily analyzed. The preliminary analysis is
 <img align="center" src="https://github.com/giuseppeantoniomotisi/boneageassessment/blob/321be465407ec1bce45a51403e7b12b13606c927/documentation/images/balanced_ds.png" width=50% height=50%>
 </p>
 
-### Preprocessing
+### Augmentation and Preprocessing
+As stated above, for the augmentation step we balanced the training dataset. To do this we took the training images and we performed a rotation of a random angle between -20 and 20 degrees around the vertical axis. Each age bin is augmented until is reached the amount of images corresponding to the maximum number of occurrences in the age histogram, so that the new histogram is basically a rectangle.
+Once the augmentation step was done we wanted to perform a preprocessing step, that has two main purposes: one is to reduce the dataset size and the second is to clean as much as possible the images (a pseudo-segmentation), making the background black and our subjects (the hands) shiny, i.e. with a higher level of gray. This expedient would create a dataset that would be more readable for our deep learning networks. At first we tried the hand segmentation with a K-means algorithm: we selected three different image regions (background, bone and soft tissue) that should have been discriminated the hand from the background but this method didn't really worked, since it mistook some shady bone regions for background regions. We then switched to the Google mediapipe package [citation] to try and detect hands in our images. Whenever the IA algorithm detects one hand, it saves 21 pixels in the image called landmarks. Each of these pixels corresponds to a specific hand zone, so by choosing the top left and the bottom right landmark we can make a bounding box for the hand and crop the image deleting what's outside the box. Then whether the hand is detected or not, the image is further processed with the following operations:
+- **Image windowing**: an algorithm finds the leftmost peak (i.e. the darker one) in the image histogram and it puts to zero every pixel with an intensity lower than that corresponding to the bin at the right base of the peak.
+- **Histogram equalization**: the image histogram gets equalized.
+- **Squaring**: the image is squared, the greater dimension of the image is the chosen side of the square.
+- **Resize**: finally the image gets resized to a 399x399 image.
+
+After all these operations, most images get brighter in the hand region and darker in the outer region. The images are ready to be read from some deep learning network to predict the hand bone age.
 
 ### Model
 Our model for estimating pediatric bone age in months integrates a CNN's feature extraction with linear regression. Initially, rVGG16 combined VGG16 with a regression head, but proved slow and lacked generalization. Dropout layers were added, offering minimal improvement. L2 regularization was then implemented to mitigate overfitting, resulting in enhanced performance. The model's [architecture](https://github.com/giuseppeantoniomotisi/boneageassessment/blob/main/documentation/images/model_graph_short_h.png), aimed to balance complexity and computational efficiency, leveraging pre-trained `ImageNet` weights for transfer learning potential. However, explainability remains a challenge, prompting consideration of attention layers to elucidate CNN feature extraction. Despite this, time constraints prevented evaluation of the proposed rVGG16-L2-ATN model.
