@@ -8,6 +8,10 @@ from csv import reader
 from tqdm import tqdm
 from RSNA.tools_rsna import unzip_folder
 
+def unzip_sh(path_to_zip):
+    if os.name == 'posix':
+        os.system(f"unzip {path_to_zip}")
+
 def open_boneageassessment():
     """
     Open boneageassessment directory.
