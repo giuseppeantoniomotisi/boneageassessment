@@ -60,8 +60,8 @@ Finally, the `boneageassessment.py` application orchestrates the smooth operatio
 │   │   ├── __init__.py
 │   │   ├── preprocessing.md
 │   │   ├── preprocessing.py
-│   │   └── tools.py
-│   │   ├── tests
+│   │   ├── tools.py
+│   │   └── tests
 │   │       └── preprocessing_test.py
 │   ├── age
 │   │   ├── __init__.py
