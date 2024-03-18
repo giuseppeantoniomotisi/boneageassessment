@@ -1,5 +1,5 @@
 # Bone Age Assessment
-This project aims to determine through machine learning methods the bone age from digital radiographs of patients aged 0 to 228 months. The challenge and the dataset can be found on the RSNA website at the following link: (https://www.rsna.org/rsnai/ai-image-challenge/RSNA-Pediatric-Bone-Age-Challenge-2017).
+This project aims to determine through machine learning methods the bone age from digital radiographs of patients aged 0 to 228 months. The challenge and the dataset can be found on the RSNA website at the following [link](https://www.rsna.org/rsnai/ai-image-challenge/RSNA-Pediatric-Bone-Age-Challenge-2017).
 
 ### What is Pediatric Bone Age Assessment?
 It is the standard method used from doctors in order to estimate the maturity of a child's skeletal system. It simply consists in taking an X-ray image of the wrist, hand and fingers of the subject. The wrist was chosen because its growth can represent the whole body bone development and the radiation damage to the human body is the least when taking X-rays. The traditional bone age recognition methods makes use of a bone age standard atlas, or alternatively of a scoring method. The atlas method consists in comparing the acquired X-ray image with the standard bone age atlas to infer the bone age. The scoring method requires the doctor to divide the development status of each bone in the hand into different grades, and then evaluate the corresponding grades and scores of different bones. The final score of each X-ray image is the sum of all scores and it can be used to infer the bone age via the median curve of bone maturity score. Of course both these methods are subjected to human error since the evaluation depends completely on the doctors' skills.
@@ -111,9 +111,9 @@ Check if you are running the code in `boneageassessment` directory.
 
 ## Methods
 ### Dataset
-- Dimensions: 10.93 GB
-- All images: 14036 images
-- Training : 9824 images
+- Dimensions: 14.2 GB
+- All images: 41206 (14036) images
+- Training : 27170 (9824) images
 - Validation : 2816 images
 - Test : 1396 images
 - Avaibility: free
