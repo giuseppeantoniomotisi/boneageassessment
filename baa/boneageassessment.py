@@ -59,7 +59,7 @@ def preprocessing_module(opt:bool):
             pass
         else: 
             raise FileNotFoundError("no file named dataset.zip or folder named dataset was found.")
-    utils.houdini()
+    utils.houdini(opt='dataset')
     print("Done!")
 
 def machinelearning_module(opt:bool, hyperparameters_json):
@@ -89,6 +89,7 @@ def prediction_module(opt:bool,name:str,path:str):
     Returns:
         prediction_result (type): The result of prediction.
     """
+    utils.houdini(opt='weights')
     if opt:
         if not os.path.exists(os.path.join(path, name)):
             raise FileNotFoundError("image was not found! Please check it.")

@@ -6,6 +6,7 @@ import platform
 import shutil
 from csv import reader
 from tqdm import tqdm
+from RSNA.tools_rsna import unzip_folder
 
 def open_boneageassessment():
     """
@@ -49,18 +50,33 @@ def switch_folders(folder1_path, folder2_path):
     # Remove temporary directory
     os.rmdir(temp_dir)
 
-def houdini():
+def houdini(opt:str='dataset'):
     """
     Houdini function switch two folders with the same name. This function is used to
     be sure that in your repository you can find everything.
-    """
-    open_boneageassessment()
-    old_dataset = os.path.join(os.getcwd(),'dataset')
-
-    open_downloads()
-    new_dataset = os.path.join(os.getcwd(),'dataset')
     
-    switch_folders(old_dataset,new_dataset)
+    Args:
+        opt (str, optional): optional argument to select kind of folder to be switch.
+        Only options are: 'dataset' and 'weights'. Otherwise, the function raise a KeyError.
+    """
+    if opt == 'dataset':
+        open_boneageassessment()
+        new_loc = os.path.join(os.getcwd(),'dataset')
+
+        open_downloads()
+        old_loc = os.path.join(os.getcwd(),'dataset')
+    
+        shutil.move(old_loc, new_loc)
+    elif opt == 'weights':
+        open_boneageassessment()
+        new_loc = os.path.join(os.getcwd(),'baa','age','weights')
+
+        open_downloads()
+        old_loc = os.path.join(os.getcwd(),'weights')
+
+        shutil.move(old_loc, new_loc)
+    else:
+        raise KeyError("only 'dataset' and 'weights' are supported. Please check input.")
 
 def write_info():
     """

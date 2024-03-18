@@ -84,6 +84,8 @@ Finally, the `boneageassessment.py` application orchestrates the smooth operatio
 ```
 ### `boneageassessment.py`
 This script provides a modular system for Bone Age Assessment (BAA). It integrates various modules such as data preprocessing, machine learning, and prediction. Users can configure the behavior of the system using a JSON configuration file.
+>[!IMPORTANT]
+>Please before usage install *dataset.zip* and *weights.zip* on [Google Drive](https://drive.google.com/drive/folders/1zNPHIJymBkvtQQkJgFwa-7K-x1XH2qdp). Then check if they are in Downloads directory and please unzip. 
 ```json
 /*macro.json*/
 
