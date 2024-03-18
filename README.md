@@ -177,11 +177,11 @@ Our model for estimating pediatric bone age in months integrates a CNN's feature
 
 ## References
 
-- [1] Google. Mediapipe | Google for Developers. Last accessed 6 March 2024. [Link](https://developers.google.com/mediapipe).
+- [1] Google. Mediapipe | Google for Developers. [Link](https://developers.google.com/mediapipe).
 
-- [2] Radiological Society of North America. RSNA Pediatric Bone Age Challenge - Appendix (2017). Last accessed 6 March 2024. [Link](https://bonexpert.com/refs/radiol.2018boneAgeChallengeAppendix.pdf).
+- [2] Radiological Society of North America. RSNA Pediatric Bone Age Challenge - Appendix (2017). [Link](https://bonexpert.com/refs/radiol.2018boneAgeChallengeAppendix.pdf).
 
-- [3] Radiological Society of North America. RSNA Pediatric Bone Age Challenge (2017). Last accessed 6 March 2024. [Link](https://www.rsna.org/rsnai/ai-image-challenge/RSNA-Pediatric-Bone-Age-Challenge-2017).
+- [3] Radiological Society of North America. RSNA Pediatric Bone Age Challenge (2017). [Link](https://www.rsna.org/rsnai/ai-image-challenge/RSNA-Pediatric-Bone-Age-Challenge-2017).
 
 - [4] Cole TJ et al. “Ethnic and sex differences in skeletal maturation among the Birth to Twenty cohort in South Africa”. In: Arch Dis Child. 2015 Feb (2014). [doi](10.1136/archdischild-2014-306399).
   
@@ -189,4 +189,4 @@ Our model for estimating pediatric bone age in months integrates a CNN's feature
 
 - [6] Chao Chen et al. “Attention-Guided Discriminative Region Localization and Label Distribution Learning for Bone Age Assessment”. In: IEEE Journal of Biomedical and Health Informatics 26.3 (2022), pp. 1208–1218. [doi](10.1109/JBHI.2021.3095128).
   
-- [7] Paul Gavrikov. visualkeras. 2020. [Link](https://github.com/paulgavrikov/visualkeras).
+- [7] Paul Gavrikov. `visualkeras`. 2020. [Link](https://github.com/paulgavrikov/visualkeras).
