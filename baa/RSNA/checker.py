@@ -1,22 +1,6 @@
 """
 checker.py defines a class called Checker which is responsible for checking the contents of
-specified folders and CSV files. Here's a breakdown of what each part of the code does:
-
-• Initialization:
-When an instance of the Checker class is created, it extracts information from an initialization
-module (__init__) to set default paths and dependencies, such as paths to processed data and CSV
-files.
-update_dir(new_default_dir) method:
-This method allows updating the default directories with a new list provided as an argument.
-update_csv(new_default_csv) method:
-This method allows updating the default CSV file names with a new list provided as an argument.
-• check() method:
-This method performs the actual checking process.
-It iterates through the default directories and CSV files.
-For each directory, it prints the number of elements (files or subdirectories) contained within
-it.
-For each CSV file, it reads the file using Pandas and prints the number of rows (elements) in the
-CSV.
+specified folders and CSV files.
 Overall, the Checker class is designed to provide a simple mechanism for verifying the contents of
 specific folders and CSV files, which can be useful in various data processing and validation
 tasks.

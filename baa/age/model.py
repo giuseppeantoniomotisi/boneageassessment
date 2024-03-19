@@ -1,52 +1,84 @@
 """
-# Bone Age Assessment Model and Utilities
+Bone Age Assessment Model and Utilities
+
 This Python script encompasses the definition of a Bone Age Assessment model and utility
 functions for its preparation, training, evaluation, and visualization. Here's a breakdown
 of its key components:
 
-Importing Libraries
+1. **Importing Libraries**
 
-The script imports various libraries necessary for deep learning model creation,
-data processing, and visualization, including os, numpy, pandas, matplotlib, and keras.
+   The script imports various libraries necessary for deep learning model creation,
+   data processing, and visualization, including `os`, `numpy`, `pandas`, `matplotlib`, and `keras`.
 
-1. BoneAgeAssessment Class
+2. **BoneAgeAssessment Class**
 
-The BoneAgeAssessment class provides methods for data preparation, model training, evaluation,
-and visualization. Key attributes include paths to data directories, data frames for training,
-validation, and test data, image size,batch size, options, and weights directory.
-Methods include:
-- preparation: Prepare data generators for training, validation, or test.
-- compiler: Compile the model with specified learning rate.
-- callbacks: Get a list of callbacks for model training.
-- loader: Load pre-trained weights into the model.
-- fitter: Train the model and return training history.
-- get_attention_map_model: Get a sub-model for visualizing attention maps.
-- visualize_attention_map: Visualize attention maps for a given image.
-- training_evaluation: Evaluate and visualize the training process.
-- model_evaluation: Evaluate the model on the test set.
+   The `BoneAgeAssessment` class provides methods for data preparation, model training,
+   evaluation, and visualization. Key attributes include paths to data directories,
+   data frames for training, validation, and test data, image size, batch size, options,
+   and weights directory. Methods include:
 
-2. Model Class
+   - `preparation`: Prepare data generators for training, validation, or test.
+   - `compiler`: Compile the model with specified learning rate.
+   - `callbacks`: Get a list of callbacks for model training.
+   - `loader`: Load pre-trained weights into the model.
+   - `fitter`: Train the model and return training history.
+   - `get_attention_map_model`: Get a sub-model for visualizing attention maps.
+   - `visualize_attention_map`: Visualize attention maps for a given image.
+   - `training_evaluation`: Evaluate and visualize the training process.
+   - `model_evaluation`: Evaluate the model on the test set.
 
-The Model class provides methods for creating different variations of the Bone Age Assessment
-model using the VGG16 architecture. Key attributes include the input size of the model and a
-flag to show the model summary.
-Methods include:
-- Model variations such as vgg16regression, vgg16regression_atn, vgg16regression_atn_l1, and
-vgg16regression_atn_l2.
+3. **Model Class**
 
-3. Statistics functions
+   The `Model` class provides methods for creating different variations of the Bone Age Assessment
+   model using the VGG16 architecture. Key attributes include the input size of the model and a
+   flag to show the model summary. Methods include model variations such as `vgg16regression`,
+   `vgg16regression_atn`, `vgg16regression_atn_l1`, and `vgg16regression_atn_l2`.
 
-- r_squared: Calculate Pearson correlation coefficient.
-- mean_absolute_error: Calculate Mean Absolute Error.
-- mean_absolute_deviation: Calculate Mean Absolute Deviation.
+4. **Statistics Functions**
+
+   - `r_squared`: Calculate Pearson correlation coefficient.
+   - `mean_absolute_error`: Calculate Mean Absolute Error.
+   - `mean_absolute_deviation`: Calculate Mean Absolute Deviation.
+
+Import:
+
+```python
+import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from tensorflow.python import keras
+from keras.preprocessing.image import ImageDataGenerator
+from keras.applications.vgg16 import VGG16
+from keras.layers import (
+    GlobalAveragePooling2D,
+    Dense,
+    Dropout,
+    Input,
+    Conv2D,
+    multiply,
+    LocallyConnected2D,
+    Lambda,
+    BatchNormalization
+)
+from keras.models import Model
+from keras.optimizers import Adam
+from keras.regularizers import l2
+from keras.callbacks import (
+    ModelCheckpoint,
+    LearningRateScheduler,
+    EarlyStopping,
+    ReduceLROnPlateau
+)
+import keras.backend as K
 """
 import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from tensorflow.python import keras
 from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.python import keras
 from keras.applications.vgg16 import VGG16
 from keras.layers import (GlobalAveragePooling2D,
                           Dense,

@@ -1,24 +1,6 @@
 """
 merge.py code defines functions and a class related to merging CSV files and images for
-a dataset project. Here's a summary of what each part of the code does:
-
-- switch_columns(dataframe, column_name1, column_name2):
-This function switches the positions of two columns in a Pandas DataFrame.
-- change_columns_names(dataframe, new_names):
-This function changes the column names of a Pandas DataFrame.
-- Merge class:
-This class is responsible for merging training and validation CSV files into a single dataset
-CSV file, as well as merging images into a single folder.
-It initializes with default attributes for paths to training and validation CSV files, as well
-as paths to image folders.
-• The merge_csv() method reads and merges the CSV files, performs necessary data transformations,
-concatenates them into a single dataset, and saves the merged dataset CSV file. It also removes
-the original training and validation CSV files after merging.
-• The merge_images() method merges images from training and validation folders into a single folder.
-• The merge() method combines both CSV files and images merging processes.
-- if __name__ == '__main__': block:
-This block of code executes the merge() method of the Merge class when the script is run as the
-main program.
+a dataset project.
 Overall, the code is designed to facilitate the management and organization of datasets by merging
 separate files into a single dataset file and consolidating images into a single folder.
 """

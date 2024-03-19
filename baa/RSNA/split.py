@@ -1,34 +1,12 @@
 """
 split.py facilitates the splitting of a dataset into training, validation, and
 test sets. Additionally, it organizes images corresponding to these sets into separate directories.
-Here's a brief overview of the class and its methods:
-
-- Initialization (__init__):
-Initializes the class with default attributes such as paths to label-related information (labels),
-processed data storage (processed), and loads a dataset from 'dataset.csv'.
-Shuffles the dataset by rows for better randomness.
-Sets default values for train_val (ratio of training and validation data) and test (ratio of test
-data).
-- Update Split (update_split):
-Updates the ratios for train_val and test with new values provided as arguments.
-- Splitting (splitting):
-Splits the dataset into training, validation, and test sets.
-Shuffles the training and validation sets for better randomness.
-Saves the split datasets as CSV files in the 'labels' directory.
-Copies images corresponding to each set into their respective directories under 'processed'
-directory.
-- Histogram (hist):
-Generates a histogram for a specific column in a given DataFrame.
-Takes a DataFrame, column index, and the number of bins as arguments.
-Note: The provided code may have a couple of issues. The variable all_images_dir is used in the
-splitting method, but it's not defined within the class. Additionally, there's a typo in the hist
-method where it should be dataframe[col_index].hist(bins=nbins) instead of
-dataframe[col_index].histogram(bins=nbins).
-
 Original splitting is set:
+
 - 70% for training data,
 - 20% for validation data,
 - 10% per test data.
+
 If you decide to change splitting ratio, first check dimension of dataset and then use the
 updat_split method.
 """
