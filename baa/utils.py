@@ -102,7 +102,7 @@ def write_info():
     raw_dir = os.path.join(IMAGES_dir,'raw')
     processed_dir = os.path.join(IMAGES_dir,'processed')
     train_dir = os.path.join(processed_dir,'train')
-    validation_dir = os.path.join(processed_dir,'validation')
+    validation_dir = os.path.join(processed_dir,'val')
     test_dir = os.path.join(processed_dir,'test')
     
     # Write info into a dict
