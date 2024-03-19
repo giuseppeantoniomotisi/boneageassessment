@@ -662,7 +662,7 @@ class BoneAgeAssessment():
 
         fig, ax = plt.subplots(figsize=(10,10))
         z = ax.imshow(image,cmap='gray')
-        ax.set_title(f'Predicted age: {pred}$\pm${error}') # Results is shown as title
+        ax.set_title(f'Predicted age: {round(pred, 0)}$\pm${round(error, 0)}') # Results is shown as title
         ax.axis('off')
         plt.colorbar(z, ax=ax)
         # Show flag, default if True
@@ -675,7 +675,7 @@ class BoneAgeAssessment():
             plt.savefig(save_fig)
             plt.close()
 
-        return f'Predicted age is {pred}$\pm${error}.'
+        return f'Predicted age is {round(pred, 0)}$\pm${round(error, 0)}.'
 
 class BaaModel:
     """Class for Bone Age Assessment model creation.

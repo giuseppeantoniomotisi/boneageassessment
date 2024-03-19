@@ -94,7 +94,7 @@ def prediction_module(opt:bool,name:str,path:str):
     if opt:
         if not os.path.exists(os.path.join(path, name)):
             raise FileNotFoundError("image was not found! Please check it.")
-        prediction_result = prediction.process(name,path)
+        prediction_result = prediction.process(name, path)
         prediction_result = 0
         return prediction_result
     else:
