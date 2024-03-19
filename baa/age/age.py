@@ -63,7 +63,7 @@ def process(params: dict):
 
     # Updates hyperparameters
     baa = BoneAgeAssessment()
-    baa.__update_batch_size__(params.get('Batch size', ()))
+    baa.__update_batch_size__(params.get('Batch size', ()), key='all')
     baa.__update_epochs__(params.get('Number of epochs', 0))
 
     # Show info
