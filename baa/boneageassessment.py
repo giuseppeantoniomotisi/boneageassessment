@@ -6,6 +6,7 @@ It integrates various modules such as data preprocessing, machine learning, and 
 Users can configure the behavior of the system using a JSON configuration file.
 
 Usage:
+`
     python script.py --macro <path_to_parameters_json>
 
 Parameters:
@@ -53,7 +54,7 @@ def preprocessing_module(opt:bool):
         utils.open_downloads()
         if 'dataset.zip' in os.listdir(os.getcwd()):
             print("We are unzipping dataset folder. Please wait.")
-            tools_rsna.unzip_folder('dateset.zip')
+            os.system(f"unzip dataset.zip")
             print("Done!")
         elif 'dataset' in os.listdir(os.getcwd()):
             pass
@@ -109,15 +110,16 @@ def baa(info_json):
     if info_json == None:
         info_json = {
             'RSNA': False,
-            'training': False,
-            'prediction': False,
-            'image_name': 'image.png',
-            'path_to_image': '../../',
+            'Training and testing model': False,
+            'Path to hyperparameters.json': '../baa/age/age_macro.json',
+            'New prediction': False,
+            'New image name': 'image.png',
+            'Path to new image': '../../',
         }
     preprocessing_module(info_json['RSNA'])
-    machinelearning_module(info_json['training'])
-    image, path = info_json['image'], info_json['path_to_image']
-    prediction_module(info_json['prediction'], image, path)
+    machinelearning_module(info_json['Training and testing model'], info_json["Path to hyperparameters.json"])
+    image, path = info_json['New image name'], info_json['Path to new image']
+    prediction_module(info_json['New prediction'], image, path)
 
 
 if __name__ == '__main__':

@@ -48,7 +48,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from tensorflow.python import keras
-from keras.preprocessing.image import ImageDataGenerator
+from keras_preprocessing.image import ImageDataGenerator
 from keras.applications.vgg16 import VGG16
 from keras.layers import (
     GlobalAveragePooling2D,
@@ -77,18 +77,19 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from keras.preprocessing.image import ImageDataGenerator
+from keras_preprocessing.image import ImageDataGenerator
 from tensorflow.python import keras
 from keras.applications.vgg16 import VGG16
 from keras.layers import (GlobalAveragePooling2D,
                           Dense,
                           Dropout,
                           Input,
-                          Conv2D,
-                          multiply,
-                          LocallyConnected2D,
-                          Lambda,
-                          BatchNormalization)
+#                          Conv2D,
+#                          multiply,
+#                          LocallyConnected2D,
+#                          Lambda,
+#                          BatchNormalization,
+                          )
 from keras.models import Model
 from keras.optimizers import Adam
 from keras.regularizers import l2
@@ -126,7 +127,6 @@ def lr_scheduler(epoch, initial_lr=1e-04, decay_rate=0.95):
     lr = initial_lr * np.power(decay_rate, epoch)
     return lr
 
-@keras.saving.register_keras_serializable()
 def r_squared(y_true, y_pred):
     """Calculate R-squared metric.
 
@@ -234,7 +234,7 @@ class BoneAgeAssessment():
         self.image_size = image_size
         self.batch_size = batch_size  # batch size for training, validation, and test
         self.lr = lr
-        self.EPOCHS = epochs
+        self.epochs = epochs
 
         # Utils
         self.opts = ['train', 'validation', 'test']  # List of options for data sets
@@ -256,8 +256,8 @@ class BoneAgeAssessment():
         if key == 'test':
             self.batch_size[2] = new_batch_size
         elif key == 'all':
-            if type(new_batch_size) != type((0,0)):
-                raise TypeError('if you select the option all, your input is a tuple')
+            if type(new_batch_size) != type([0,0]):
+                raise TypeError('if you select the option all, your input is a list')
             else:
                 self.batch_size = new_batch_size
         
@@ -275,7 +275,7 @@ class BoneAgeAssessment():
         Args:
             new_num_epochs (int): new number of epochs for training.
         """
-        self.EPOCHS = new_num_epochs
+        self.epochs = new_num_epochs
     
     def __show_info__(self) -> dict:
         """Show attributes of BoneAgeAssessment class. If you create an instance,
@@ -292,7 +292,7 @@ class BoneAgeAssessment():
         return {'image size':self.image_size,
                 'batch size':self.batch_size,
                 'learning rate':self.lr,
-                'number of epochs':self.EPOCHS,
+                'number of epochs':self.epochs,
                 'weights loc':self.weights}
     
     def __get_dataframe__(self,kind:str) -> pd.DataFrame:
@@ -439,7 +439,7 @@ class BoneAgeAssessment():
                             batch_size=self.batch_size[0],
                             validation_data=self.validation_generator,
                             validation_steps=len(self.validation_df['id']) // self.batch_size[1],
-                            epochs=self.EPOCHS,
+                            epochs=self.epochs,
                             callbacks=[checkpoint,early])
         model.save(os.path.join())
         return histo.history
@@ -460,7 +460,7 @@ class BoneAgeAssessment():
                             batch_size=self.batch_size[0],
                             validation_data=validation_generator,
                             validation_steps=len(self.validation_df['id']) // self.batch_size[1],
-                            epochs=self.EPOCHS)
+                            epochs=self.epochs)
         return histo.history
 
     def get_attention_map_model(self, model:keras.models):
@@ -498,7 +498,7 @@ class BoneAgeAssessment():
             model (keras.Model): The trained model.
             num_epochs (int): Number of epochs used for training.
         """
-        path_ckpnt = os.path.join(self.weights,'ckpnt','checkpoint_epoch_{epoch:02d}_model.keras')
+        path_ckpnt = os.path.join(self.weights,'ckpnt','checkpoint_epoch_{epoch:02d}_model.weights.h5')
         path_best = os.path.join(self.weights,'best_model.keras')
         checkpoint = ModelCheckpoint(path_ckpnt,
                                      monitor='val_loss',
@@ -784,89 +784,89 @@ class BaaModel:
 
         return model
     
-    def vgg16regression_atn(self):
-        """Create VGG16 regression model with attention mechanism.
+    # def vgg16regression_atn(self):
+    #     """Create VGG16 regression model with attention mechanism.
 
-        Returns:
-            keras.Model: VGG16 regression model with attention.
-        """
-        # Define input layer
-        in_layer = Input(self.input_size)
-        # Load VGG16 model with pre-trained weights
-        base_model = VGG16(weights="imagenet",include_top=False,input_shape=self.input_size)
-        base_model.trainable = True
+    #     Returns:
+    #         keras.Model: VGG16 regression model with attention.
+    #     """
+    #     # Define input layer
+    #     in_layer = Input(self.input_size)
+    #     # Load VGG16 model with pre-trained weights
+    #     base_model = VGG16(weights="imagenet",include_top=False,input_shape=self.input_size)
+    #     base_model.trainable = True
 
-        # Obtain features from VGG16 base
-        pt_depth = base_model.layers[-1].output_shape[3]
-        pt_features = base_model(in_layer)
+    #     # Obtain features from VGG16 base
+    #     pt_depth = base_model.layers[-1].output_shape[3]
+    #     pt_features = base_model(in_layer)
 
-        # Apply attention mechanism
-        bn_features = BatchNormalization()(pt_features)
-        attn_layer = Conv2D(64,kernel_size=(1,1),padding='same',activation='relu')(bn_features)
-        attn_layer = Conv2D(16,kernel_size=(1,1),padding='same',activation='relu')(attn_layer)
-        attn_layer = LocallyConnected2D(1,kernel_size=(1,1),padding='valid',
-                                        activation='sigmoid')(attn_layer)
-        up_c2_w = np.ones((1,1,1,pt_depth))
-        up_c2 = Conv2D(pt_depth,kernel_size=(1,1),padding='same',
-                    activation='linear',use_bias=False,weights=[up_c2_w])
-        up_c2.trainable = False
-        attn_layer = up_c2(attn_layer)
-        mask_features = multiply([attn_layer, bn_features])
-        gap_features = GlobalAveragePooling2D()(mask_features)
-        gap_mask = GlobalAveragePooling2D()(attn_layer)
-        gap = Lambda(lambda x: x[0]/x[1], name='RescaleGAP')([gap_features,gap_mask])
-        gap_dr = Dropout(0.5)(gap)
-        dr_steps = Dropout(0.25)(Dense(1024, activation='elu')(gap_dr))
-        out_layer = Dense(1, activation='linear')(dr_steps)
+    #     # Apply attention mechanism
+    #     bn_features = BatchNormalization()(pt_features)
+    #     attn_layer = Conv2D(64,kernel_size=(1,1),padding='same',activation='relu')(bn_features)
+    #     attn_layer = Conv2D(16,kernel_size=(1,1),padding='same',activation='relu')(attn_layer)
+    #     attn_layer = LocallyConnected2D(1,kernel_size=(1,1),padding='valid',
+    #                                     activation='sigmoid')(attn_layer)
+    #     up_c2_w = np.ones((1,1,1,pt_depth))
+    #     up_c2 = Conv2D(pt_depth,kernel_size=(1,1),padding='same',
+    #                 activation='linear',use_bias=False,weights=[up_c2_w])
+    #     up_c2.trainable = False
+    #     attn_layer = up_c2(attn_layer)
+    #     mask_features = multiply([attn_layer, bn_features])
+    #     gap_features = GlobalAveragePooling2D()(mask_features)
+    #     gap_mask = GlobalAveragePooling2D()(attn_layer)
+    #     gap = Lambda(lambda x: x[0]/x[1], name='RescaleGAP')([gap_features,gap_mask])
+    #     gap_dr = Dropout(0.5)(gap)
+    #     dr_steps = Dropout(0.25)(Dense(1024, activation='elu')(gap_dr))
+    #     out_layer = Dense(1, activation='linear')(dr_steps)
 
-        # Compile the model
-        model = Model(inputs=[in_layer], outputs=[out_layer], name='rVGG16_atn')
+    #     # Compile the model
+    #     model = Model(inputs=[in_layer], outputs=[out_layer], name='rVGG16_atn')
 
-        # Show summary if summ flag is True
-        if self.summ:
-            model.summary()
+    #     # Show summary if summ flag is True
+    #     if self.summ:
+    #         model.summary()
 
-        return model
+    #     return model
     
-    def vgg16regression_atn_l2(self, reg_factor:float):
-        """Create VGG16 regression model with attention mechanism and L2 regularization.
+    # def vgg16regression_atn_l2(self, reg_factor:float):
+    #     """Create VGG16 regression model with attention mechanism and L2 regularization.
 
-        Returns:
-            keras.Model: VGG16 regression model with attention.
-        """
-        # Define input layer
-        in_layer = Input(self.input_size)
-        # Load VGG16 model with pre-trained weights
-        base_model = VGG16(weights="imagenet", include_top=False, input_shape=self.input_size)
-        base_model.trainable = True
+    #     Returns:
+    #         keras.Model: VGG16 regression model with attention.
+    #     """
+    #     # Define input layer
+    #     in_layer = Input(self.input_size)
+    #     # Load VGG16 model with pre-trained weights
+    #     base_model = VGG16(weights="imagenet", include_top=False, input_shape=self.input_size)
+    #     base_model.trainable = True
 
-        # Obtain features from VGG16 base
-        pt_depth = base_model.layers[-1].output_shape[3]
-        pt_features = base_model(in_layer)
+    #     # Obtain features from VGG16 base
+    #     pt_depth = base_model.layers[-1].output_shape[3]
+    #     pt_features = base_model(in_layer)
 
-        # Apply attention mechanism
-        bn_features = BatchNormalization()(pt_features)
-        attn_layer = Conv2D(64, kernel_size=(1, 1), padding='same', activation='relu')(bn_features)
-        attn_layer = Conv2D(16, kernel_size=(1, 1), padding='same', activation='relu')(attn_layer)
-        attn_layer = LocallyConnected2D(1, kernel_size=(1, 1), padding='valid', activation='sigmoid')(attn_layer)
-        pt_depth = base_model.layers[-1].output_shape[-1]  # Update to use dynamic shape
-        up_c2_w = np.ones((1, 1, 1, pt_depth))
-        up_c2 = Conv2D(pt_depth, kernel_size=(1, 1), padding='same', activation='linear', use_bias=False, weights=[up_c2_w])
-        up_c2.trainable = False
-        attn_layer = up_c2(attn_layer)
-        mask_features = multiply([attn_layer, bn_features])
-        gap_features = GlobalAveragePooling2D()(mask_features)
-        gap_mask = GlobalAveragePooling2D()(attn_layer)
-        gap = Lambda(lambda x: x[0] / x[1], name='RescaleGAP')([gap_features, gap_mask])
-        gap_dr = Dropout(0.5)(gap)
-        dr_steps = Dropout(0.25)(Dense(1024, activation='elu', kernel_regularizer=l2(reg_factor))(gap_dr))
-        out_layer = Dense(1, activation='linear', kernel_regularizer=l2(reg_factor))(dr_steps)
+    #     # Apply attention mechanism
+    #     bn_features = BatchNormalization()(pt_features)
+    #     attn_layer = Conv2D(64, kernel_size=(1, 1), padding='same', activation='relu')(bn_features)
+    #     attn_layer = Conv2D(16, kernel_size=(1, 1), padding='same', activation='relu')(attn_layer)
+    #     attn_layer = LocallyConnected2D(1, kernel_size=(1, 1), padding='valid', activation='sigmoid')(attn_layer)
+    #     pt_depth = base_model.layers[-1].output_shape[-1]  # Update to use dynamic shape
+    #     up_c2_w = np.ones((1, 1, 1, pt_depth))
+    #     up_c2 = Conv2D(pt_depth, kernel_size=(1, 1), padding='same', activation='linear', use_bias=False, weights=[up_c2_w])
+    #     up_c2.trainable = False
+    #     attn_layer = up_c2(attn_layer)
+    #     mask_features = multiply([attn_layer, bn_features])
+    #     gap_features = GlobalAveragePooling2D()(mask_features)
+    #     gap_mask = GlobalAveragePooling2D()(attn_layer)
+    #     gap = Lambda(lambda x: x[0] / x[1], name='RescaleGAP')([gap_features, gap_mask])
+    #     gap_dr = Dropout(0.5)(gap)
+    #     dr_steps = Dropout(0.25)(Dense(1024, activation='elu', kernel_regularizer=l2(reg_factor))(gap_dr))
+    #     out_layer = Dense(1, activation='linear', kernel_regularizer=l2(reg_factor))(dr_steps)
 
-        # Compile the model
-        model = Model(inputs=[in_layer], outputs=[out_layer], name='rVGG16_L2_atn')
+    #     # Compile the model
+    #     model = Model(inputs=[in_layer], outputs=[out_layer], name='rVGG16_L2_atn')
 
-        # Show summary if summ flag is True
-        if self.summ:
-            model.summary()
+    #     # Show summary if summ flag is True
+    #     if self.summ:
+    #         model.summary()
 
-        return model
+    #     return model
