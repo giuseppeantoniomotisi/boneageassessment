@@ -1,13 +1,13 @@
 Dictionary key,Path to folder
-main,../boneageassessment
-baa,../boneageassessment/baa
-IMAGES,../boneageassessment/dataset/IMAGES
-labels,../boneageassessment/dataset/IMAGES/labels
-raw,../boneageassessment/dataset/IMAGES/raw
-processed,../boneageassessment/dataset/IMAGES/processed
-train,../boneageassessment/dataset/IMAGES/processed/train
-validation,../boneageassessment/dataset/IMAGES/processed/val
-test,../boneageassessment/dataset/IMAGES/processed/test
-rsna,../boneageassessment/baa/RSNA
-preprocessing,../boneageassessment/baa/preprocessing
-age,../boneageassessment/baa/age
+main,/Users/Giuseppe/Documents/vscode/exam/boneageassessment
+baa,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/baa
+IMAGES,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/dataset/IMAGES
+labels,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/dataset/IMAGES/labels
+raw,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/dataset/IMAGES/raw
+processed,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/dataset/IMAGES/processed
+train,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/dataset/IMAGES/processed/train
+validation,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/dataset/IMAGES/processed/val
+test,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/dataset/IMAGES/processed/test
+rsna,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/baa/RSNA
+preprocessing,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/baa/preprocessing
+age,/Users/Giuseppe/Documents/vscode/exam/boneageassessment/baa/age

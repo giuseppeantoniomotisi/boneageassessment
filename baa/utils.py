@@ -4,19 +4,23 @@ import os
 import pwd
 import platform
 import shutil
+from pathlib import Path
 from csv import reader
 from tqdm import tqdm
 from RSNA.tools_rsna import unzip_folder
-
-def unzip_sh(path_to_zip):
-    if os.name == 'posix':
-        os.system(f"unzip {path_to_zip}")
 
 def open_boneageassessment():
     """
     Open boneageassessment directory.
     """
-    os.chdir(os.getcwd())
+    # SISTEMARE OPEN BONEAGEASSESSMENY !!!
+    boneageasessment_dir = Path('boneageassessment').resolve()
+    print(f'{boneageasessment_dir}')
+    #os.chdir(os.getcwd())
+
+def unzip_sh(path_to_zip):
+    if os.name == 'posix':
+        os.system(f"unzip {path_to_zip}")
 
 def open_downloads():
     """
@@ -64,7 +68,7 @@ def houdini(opt:str='dataset'):
         Only options are: 'dataset' and 'weights'. Otherwise, the function raise a KeyError.
     """
     if opt == 'dataset':
-        open_boneageassessment()
+        extract_info('main')
         new_loc = os.path.join(os.getcwd(),'dataset')
 
         open_downloads()
@@ -72,7 +76,7 @@ def houdini(opt:str='dataset'):
     
         shutil.move(old_loc, new_loc)
     elif opt == 'weights':
-        open_boneageassessment()
+        extract_info('main')
         new_loc = os.path.join(os.getcwd(),'baa','age','weights')
 
         open_downloads()
@@ -128,7 +132,7 @@ def write_info():
             fp.write(f"{key},{info[key]}\n")
 
 def extract_info(key):
-    open_boneageassessment()
+    open_boneageassessment() # Qui smette di funzionare
     filename = os.path.join(os.getcwd(),'baa','info.csv')
     with open(filename, newline='\n') as file:
         # Create a CSV reader object
