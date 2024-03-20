@@ -127,6 +127,7 @@ def lr_scheduler(epoch, initial_lr=1e-04, decay_rate=0.95):
     lr = initial_lr * np.power(decay_rate, epoch)
     return lr
 
+# @keras.saving.register_keras_serializable()
 def r_squared(y_true, y_pred):
     """Calculate R-squared metric.
 

@@ -28,14 +28,6 @@ RSNA.merge module
    :undoc-members:
    :show-inheritance:
 
-RSNA.rsna module
-----------------
-
-.. automodule:: RSNA.rsna
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 RSNA.split module
 -----------------
 
