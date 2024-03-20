@@ -70,6 +70,7 @@ Finally, the `boneageassessment.py` application orchestrates the smooth operatio
 │   │   ├── age_macro.json
 │   │   ├── model.py
 │   │   ├── results
+│   │   ├── weights
 │   │   └── tests
 │   │       └── age_test.py
 │   ├── info.csv
@@ -78,9 +79,21 @@ Finally, the `boneageassessment.py` application orchestrates the smooth operatio
 │   ├── utils.py
 │   └── boneageassessment.py
 ├── dataset
-│   └── link_to_dataset.txt
-└── documentation
-    └── images
+│   └── IMAGES
+│       ├── labels
+│       ├── raw
+│       └── processed
+│           │──
+│           ├──
+│           └── train
+├── documentation
+│   ├── link_to_dataset.txt
+│   ├── Bone_Age_Assessment_Report.pdf
+│   └── images
+└── requirements
+    ├── install_reqs.bat
+    ├── install_reqs.sh
+    └── requirements.txt
 ```
 ### `boneageassessment.py`
 This script provides a modular system for Bone Age Assessment (BAA). It integrates various modules such as data preprocessing, machine learning, and prediction. Users can configure the behavior of the system using a JSON configuration file.
