@@ -9,24 +9,24 @@ import pwd
 import platform
 import zipfile
 
-def open_desktop():
-    """
-    Open Desktop directory based on the current platform.
-    """
-    username = pwd.getpwuid(os.getuid()).pw_gecos
-    if platform.system() == 'Windows':
-        path = 'C:/Users/username/Desktop'.replace('/username/', f'/{username}/')
-    elif platform.system() == 'Darwin':
-        path = '/Users/username/Desktop'.replace('/username/', f'/{username}/')
-    elif platform.system() == 'Linux':
-        path = '/home/username/Desktop'.replace('/username/', f'/{username}/')
-    os.chdir(path)
+# def open_desktop():
+#     """
+#     Open Desktop directory based on the current platform.
+#     """
+#     username = pwd.getpwuid(os.getuid()).pw_gecos
+#     if platform.system() == 'Windows':
+#         path = 'C:/Users/username/Desktop'.replace('/username/', f'/{username}/')
+#     elif platform.system() == 'Darwin':
+#         path = '/Users/username/Desktop'.replace('/username/', f'/{username}/')
+#     elif platform.system() == 'Linux':
+#         path = '/home/username/Desktop'.replace('/username/', f'/{username}/')
+#     os.chdir(path)
 
 def open_downloads():
     """
     Open Downloads directory based on the current platform.
     """
-    username = pwd.getpwuid(os.getuid()).pw_gecos
+    username = pwd.getpwuid(os.getuid()).pw_name
     if platform.system() == 'Windows':
         path = 'C:/Users/username/Downloads'.replace('/username/', f'/{username}/')
     elif platform.system() == 'Darwin':
