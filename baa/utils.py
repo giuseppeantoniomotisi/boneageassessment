@@ -1,22 +1,42 @@
 """Some useful functions.
 """
 import os
+import json
 import pwd
 import platform
 import shutil
-from pathlib import Path
 from csv import reader
 from tqdm import tqdm
-from RSNA.tools_rsna import unzip_folder
 
-def open_boneageassessment():
+def append_in_json(key:str, value, json_file:str):
+    new_line = {key:value}
+    with open(json_file, 'r') as f:
+        temp = json.load(f)
+    temp.update(new_line)
+    with open(json_file, 'w') as f:
+        json.dump(temp, f, ensure_ascii=False, indent=4)
+
+def write_in_macro():
+    v = os.getcwd()
+    k = "Path to boneageassessment"
+    macro = os.path.join(v, 'baa', 'macro.json')
+    append_in_json(key=k, value=v, json_file=macro)
+
+def open_boneageassessment(naive:bool=True):
     """
     Open boneageassessment directory.
+
+    Args:
+        naive (bool, optional): 
     """
-    # SISTEMARE OPEN BONEAGEASSESSMENY !!!
-    boneageasessment_dir = Path('boneageassessment').resolve()
-    print(f'{boneageasessment_dir}')
-    #os.chdir(os.getcwd())
+    if naive:
+        os.chdir(os.getcwd())
+
+    else:
+        raise NotImplementedError
+        # boneageasessment_dir = '..' 
+        # -> to do: implement a way to find its path
+        # os.chdir(boneageasessment_dir)
 
 def unzip_sh(path_to_zip):
     if os.name == 'posix':
@@ -26,7 +46,7 @@ def open_downloads():
     """
     Open Downloads directory based on the current platform.
     """
-    username = pwd.getpwuid(os.getuid()).pw_gecos
+    username = pwd.getpwuid(os.getuid()).pw_name
     if platform.system() == 'Windows':
         path = 'C:/Users/username/Downloads'.replace('/username/', f'/{username}/')
     elif platform.system() == 'Darwin':
@@ -34,6 +54,20 @@ def open_downloads():
     elif platform.system() == 'Linux':
         path = '/home/username/Downloads'.replace('/username/', f'/{username}/')
     os.chdir(path)
+
+def get_downloads():
+    """
+    Get Downloads directory path based on the current platform.
+    """
+    username = pwd.getpwuid(os.getuid()).pw_name
+    if platform.system() == 'Windows':
+        path = 'C:/Users/username/Downloads'.replace('/username/', f'/{username}/')
+    elif platform.system() == 'Darwin':
+        path = '/Users/username/Downloads'.replace('/username/', f'/{username}/')
+    elif platform.system() == 'Linux':
+        path = '/home/username/Downloads'.replace('/username/', f'/{username}/')
+
+    return path
 
 def switch_folders(folder1_path, folder2_path):
     # Create a temporary directory to hold the contents of folder1
@@ -71,16 +105,16 @@ def houdini(opt:str='dataset'):
         extract_info('main')
         new_loc = os.path.join(os.getcwd(),'dataset')
 
-        open_downloads()
-        old_loc = os.path.join(os.getcwd(),'dataset')
+        down = get_downloads()
+        old_loc = os.path.join(down,'dataset')
     
         shutil.move(old_loc, new_loc)
     elif opt == 'weights':
         extract_info('main')
         new_loc = os.path.join(os.getcwd(),'baa','age','weights')
 
-        open_downloads()
-        old_loc = os.path.join(os.getcwd(),'weights')
+        down = get_downloads()
+        old_loc = os.path.join(down,'weights')
 
         shutil.move(old_loc, new_loc)
     else:
@@ -144,4 +178,4 @@ def extract_info(key):
                     return row[1]
 
 if __name__ == '__main__':
-    write_info()
+    write_in_macro()

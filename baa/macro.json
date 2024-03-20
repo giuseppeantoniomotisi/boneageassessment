@@ -1,8 +1,8 @@
 {
- "RSNA": false,
- "Training and testing model": false,
- "Path to hyperparameters.json": "../baa/age/macro_age.json",
- "New prediction": false,
- "New image name": "image.png",
- "Path to new image": "../"
+    "RSNA": false,
+    "Training and testing model": false,
+    "Path to hyperparameters.json": "../baa/age/macro_age.json",
+    "New prediction": false,
+    "New image name": "image.png",
+    "Path to new image": "../"
 }

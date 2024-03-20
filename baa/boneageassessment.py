@@ -49,54 +49,56 @@ def preprocessing_module(opt:bool):
         print("Done!")
         print("We are processing images. Please wait.")
         preprocessing.process()
+        utils.houdini()
         print("Done!")
 
     else:
-        utils.open_downloads()
+        downloads_dir = utils.get_downloads()
 
-        if 'dataset.zip' in os.listdir(os.getcwd()):
+        if 'dataset.zip' in os.listdir(downloads_dir):
             if os.name != 'posix':
                 error = "you work on Windows. The shell command 'unzip' works only for MACOS and Linux.\n"
                 error += "Please unzip by your UtilityCompressor and retry."
                 raise NotImplementedError(error)
 
             print("We are unzipping dataset folder. Please wait.")
-            os.system(f"unzip dataset.zip")
+            os.system(f"unzip {os.path.join(downloads_dir, 'dataset.zip')}")
+            #if os.path.exists(os.path.join(downloads_dir, '__MACOSX')):
             if os.path.exists('__MACOSX'):
-                os.system("rm -r __MACOSX")
-                os.remove('dataset.zip')
+                os.system(f"rm -r '__MACOSX')")
+            os.remove(os.path.join(downloads_dir, 'dataset.zip'))
             print("Done!")
 
-        elif 'dataset' in os.listdir(os.getcwd()):
+        elif 'dataset' in os.listdir(downloads_dir):
+            pass
+
+        elif os.path.exists(os.path.join(os.getcwd(), 'dataset')):
             pass
 
         else: 
             raise FileNotFoundError("no file named dataset.zip or folder named dataset was found.")
 
-    utils.open_downloads()
-    print(os.listdir(os.getcwd()))
-    if 'weights.zip' in os.listdir(os.getcwd()):
+    if 'weights.zip' in os.listdir(downloads_dir):
         if os.name != 'posix':
             error = "you work on Windows. The shell command 'unzip' works only for MACOS and Linux.\n"
             error += "Please unzip by your UtilityCompressor and retry."
             raise NotImplementedError(error)
 
         print("We are unzipping weights folder. Please wait.")
-        os.system(f"unzip weights.zip")
-        if os.path.exists('__MACOSX'):
-            os.system("rm -r __MACOSX")
-            os.remove('weights.zip')
-            print("Done!")
+        os.system(f"unzip {os.path.join(downloads_dir, 'weights.zip')} -d {os.path.join(os.getcwd(), 'baa', 'age')}")
+        if os.path.exists(os.path.join(os.getcwd(), 'baa', 'age', '__MACOSX')):
+            os.system(f"rm -r {os.path.join(os.getcwd(), 'baa', 'age', '__MACOSX')}")
+        os.remove(os.path.join(downloads_dir, 'weights.zip'))
+        print("Done!")
 
-    elif 'weights' in os.listdir(os.getcwd()):
+    elif 'weights' in os.listdir(downloads_dir):
+        pass
+    
+    elif os.path.exists(os.path.join(os.getcwd(), 'baa', 'age', 'weights')):
         pass
 
     else: 
         raise FileNotFoundError("no file named weights.zip or folder named weights was found.")
-
-    print(utils.extract_info('main'))
-    utils.houdini(opt='dataset')
-    utils.houdini(opt='weights')
     print("Done!")
 
 def machinelearning_module(opt:bool, hyperparameters_json):
@@ -145,6 +147,7 @@ def baa(info_json):
     """
     if info_json == None:
         info_json = {
+            'Path to boneageassessment': '../',
             'RSNA': False,
             'Training and testing model': False,
             'Path to hyperparameters.json': '../baa/age/age_macro.json',
@@ -154,9 +157,9 @@ def baa(info_json):
         }
 
     preprocessing_module(info_json['RSNA'])
-    #machinelearning_module(info_json['Training and testing model'], info_json["Path to hyperparameters.json"])
-    #image, path = info_json['New image name'], info_json['Path to new image']
-    #prediction_module(info_json['New prediction'], image, path)
+    machinelearning_module(info_json['Training and testing model'], info_json["Path to hyperparameters.json"])
+    image, path = info_json['New image name'], info_json['Path to new image']
+    prediction_module(info_json['New prediction'], image, path)
 
 
 if __name__ == '__main__':
