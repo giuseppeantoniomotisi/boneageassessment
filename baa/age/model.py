@@ -65,6 +65,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from keras_preprocessing.image import ImageDataGenerator
+import tensorflow as tf
 from tensorflow.python import keras
 from keras.applications.vgg16 import VGG16
 from keras.layers import (GlobalAveragePooling2D,
@@ -132,7 +133,7 @@ def lr_scheduler(epoch, initial_lr=1e-04, decay_rate=0.95):
     lr = initial_lr * np.power(decay_rate, epoch)
     return lr
 
-# @keras.saving.register_keras_serializable()
+@tf.keras.saving.register_keras_serializable()
 def r_squared(y_true, y_pred):
     """Calculate R-squared metric.
 
