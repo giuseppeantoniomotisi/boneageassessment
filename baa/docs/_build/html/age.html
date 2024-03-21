@@ -1,0 +1,791 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>age package &#8212; baa 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=e1a75a79"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'age';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utils module" href="utils.html" />
+    <link rel="prev" title="preprocessing package" href="preprocessing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">baa 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modules.html">baa</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="RSNA.html">RSNA package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">preprocessing package</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">age package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/age.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>age package</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-age.model">age.model module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BaaModel"><code class="docutils literal notranslate"><span class="pre">BaaModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BaaModel.vgg16regression"><code class="docutils literal notranslate"><span class="pre">BaaModel.vgg16regression()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BaaModel.vgg16regression_l2"><code class="docutils literal notranslate"><span class="pre">BaaModel.vgg16regression_l2()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.compiler"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.compiler()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.fitter"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.fitter()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.fitter_dummy"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.fitter_dummy()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.get_attention_map_model"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.get_attention_map_model()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.loader"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.loader()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.model_evaluation"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.model_evaluation()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.prediction"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.prediction()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.preparatory"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.preparatory()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.training_evaluation"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.training_evaluation()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.visualize_attention_map"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.visualize_attention_map()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.lr_scheduler"><code class="docutils literal notranslate"><span class="pre">lr_scheduler()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.mean_absolute_deviation"><code class="docutils literal notranslate"><span class="pre">mean_absolute_deviation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.mean_absolute_error"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.r_squared"><code class="docutils literal notranslate"><span class="pre">r_squared()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-age">Module contents</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="age-package">
+<h1>age package<a class="headerlink" href="#age-package" title="Link to this heading">#</a></h1>
+<section id="module-age.model">
+<span id="age-model-module"></span><h2>age.model module<a class="headerlink" href="#module-age.model" title="Link to this heading">#</a></h2>
+<p>Bone Age Assessment Model and Utilities</p>
+<p>This Python script encompasses the definition of a Bone Age Assessment model and utility
+functions for its preparation, training, evaluation, and visualization. Here’s a breakdown
+of its key components:</p>
+<ol class="arabic">
+<li><p><strong>Importing Libraries</strong></p>
+<p>The script imports various libraries necessary for deep learning model creation,
+data processing, and visualization, including <cite>os</cite>, <cite>numpy</cite>, <cite>pandas</cite>, <cite>matplotlib</cite>, and <cite>keras</cite>.</p>
+</li>
+<li><p><strong>BoneAgeAssessment Class</strong></p>
+<p>The <cite>BoneAgeAssessment</cite> class provides methods for data preparation, model training,
+evaluation, and visualization. Key attributes include paths to data directories,
+data frames for training, validation, and test data, image size, batch size, options,
+and weights directory. Methods include:</p>
+<ul class="simple">
+<li><p><cite>preparation</cite>: Prepare data generators for training, validation, or test.</p></li>
+<li><p><cite>compiler</cite>: Compile the model with specified learning rate.</p></li>
+<li><p><cite>callbacks</cite>: Get a list of callbacks for model training.</p></li>
+<li><p><cite>loader</cite>: Load pre-trained weights into the model.</p></li>
+<li><p><cite>fitter</cite>: Train the model and return training history.</p></li>
+<li><p><cite>get_attention_map_model</cite>: Get a sub-model for visualizing attention maps.</p></li>
+<li><p><cite>visualize_attention_map</cite>: Visualize attention maps for a given image.</p></li>
+<li><p><cite>training_evaluation</cite>: Evaluate and visualize the training process.</p></li>
+<li><p><cite>model_evaluation</cite>: Evaluate the model on the test set.</p></li>
+</ul>
+</li>
+<li><p><strong>Model Class</strong></p>
+<p>The <cite>Model</cite> class provides methods for creating different variations of the Bone Age Assessment
+model using the VGG16 architecture. Key attributes include the input size of the model and a
+flag to show the model summary. Methods include model variations such as <cite>vgg16regression</cite>,
+<cite>vgg16regression_atn</cite>, <cite>vgg16regression_atn_l1</cite>, and <cite>vgg16regression_atn_l2</cite>.</p>
+</li>
+<li><p><strong>Statistics Functions</strong></p>
+<ul class="simple">
+<li><p><cite>r_squared</cite>: Calculate Pearson correlation coefficient.</p></li>
+<li><p><cite>mean_absolute_error</cite>: Calculate Mean Absolute Error.</p></li>
+<li><p><cite>mean_absolute_deviation</cite>: Calculate Mean Absolute Deviation.</p></li>
+</ul>
+</li>
+</ol>
+<dl class="py class">
+<dt class="sig sig-object py" id="age.model.BaaModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">age.model.</span></span><span class="sig-name descname"><span class="pre">BaaModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(399,</span> <span class="pre">399,</span> <span class="pre">3)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summ</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BaaModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BaaModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for Bone Age Assessment model creation.</p>
+<p>This class provides methods for creating different variations of
+the Bone Age Assessment model using VGG16 architecture.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>input_size (tuple): Input size of the model.
+summ (bool): Flag to show model summary.</p>
+</dd>
+<dt>Methods:</dt><dd><dl class="simple">
+<dt>vgg16regression() -&gt; keras.Model:</dt><dd><p>Create a simplified VGG16 regression model.</p>
+</dd>
+<dt>vgg16regression_l2(reg_factor: float) -&gt; keras.Model:</dt><dd><p>Create VGG16 regression model with L2 regularization.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BaaModel.vgg16regression">
+<span class="sig-name descname"><span class="pre">vgg16regression</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BaaModel.vgg16regression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BaaModel.vgg16regression" title="Link to this definition">#</a></dt>
+<dd><p>Create a simplified VGG16 regression model.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>keras.Model: Simplified VGG16 regression model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BaaModel.vgg16regression_l2">
+<span class="sig-name descname"><span class="pre">vgg16regression_l2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reg_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BaaModel.vgg16regression_l2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BaaModel.vgg16regression_l2" title="Link to this definition">#</a></dt>
+<dd><p>Create VGG16 regression model with L2 regularization.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>reg_factor (float): Regularization factor.</p>
+</dd>
+<dt>Returns:</dt><dd><p>keras.Model: VGG16 regression model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">age.model.</span></span><span class="sig-name descname"><span class="pre">BoneAgeAssessment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(399,</span> <span class="pre">399)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(32,</span> <span class="pre">32,</span> <span class="pre">1396)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balanced</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for Bone Age Assessment model.</p>
+<p>This class provides methods for data preparation, model training,
+evaluation, and visualization.</p>
+<p>Attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>main (str): Path to the boneageassessment directory.</p></li>
+<li><p>baa (str): Path to the baa directory.</p></li>
+<li><p>IMAGES (str): Path to the images directory.</p></li>
+<li><p>labels (str): Path to the labels directory.</p></li>
+<li><p>processed (str): Path to the processed data directory.</p></li>
+<li><p>train (str): Path to the training data directory.</p></li>
+<li><p>train_df (pd.DataFrame): DataFrame containing training data.</p></li>
+<li><p>validation (str): Path to the validation data directory.</p></li>
+<li><p>validation_df (pd.DataFrame): DataFrame containing validation data.</p></li>
+<li><p>test (str): Path to the test data directory.</p></li>
+<li><p>test_df (pd.DataFrame): DataFrame containing test data.</p></li>
+<li><p>image_size (tuple): Size of the input images.</p></li>
+<li><p>batch_size (tuple): Batch size for training, validation, and test.</p></li>
+<li><p>opts (list): List of allowed options.</p></li>
+<li><p>weights (str): Path to the directory for storing model weights.</p></li>
+</ul>
+</div></blockquote>
+<dl>
+<dt>Methods:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>update_batch_size(new_batch_size: tuple):</dt><dd><p>Update the batch size for training, validation, and test.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="simple">
+<dt>preparation(kind: str):</dt><dd><p>Prepare data generators for training, validation, or test.</p>
+</dd>
+<dt>r_squared(y_true, y_pred):</dt><dd><p>Calculate R-squared metric.</p>
+</dd>
+<dt>compiler(model, lr: float = 0.0001):</dt><dd><p>Compile the model with specified learning rate.</p>
+</dd>
+<dt>callbacks() -&gt; list:</dt><dd><p>Get a list of callbacks for model training.</p>
+</dd>
+<dt>loader(model, weight_name: str) -&gt; keras.model:</dt><dd><p>Load pre-trained weights into the model.</p>
+</dd>
+<dt>fitter(model, num_epochs: int):</dt><dd><p>Train the model and return training history.</p>
+</dd>
+<dt>get_attention_map_model(model):</dt><dd><p>Get a sub-model for visualizing attention maps.</p>
+</dd>
+<dt>visualize_attention_map(img_array, attention_map_model):</dt><dd><p>Visualize attention maps for a given image.</p>
+</dd>
+<dt>training_evaluation(model, num_epochs: int):</dt><dd><p>Evaluate and visualize the training process.</p>
+</dd>
+<dt>model_evaluation(weight: str):</dt><dd><p>Evaluate the model on the test set.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment.compiler">
+<span class="sig-name descname"><span class="pre">compiler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment.compiler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment.compiler" title="Link to this definition">#</a></dt>
+<dd><p>Compile the model with specified optimizer and loss function.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>model (keras.Model): The model to be compiled.</p>
+</dd>
+<dt>Returns:</dt><dd><p>keras.Model: Compiled model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment.fitter">
+<span class="sig-name descname"><span class="pre">fitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment.fitter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment.fitter" title="Link to this definition">#</a></dt>
+<dd><p>Train the model and return training history.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>model (keras.Model): The model to be trained.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Training history.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment.fitter_dummy">
+<span class="sig-name descname"><span class="pre">fitter_dummy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_generator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_generator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment.fitter_dummy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment.fitter_dummy" title="Link to this definition">#</a></dt>
+<dd><p>Train the model and return training history without callbacks.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>model (keras.Model): The model to be trained.
+train_generator (keras.generator): Keras training dataset generator.
+validation_generator (keras.generator): Keras validation dataset generator.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Training history.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment.get_attention_map_model">
+<span class="sig-name descname"><span class="pre">get_attention_map_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model:</span> <span class="pre">&lt;module</span> <span class="pre">'tensorflow.python.keras.models'</span> <span class="pre">from</span> <span class="pre">'/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/tensorflow/python/keras/models.py'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment.get_attention_map_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment.get_attention_map_model" title="Link to this definition">#</a></dt>
+<dd><p>Extract the attention layer from the model.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>model (keras.Model): The model.</p>
+</dd>
+<dt>Returns:</dt><dd><p>keras.Model: Model with the attention layer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment.loader">
+<span class="sig-name descname"><span class="pre">loader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Model</span></span></span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment.loader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment.loader" title="Link to this definition">#</a></dt>
+<dd><p>Load pre-trained weights into the model.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>model (keras.Model): The model to load weights into.
+weight_name (str): Name of the weight file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>keras.Model: Model with loaded weights.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment.model_evaluation">
+<span class="sig-name descname"><span class="pre">model_evaluation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">training</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment.model_evaluation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment.model_evaluation" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the model on the test set.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>training (bool): if True, load the just trained model.
+Else load the weight specified by the input path.
+weight (str, optional): Name of the pre-trained weight file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment.prediction">
+<span class="sig-name descname"><span class="pre">prediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment.prediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment.prediction" title="Link to this definition">#</a></dt>
+<dd><p>Make prediction on an image and visualize the result.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>image (np.ndarray): The input image array.
+show (bool, optional): Whether to display the prediction plot. Defaults to True.
+save (bool, optional): Whether to save the prediction plot. Defaults to True.
+image_id (int, optional): Identifier for the image. Defaults to 0.</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: Predicted age.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment.preparatory">
+<span class="sig-name descname"><span class="pre">preparatory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment.preparatory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment.preparatory" title="Link to this definition">#</a></dt>
+<dd><p>Prepare data generators for training and validation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment.training_evaluation">
+<span class="sig-name descname"><span class="pre">training_evaluation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment.training_evaluation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment.training_evaluation" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate and visualize the training process.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>model (keras.Model): The trained model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="age.model.BoneAgeAssessment.visualize_attention_map">
+<span class="sig-name descname"><span class="pre">visualize_attention_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_map_model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#BoneAgeAssessment.visualize_attention_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.BoneAgeAssessment.visualize_attention_map" title="Link to this definition">#</a></dt>
+<dd><p>Visualize attention maps for a given image.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>img_array (np.array): Image array.
+attention_map_model (keras.Model): Model with attention maps.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="age.model.lr_scheduler">
+<span class="sig-prename descclassname"><span class="pre">age.model.</span></span><span class="sig-name descname"><span class="pre">lr_scheduler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">epoch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decay_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.95</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#lr_scheduler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.lr_scheduler" title="Link to this definition">#</a></dt>
+<dd><p>Learning rate schedule function with exponential decay.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>epoch (int): Current epoch number.
+initial_lr (float, optional): Initial learning rate. Defaults to 1e-04.
+decay_rate (float, optional): Rate of decay. Defaults to 0.95.</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: Updated learning rate.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="age.model.mean_absolute_deviation">
+<span class="sig-prename descclassname"><span class="pre">age.model.</span></span><span class="sig-name descname"><span class="pre">mean_absolute_deviation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#mean_absolute_deviation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.mean_absolute_deviation" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the mean absolute deviation.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>y_true (np.ndarray): True values.
+y_pred (np.ndarray): Predicted values.</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: Mean absolute deviation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="age.model.mean_absolute_error">
+<span class="sig-prename descclassname"><span class="pre">age.model.</span></span><span class="sig-name descname"><span class="pre">mean_absolute_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#mean_absolute_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.mean_absolute_error" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the mean absolute error.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>y_true (np.ndarray): True values.
+y_pred (np.ndarray): Predicted values.</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: Mean absolute error.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="age.model.r_squared">
+<span class="sig-prename descclassname"><span class="pre">age.model.</span></span><span class="sig-name descname"><span class="pre">r_squared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/age/model.html#r_squared"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#age.model.r_squared" title="Link to this definition">#</a></dt>
+<dd><p>Calculate R-squared metric.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>y_true (tensor): True values.
+y_pred (tensor): Predicted values.</p>
+</dd>
+<dt>Returns:</dt><dd><p>tensor: R-squared value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-age">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-age" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="preprocessing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">preprocessing package</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="utils.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">utils module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-age.model">age.model module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BaaModel"><code class="docutils literal notranslate"><span class="pre">BaaModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BaaModel.vgg16regression"><code class="docutils literal notranslate"><span class="pre">BaaModel.vgg16regression()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BaaModel.vgg16regression_l2"><code class="docutils literal notranslate"><span class="pre">BaaModel.vgg16regression_l2()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.compiler"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.compiler()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.fitter"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.fitter()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.fitter_dummy"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.fitter_dummy()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.get_attention_map_model"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.get_attention_map_model()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.loader"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.loader()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.model_evaluation"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.model_evaluation()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.prediction"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.prediction()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.preparatory"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.preparatory()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.training_evaluation"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.training_evaluation()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.BoneAgeAssessment.visualize_attention_map"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.visualize_attention_map()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.lr_scheduler"><code class="docutils literal notranslate"><span class="pre">lr_scheduler()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.mean_absolute_deviation"><code class="docutils literal notranslate"><span class="pre">mean_absolute_deviation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.mean_absolute_error"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age.model.r_squared"><code class="docutils literal notranslate"><span class="pre">r_squared()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-age">Module contents</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By GiuseppeAntonioMotisi&GiuseppeFanciulli
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, GiuseppeAntonioMotisi&amp;GiuseppeFanciulli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

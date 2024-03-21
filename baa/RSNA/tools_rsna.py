@@ -2,8 +2,11 @@
 tools_rsna.py is used to create folders so that the correct paths used by the application can
 be constructed. Specifically, it switches from the subdivision proposed by RSNA (training,
 validation-1, validation-2).
+
 You can easily find your new dataset in the same repository where you downloaded.
 """
+
+
 import os
 import pwd
 import platform
@@ -84,6 +87,9 @@ def unzip_current_in_folders():
 def unzip_folder(zip_file):
     """
     Unzip a specified zip file.
+
+    Args:
+        zip_file (str): Name of the zip file to unzip.
     """
     name = zip_file[:-4]
     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
@@ -137,10 +143,10 @@ def check_path():
 
 def extract_info_as_dict() -> dict:
     """
-    Assigns paths to various datasets from the original RSNA paths file.
+    Assign paths to various datasets from the original RSNA paths file.
 
     Returns:
-    - output_dict (dict): A dictionary containing paths to different datasets.
+        dict: A dictionary containing paths to different datasets.
     """
     # Open the Desktop directory
     open_downloads()
@@ -193,8 +199,7 @@ def extract_info_as_dict() -> dict:
         
 
 def clean_workspace():
-    """Remove old directories from Documents folder.
-    """
+    """Remove old directories from Documents folder."""
     open_downloads()
 
     directories = ['Bone Age Validation Set','boneage-training-dataset']
@@ -211,6 +216,11 @@ def clean_workspace():
         pass
 
 if __name__ == '__main__':
+    # Create necessary directories
     create_directories()
+
+    # Check and update the RSNA paths
     check_path()
+
+    # Remove old directories from Documents folder
     clean_workspace()

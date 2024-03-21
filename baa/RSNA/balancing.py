@@ -1,7 +1,8 @@
 """
-balancing.py defines a class BalancingDataset that is designed to balance a dataset by augmenting
+Balancing module defines a class BalancingDataset that is designed to balance a dataset by augmenting
 the training data with additional samples. The process involves creating a balanced CSV file and,
 optionally, generating augmented images.
+
 This method balances the dataset by calling create_bal_csv to create the balanced CSV file.
 If create_images is set to True, it further calls create_images to generate and save augmented
 images.
@@ -106,10 +107,10 @@ class BalancingDataset:
         Returns:
             tuple: A tuple containing a dictionary representing classes and an array representing
             the delta values.
-               - The dictionary (dict): Keys represent the classes, and values represent the
-               elements in each class.
-               - The array (numpy.ndarray): Represents the difference between the limit_value and
-               the histogram values.
+                The dictionary (dict): Keys represent the classes, and values represent the
+                elements in each class.
+                The array (numpy.ndarray): Represents the difference between the limit_value and
+                the histogram values.
         """
         # Check self.dataframe type
         if type(self.dataframe) != pd.DataFrame:

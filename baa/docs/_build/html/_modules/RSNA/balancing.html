@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSNA.balancing &#8212; baa 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=e1a75a79"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/RSNA/balancing';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">baa 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">baa</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../RSNA.html">RSNA package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preprocessing.html">preprocessing package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../age.html">age package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html">utils module</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for RSNA.balancing</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Balancing module defines a class BalancingDataset that is designed to balance a dataset by augmenting</span>
+<span class="sd">the training data with additional samples. The process involves creating a balanced CSV file and,</span>
+<span class="sd">optionally, generating augmented images.</span>
+
+<span class="sd">This method balances the dataset by calling create_bal_csv to create the balanced CSV file.</span>
+<span class="sd">If create_images is set to True, it further calls create_images to generate and save augmented</span>
+<span class="sd">images.</span>
+
+<span class="sd">In summary, this script is designed to balance a dataset by creating a balanced CSV file and</span>
+<span class="sd">optionally generating augmented images for training. The augmentation involves introducing random</span>
+<span class="sd">rotations to the images.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">cv2</span> <span class="k">as</span> <span class="nn">cv</span>
+<span class="kn">from</span> <span class="nn">tools_rsna</span> <span class="kn">import</span> <span class="n">extract_info_as_dict</span>
+
+<div class="viewcode-block" id="BalancingDataset">
+<a class="viewcode-back" href="../../RSNA.html#RSNA.balancing.BalancingDataset">[docs]</a>
+<span class="k">class</span> <span class="nc">BalancingDataset</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    BalancingDataset class handles the process of balancing a dataset by augmenting the</span>
+<span class="sd">    training data with additional samples and creating balanced CSV and image files.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        path_to_csv (str): Path to the directory containing CSV files.</span>
+<span class="sd">        path_to_images (str): Path to the directory containing raw images.</span>
+<span class="sd">        path_to_train (str): Path to the processed training folder.</span>
+<span class="sd">        csv_name (str): Name of the training CSV file.</span>
+<span class="sd">        dataframe (pd.DataFrame): Pandas DataFrame containing the training data.</span>
+
+<span class="sd">        key_id (str): Column name for identifiers in the DataFrame.</span>
+<span class="sd">        key_value (str): Column name for values used for categorization.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        find_element(limit_value, num_classes) -&gt; tuple:</span>
+<span class="sd">            Categorizes elements in a DataFrame into classes based on their values, and calculates</span>
+<span class="sd">            delta values</span>
+<span class="sd">            based on the histogram of key_values column and limit_value.</span>
+
+<span class="sd">        create_bal_csv():</span>
+<span class="sd">            Creates a balanced CSV file by augmenting the training data with additional samples and</span>
+<span class="sd">            saves it.</span>
+
+<span class="sd">        rotation(image, angle) -&gt; np.ndarray:</span>
+<span class="sd">            Rotates the image by a given angle.</span>
+
+<span class="sd">        create_images():</span>
+<span class="sd">            Creates augmented images based on the balanced CSV file and saves them to the</span>
+<span class="sd">            processed training folder.</span>
+
+<span class="sd">        balance(create_images: bool = False):</span>
+<span class="sd">            Balances the dataset by creating a balanced CSV file and optionally generating</span>
+<span class="sd">            augmented images.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes BalancingDataset class with default paths and dependencies.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># find all dependicies</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">extract_info_as_dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_to_csv</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_to_images</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_to_train</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;processed&#39;</span><span class="p">],</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">csv_name</span> <span class="o">=</span> <span class="s1">&#39;train.csv&#39;</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_to_csv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">csv_name</span><span class="p">)):</span>
+            <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_to_csv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">csv_name</span><span class="p">))</span>
+            <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span> <span class="o">=</span> <span class="n">dataframe</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_id</span> <span class="o">=</span> <span class="s1">&#39;id&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_value</span> <span class="o">=</span> <span class="s1">&#39;boneage&#39;</span>
+        
+    <span class="k">def</span> <span class="nf">__update_df__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_dataframe_path</span><span class="p">):</span>
+        <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">new_dataframe_path</span><span class="p">)</span>
+        <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span> <span class="o">=</span> <span class="n">dataframe</span>
+
+<div class="viewcode-block" id="BalancingDataset.find_element">
+<a class="viewcode-back" href="../../RSNA.html#RSNA.balancing.BalancingDataset.find_element">[docs]</a>
+    <span class="k">def</span> <span class="nf">find_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit_value</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Summary:</span>
+<span class="sd">            The function find_element seems designed to categorize elements in a DataFrame into</span>
+<span class="sd">            classes based on their values in a particular column, key_values.</span>
+<span class="sd">            Additionally, it calculates the delta values based on the histogram of key_values</span>
+<span class="sd">            column and limit_value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataframe (pd.DataFrame): A pandas DataFrame containing the data.</span>
+<span class="sd">            key_id (str): The name of the column in the DataFrame containing the identifiers.</span>
+<span class="sd">            key_values (str): The name of the column in the DataFrame containing the values to be</span>
+<span class="sd">            categorized.</span>
+<span class="sd">            limit_value (int): The maximum number of elements allowed in each class.</span>
+<span class="sd">            num_classes (int): The number of classes to categorize the data into.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If dataframe is not of type pd.DataFrame.</span>
+<span class="sd">            TypeError: If limit_value is not of type int.</span>
+<span class="sd">            TypeError: If num_classes is not of type int.</span>
+<span class="sd">            ValueError: If key_id or key_values are not found in the DataFrame.</span>
+<span class="sd">            ValueError: If limit_value is less than the maximum histogram value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: A tuple containing a dictionary representing classes and an array representing</span>
+<span class="sd">            the delta values.</span>
+<span class="sd">                The dictionary (dict): Keys represent the classes, and values represent the</span>
+<span class="sd">                elements in each class.</span>
+<span class="sd">                The array (numpy.ndarray): Represents the difference between the limit_value and</span>
+<span class="sd">                the histogram values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check self.dataframe type</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+            <span class="n">type_error</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;dataframe&#39;s expeted type is&quot;</span> <span class="o">+</span> \
+            <span class="s2">&quot;&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;,not {type(self.dataframe)}&quot;</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">type_error</span><span class="p">)</span>
+
+        <span class="c1"># Check limit_value type</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">limit_value</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;limit_value&#39;s expeted type is &lt;class &#39;int&#39;&gt;, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">limit_value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check num_classes type</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;num_classes&#39;s expeted type is &lt;class &#39;int&#39;&gt;, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Create empty lists to append image id</span>
+        <span class="n">classes_value</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)]</span>
+        <span class="n">classes_key</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+        <span class="n">classes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">classes_key</span><span class="p">,</span> <span class="n">classes_value</span><span class="p">))</span>
+
+        <span class="c1"># Calculate histogram</span>
+        <span class="n">hist</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key_value</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
+
+        <span class="c1"># Check if limit_value is greater than the maximum bin value</span>
+        <span class="k">if</span> <span class="n">limit_value</span> <span class="o">&lt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">hist</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;limit_value must be greater or equal to max_hist: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Define how much is distant the desired number of images</span>
+        <span class="n">delta_array</span> <span class="o">=</span> <span class="n">limit_value</span> <span class="o">-</span> <span class="n">hist</span>
+
+        <span class="c1"># Assign elements to classes based on their values</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_classes</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">edges</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key_value</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">edges</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">classes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key_id</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+                    <span class="k">break</span>
+
+        <span class="k">return</span> <span class="n">classes</span><span class="p">,</span> <span class="n">delta_array</span></div>
+
+
+<div class="viewcode-block" id="BalancingDataset.create_bal_csv">
+<a class="viewcode-back" href="../../RSNA.html#RSNA.balancing.BalancingDataset.create_bal_csv">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_bal_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a balanced CSV file by augmenting the training data with additional</span>
+<span class="sd">        samples and saves it.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="mi">19</span>
+        <span class="n">list_of_names</span><span class="p">,</span> <span class="n">delta_balanced</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">limit</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+
+        <span class="n">temp_id</span><span class="p">,</span> <span class="n">temp_boneage</span><span class="p">,</span> <span class="n">temp_gender</span><span class="p">,</span> <span class="n">temp_bn</span><span class="p">,</span> <span class="n">temp_angles</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_names</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Creating </span><span class="si">{</span><span class="n">delta_balanced</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1"> files for [</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">) age range ...&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">delta_balanced</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="c1"># Draw name to transform</span>
+                <span class="n">selected_name</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">list_of_names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">selected_name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="c1"># Generate a random angle to rotate image</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">*</span> <span class="mi">360</span>
+
+                <span class="n">angle_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">angle</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="n">new_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">angle_name</span><span class="si">}{</span><span class="n">selected_name</span><span class="si">}</span><span class="s1">&#39;</span>  <span class="c1"># Adding angle to the name</span>
+
+                <span class="c1"># Add name to csv file</span>
+                <span class="n">temp_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_name</span><span class="p">)</span>
+                <span class="n">temp_angles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+                <span class="n">temp_boneage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;boneage&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">temp_gender</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;male&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done!&#39;</span><span class="p">)</span>
+
+        <span class="n">temp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="n">temp_id</span><span class="p">,</span>
+                                <span class="s1">&#39;boneage&#39;</span><span class="p">:</span><span class="n">temp_boneage</span><span class="p">,</span>
+                                <span class="s1">&#39;male&#39;</span><span class="p">:</span><span class="n">temp_gender</span><span class="p">,</span>
+                                <span class="s1">&#39;angle&#39;</span><span class="p">:</span><span class="n">temp_angles</span><span class="p">})</span>
+
+        <span class="n">dataframe_aug</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">temp_df</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">dataframe_aug_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_to_csv</span><span class="p">,</span> <span class="s1">&#39;augmented.csv&#39;</span><span class="p">)</span>
+        <span class="n">dataframe_aug</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">dataframe_aug_name</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BalancingDataset.rotation">
+<a class="viewcode-back" href="../../RSNA.html#RSNA.balancing.BalancingDataset.rotation">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">rotation</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Summary:</span>
+<span class="sd">            Rotate the image by a given angle.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image (numpy.ndarray): The input image.</span>
+<span class="sd">            angle (float): The angle by which the image should be rotated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The rotated image.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">size_reverse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># swap x with y</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">getRotationMatrix2D</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">size_reverse</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">),</span> <span class="n">angle</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+        <span class="n">MM</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">M</span><span class="p">[:,:</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">size_new</span> <span class="o">=</span> <span class="n">MM</span> <span class="o">@</span> <span class="n">size_reverse</span>
+        <span class="n">M</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">size_new</span> <span class="o">-</span> <span class="n">size_reverse</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="k">return</span> <span class="n">cv</span><span class="o">.</span><span class="n">warpAffine</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">size_new</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)))</span></div>
+
+    
+<div class="viewcode-block" id="BalancingDataset.create_images">
+<a class="viewcode-back" href="../../RSNA.html#RSNA.balancing.BalancingDataset.create_images">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_images</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates augmented images based on the balanced CSV file and saves them to the processed</span>
+<span class="sd">        training folder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">from_directory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_to_images</span>
+        <span class="n">to_directory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_dir</span>
+        <span class="n">dataframe_aug_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_to_csv</span><span class="p">,</span> <span class="s1">&#39;augmented.csv&#39;</span><span class="p">)</span>
+        <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dataframe_aug_name</span><span class="p">)</span>
+        <span class="n">iterations</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">)):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">input_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">from_directory</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">output_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">to_directory</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_path</span><span class="p">):</span>
+                 <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;angle&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">angle</span> <span class="o">=</span> <span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;angle&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+                    <span class="n">angle_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">angle</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">angle_name</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="n">input_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">from_directory</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">output_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">to_directory</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+                    <span class="n">image</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="n">rotated_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">otation</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+                    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rotated_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+                    <span class="k">del</span> <span class="n">angle_name</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">rotated_image</span></div>
+
+    
+<div class="viewcode-block" id="BalancingDataset.balance">
+<a class="viewcode-back" href="../../RSNA.html#RSNA.balancing.BalancingDataset.balance">[docs]</a>
+    <span class="k">def</span> <span class="nf">balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">create_images</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Balances the dataset by creating a balanced CSV file and optionally generating</span>
+<span class="sd">        augmented images.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            create_images (bool): If True, generates and saves augmented images.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># First create csv file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_bal_csv</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
+        
+        <span class="c1"># Then creates image</span>
+        <span class="k">if</span> <span class="n">create_images</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_images</span><span class="p">()</span></div>
+</div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">BalancingDataset</span><span class="p">()</span><span class="o">.</span><span class="n">balance</span><span class="p">(</span><span class="n">create_images</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By GiuseppeAntonioMotisi&GiuseppeFanciulli
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, GiuseppeAntonioMotisi&amp;GiuseppeFanciulli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

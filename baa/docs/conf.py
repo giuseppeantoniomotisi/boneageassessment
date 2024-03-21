@@ -5,16 +5,13 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-
 import os
 import sys
-baa_dir = os.path.abspath('..')
-sys.path.insert(0, baa_dir)
-sys.path.insert(0, os.path.join(baa_dir, 'RSNA'))
-sys.path.insert(0, os.path.join(baa_dir, 'age'))
-sys.path.insert(0, os.path.join(baa_dir, 'preprocessing'))
 
-project = 'Bone Age Assessment'
+sys.path.append(os.path.abspath(".."))
+sys.path.append(os.path.join(os.path.abspath(".."), 'RSNA'))
+
+project = 'baa'
 copyright = '2024, GiuseppeAntonioMotisi&GiuseppeFanciulli'
 author = 'GiuseppeAntonioMotisi&GiuseppeFanciulli'
 release = '0.1'

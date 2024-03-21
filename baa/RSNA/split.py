@@ -1,5 +1,5 @@
 """
-split.py facilitates the splitting of a dataset into training, validation, and
+Split module facilitates the splitting of a dataset into training, validation, and
 test sets. Additionally, it organizes images corresponding to these sets into separate directories.
 Original splitting is set:
 
@@ -141,4 +141,10 @@ class Split:
         dataframe[col_index].hist(bins=nbins)
 
 if __name__ == '__main__':
-    Split().splitting()
+    # Create an instance of the Split class
+    splitter = Split()
+
+    # Perform the splitting operation
+    splitter.splitting()
+
+    print("Splitting operation completed successfully!")

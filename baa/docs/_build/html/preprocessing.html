@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>preprocessing package &#8212; baa 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=e1a75a79"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'preprocessing';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="age package" href="age.html" />
+    <link rel="prev" title="RSNA package" href="RSNA.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">baa 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modules.html">baa</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="RSNA.html">RSNA package</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">preprocessing package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="age.html">age package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/preprocessing.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>preprocessing package</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-preprocessing.tools">preprocessing.tools module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing"><code class="docutils literal notranslate"><span class="pre">Preprocessing</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.brightness"><code class="docutils literal notranslate"><span class="pre">Preprocessing.brightness()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.brightness_aug"><code class="docutils literal notranslate"><span class="pre">Preprocessing.brightness_aug()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.cut_peak"><code class="docutils literal notranslate"><span class="pre">Preprocessing.cut_peak()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.histogram_equalization"><code class="docutils literal notranslate"><span class="pre">Preprocessing.histogram_equalization()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.in_box"><code class="docutils literal notranslate"><span class="pre">Preprocessing.in_box()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.preprocessing_directory"><code class="docutils literal notranslate"><span class="pre">Preprocessing.preprocessing_directory()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.preprocessing_image"><code class="docutils literal notranslate"><span class="pre">Preprocessing.preprocessing_image()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.process"><code class="docutils literal notranslate"><span class="pre">Preprocessing.process()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.rectangle"><code class="docutils literal notranslate"><span class="pre">Preprocessing.rectangle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.resize"><code class="docutils literal notranslate"><span class="pre">Preprocessing.resize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.square"><code class="docutils literal notranslate"><span class="pre">Preprocessing.square()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-preprocessing">Module contents</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="preprocessing-package">
+<h1>preprocessing package<a class="headerlink" href="#preprocessing-package" title="Link to this heading">#</a></h1>
+<section id="module-preprocessing.tools">
+<span id="preprocessing-tools-module"></span><h2>preprocessing.tools module<a class="headerlink" href="#module-preprocessing.tools" title="Link to this heading">#</a></h2>
+<p>After data manipulation and data augmentation, what we need to do is to preprocess our images.
+This is step has two main purposes: one is to reduce the dataset size and the second is to clean
+as much as possible the images, making the background black and our subjects (the hands) shiny,
+i.e. with a higher level of gray. This expedient would create a dataset that would be more readable
+for our deep learning networks.
+Let’s start by importing all the packages that we need to perform our preprocessing and then we
+define the functions that we are going to use throughout this step.</p>
+<p>Requirements: os, csv, numpy, matplolib, cv2 and mediapipe</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">preprocessing.tools.</span></span><span class="sig-name descname"><span class="pre">Preprocessing</span></span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.brightness">
+<span class="sig-name descname"><span class="pre">brightness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.brightness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.brightness" title="Link to this definition">#</a></dt>
+<dd><p>Remove the background from the hand X-ray image we are delaing with.
+By using the cut_peak function finds the index corresponding to the right
+base of the higher peak of the image histogram (by assuming that this
+peak is always corresponding to the background pixels). Then every pixel
+value that is less than the found index or greater than 254 is set to 0.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>image (np.ndarray): array of some image</p></li>
+<li><p>filename (str): name of the image file</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>np.ndarray: array of corrected image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.brightness_aug">
+<span class="sig-name descname"><span class="pre">brightness_aug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.brightness_aug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.brightness_aug" title="Link to this definition">#</a></dt>
+<dd><p>This function was only used for augmented images (rotated), in order to
+remove the white frame and the black background that was originated from the
+rotation operation. The background gets set at the most occurred gray level
+excluding pitch black (gray level = 0) and complete white (gray level = 255).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>image (np.ndarray): array of augmented image</p></li>
+<li><p>filename (str): name of the image file</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>np.ndarray: array of corrected image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.cut_peak">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cut_peak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.cut_peak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.cut_peak" title="Link to this definition">#</a></dt>
+<dd><p>Finds index corresponding to approximate end of background contribution in an X-ray image.
+It takes as inputs the array histogram of the image, the index to which correpsonds the
+maximum of the histogram, the peak fraction where to cut the maximum peak and the name of
+the image file. By descending along the peak to its right side (therefore by assuming that
+the maximum of the histogram is in the black shade region) the algorithm finds the index
+(new_index) where the histogram value is less than the maximum of the histogram divided
+by the peak fraction chosen. If the new_index is further than 10 levels of gray,it is
+automatically set as index + 5 levels of gray. The code also checks if the index found is
+too large (larger than the array size) and if it is the case, it puts the new_index = 0
+and prints the name of the problematic image.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>h (np.ndarray): histogram array of some image</p></li>
+<li><p>index (int): index (and gray level) corresponding to histogram maximum</p></li>
+<li><p>frac (float): fraction of the histogram maximum where background ends</p></li>
+<li><p>filename (str): name of the image file</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>int: the index found, corresponding to the last level of background</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.histogram_equalization">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">histogram_equalization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.histogram_equalization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.histogram_equalization" title="Link to this definition">#</a></dt>
+<dd><p>Performs the histogram equalization of some image.
+It takes as input an image and equalizes its histogram with the method 
+presented here: <a class="reference external" href="https://en.wikipedia.org/wiki/Histogram_equalization">https://en.wikipedia.org/wiki/Histogram_equalization</a>.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>image (np.ndarray): array of some image</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>np.ndarray: array of equalized image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.in_box">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">in_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.in_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.in_box" title="Link to this definition">#</a></dt>
+<dd><p>Takes as input the x and y coordinates of a point and checks whether it is inside or
+outside a rectangle (for example an image).
+If the point is inside the box, the function returns a tuple containing the x coordinate
+as the first element and the y coordinate as the second element. Otherwise, if the point
+is outside the box, it gets redefined on the border of the box and then the function
+returns the tuple with the corrected coordinates.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>vertex_x (int): x coordinate of point</p></li>
+<li><p>vertex_y (int): y cooridnate of point</p></li>
+<li><p>image_width (int): width of the box (image)</p></li>
+<li><p>image_hieght (int): height of the box (image)</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>tuple (int, int): x and y coordinates of the point (may be corrected).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.preprocessing_directory">
+<span class="sig-name descname"><span class="pre">preprocessing_directory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.preprocessing_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.preprocessing_directory" title="Link to this definition">#</a></dt>
+<dd><p>Takes the hand x-ray images contained in some directory as input and makes
+use of mediapipe package in order to find the hand in the images. If found, 
+first crops the images with a bounding box around the hand and then applies the
+process method to the cropped images; finally it saves them. Alternatively, if 
+it cannot find hands, it just applies the process method to the image and then 
+it saves it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.preprocessing_image">
+<span class="sig-name descname"><span class="pre">preprocessing_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.preprocessing_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.preprocessing_image" title="Link to this definition">#</a></dt>
+<dd><p>Takes the hand x-ray image as input and makes use of mediapipe package
+in order to find the hand in the image. If found, first crops the image with
+a bounding box around the hand and then applies the process method to the
+cropped image; finally it shows/saves it. Alternatively, if it cannot find 
+hands, it just applies the process method to the image and then it shows/saves
+it.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>image_name (str): name of the image file
+show (bool): True if user wants the image to be shown, False otherwise
+save (bool): True if user wants the image to be saved, False otherwise</p>
+</dd>
+<dt>Raises:</dt><dd><p>Warning: if image doesn’t get cropped, the program gives a warning.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.process" title="Link to this definition">#</a></dt>
+<dd><p>This function makes use of brightness, histogram_equalization,
+square and resize functions to preprocess the image. This is the optimized
+sequence that gives back an approximately segmented hand X-ray image.</p>
+<p>Args:
+- image (np.ndarray): array of image to preprocess
+- filename (str): name of the image file</p>
+<p>Returns:
+np.ndarray: array of preprocessed image</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.rectangle">
+<span class="sig-name descname"><span class="pre">rectangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coord</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.rectangle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.rectangle" title="Link to this definition">#</a></dt>
+<dd><p>Takes as input a 2-D array (e.g. an image) and a 2-D list contianing the x and y
+coordinates of two points, the upper left and the bottom right vertex of a rectangle.
+Starting from this two points, it moves them by a fraction of the frame shape (frac)
+and then with the in_box function check if they are inside frame (if they are not,
+the function changes their coordinates). Returns two tuples, the first containing x
+and y cooridnates of the top left vertex of an enlarged rectangle and the second one 
+are the x and y coordinates of the bottom right vertex of the same rectangle.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>frame (np.ndarray): 2-D array (image)</p></li>
+<li><p>coord (list): 2-D list containing x and y coordinates of top left and bottom right vertex</p></li>
+</ul>
+</dd>
+<dt>Returns: </dt><dd><p>tuple (int, int), tuple (int, int): coordinates of ‘enlarged’ vertices of rectangle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.resize">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.resize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.resize" title="Link to this definition">#</a></dt>
+<dd><p>See documentation of OpenCV cv2.resize function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.square">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.square" title="Link to this definition">#</a></dt>
+<dd><p>It takes as input an image and outputs the image with same height and width,
+by choosing as the square length side the greater between height and width
+of the original image. The image is centered and where there is no original
+image, the new image is black (gray level = 0).</p>
+<dl class="simple">
+<dt>Arg:</dt><dd><ul class="simple">
+<li><p>image (np.ndarray): array of the input image</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>np.ndarray: squared image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-preprocessing">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-preprocessing" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="RSNA.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">RSNA package</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="age.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">age package</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-preprocessing.tools">preprocessing.tools module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing"><code class="docutils literal notranslate"><span class="pre">Preprocessing</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.brightness"><code class="docutils literal notranslate"><span class="pre">Preprocessing.brightness()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.brightness_aug"><code class="docutils literal notranslate"><span class="pre">Preprocessing.brightness_aug()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.cut_peak"><code class="docutils literal notranslate"><span class="pre">Preprocessing.cut_peak()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.histogram_equalization"><code class="docutils literal notranslate"><span class="pre">Preprocessing.histogram_equalization()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.in_box"><code class="docutils literal notranslate"><span class="pre">Preprocessing.in_box()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.preprocessing_directory"><code class="docutils literal notranslate"><span class="pre">Preprocessing.preprocessing_directory()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.preprocessing_image"><code class="docutils literal notranslate"><span class="pre">Preprocessing.preprocessing_image()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.process"><code class="docutils literal notranslate"><span class="pre">Preprocessing.process()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.rectangle"><code class="docutils literal notranslate"><span class="pre">Preprocessing.rectangle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.resize"><code class="docutils literal notranslate"><span class="pre">Preprocessing.resize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing.tools.Preprocessing.square"><code class="docutils literal notranslate"><span class="pre">Preprocessing.square()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-preprocessing">Module contents</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By GiuseppeAntonioMotisi&GiuseppeFanciulli
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, GiuseppeAntonioMotisi&amp;GiuseppeFanciulli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

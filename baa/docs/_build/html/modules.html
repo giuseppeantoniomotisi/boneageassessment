@@ -1,0 +1,519 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>baa &#8212; baa 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=e1a75a79"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSNA package" href="RSNA.html" />
+    <link rel="prev" title="Welcome to baa’s documentation!" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">baa 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">baa</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="RSNA.html">RSNA package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">preprocessing package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="age.html">age package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/modules.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>baa</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="baa">
+<h1>baa<a class="headerlink" href="#baa" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="RSNA.html">RSNA package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="RSNA.html#module-RSNA.merge">RSNA.merge module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.merge.Merge"><code class="docutils literal notranslate"><span class="pre">Merge</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.merge.Merge.merge"><code class="docutils literal notranslate"><span class="pre">Merge.merge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.merge.Merge.merge_csv"><code class="docutils literal notranslate"><span class="pre">Merge.merge_csv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.merge.Merge.merge_images"><code class="docutils literal notranslate"><span class="pre">Merge.merge_images()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.merge.change_columns_names"><code class="docutils literal notranslate"><span class="pre">change_columns_names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.merge.switch_columns"><code class="docutils literal notranslate"><span class="pre">switch_columns()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RSNA.html#module-RSNA.split">RSNA.split module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.split.Split"><code class="docutils literal notranslate"><span class="pre">Split</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.split.Split.hist"><code class="docutils literal notranslate"><span class="pre">Split.hist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.split.Split.splitting"><code class="docutils literal notranslate"><span class="pre">Split.splitting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.split.Split.update_split"><code class="docutils literal notranslate"><span class="pre">Split.update_split()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RSNA.html#module-RSNA.balancing">RSNA.balancing module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.balancing.BalancingDataset"><code class="docutils literal notranslate"><span class="pre">BalancingDataset</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.balancing.BalancingDataset.balance"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.balance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.balancing.BalancingDataset.create_bal_csv"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.create_bal_csv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.balancing.BalancingDataset.create_images"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.create_images()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.balancing.BalancingDataset.find_element"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.find_element()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.balancing.BalancingDataset.rotation"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.rotation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RSNA.html#module-RSNA.checker">RSNA.checker module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.checker.Checker"><code class="docutils literal notranslate"><span class="pre">Checker</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.checker.Checker.check"><code class="docutils literal notranslate"><span class="pre">Checker.check()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.checker.Checker.update_csv"><code class="docutils literal notranslate"><span class="pre">Checker.update_csv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="RSNA.html#RSNA.checker.Checker.update_dir"><code class="docutils literal notranslate"><span class="pre">Checker.update_dir()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RSNA.html#module-RSNA.tools_rsna">RSNA.tools_rsna module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.tools_rsna.check_path"><code class="docutils literal notranslate"><span class="pre">check_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.tools_rsna.clean_workspace"><code class="docutils literal notranslate"><span class="pre">clean_workspace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.tools_rsna.create_directories"><code class="docutils literal notranslate"><span class="pre">create_directories()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.tools_rsna.extract_info_as_dict"><code class="docutils literal notranslate"><span class="pre">extract_info_as_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.tools_rsna.open_downloads"><code class="docutils literal notranslate"><span class="pre">open_downloads()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.tools_rsna.unzip_current_in_folders"><code class="docutils literal notranslate"><span class="pre">unzip_current_in_folders()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RSNA.html#RSNA.tools_rsna.unzip_folder"><code class="docutils literal notranslate"><span class="pre">unzip_folder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RSNA.html#module-RSNA">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">preprocessing package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html#module-preprocessing.tools">preprocessing.tools module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing"><code class="docutils literal notranslate"><span class="pre">Preprocessing</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.brightness"><code class="docutils literal notranslate"><span class="pre">Preprocessing.brightness()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.brightness_aug"><code class="docutils literal notranslate"><span class="pre">Preprocessing.brightness_aug()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.cut_peak"><code class="docutils literal notranslate"><span class="pre">Preprocessing.cut_peak()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.histogram_equalization"><code class="docutils literal notranslate"><span class="pre">Preprocessing.histogram_equalization()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.in_box"><code class="docutils literal notranslate"><span class="pre">Preprocessing.in_box()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.preprocessing_directory"><code class="docutils literal notranslate"><span class="pre">Preprocessing.preprocessing_directory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.preprocessing_image"><code class="docutils literal notranslate"><span class="pre">Preprocessing.preprocessing_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.process"><code class="docutils literal notranslate"><span class="pre">Preprocessing.process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.rectangle"><code class="docutils literal notranslate"><span class="pre">Preprocessing.rectangle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.resize"><code class="docutils literal notranslate"><span class="pre">Preprocessing.resize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="preprocessing.html#preprocessing.tools.Preprocessing.square"><code class="docutils literal notranslate"><span class="pre">Preprocessing.square()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html#module-preprocessing">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="age.html">age package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="age.html#module-age.model">age.model module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="age.html#age.model.BaaModel"><code class="docutils literal notranslate"><span class="pre">BaaModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BaaModel.vgg16regression"><code class="docutils literal notranslate"><span class="pre">BaaModel.vgg16regression()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BaaModel.vgg16regression_l2"><code class="docutils literal notranslate"><span class="pre">BaaModel.vgg16regression_l2()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment.compiler"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.compiler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment.fitter"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.fitter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment.fitter_dummy"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.fitter_dummy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment.get_attention_map_model"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.get_attention_map_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment.loader"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.loader()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment.model_evaluation"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.model_evaluation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment.prediction"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment.preparatory"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.preparatory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment.training_evaluation"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.training_evaluation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="age.html#age.model.BoneAgeAssessment.visualize_attention_map"><code class="docutils literal notranslate"><span class="pre">BoneAgeAssessment.visualize_attention_map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="age.html#age.model.lr_scheduler"><code class="docutils literal notranslate"><span class="pre">lr_scheduler()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="age.html#age.model.mean_absolute_deviation"><code class="docutils literal notranslate"><span class="pre">mean_absolute_deviation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="age.html#age.model.mean_absolute_error"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="age.html#age.model.r_squared"><code class="docutils literal notranslate"><span class="pre">r_squared()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="age.html#module-age">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.append_in_json"><code class="docutils literal notranslate"><span class="pre">append_in_json()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.extract_info"><code class="docutils literal notranslate"><span class="pre">extract_info()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.get_downloads"><code class="docutils literal notranslate"><span class="pre">get_downloads()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.houdini"><code class="docutils literal notranslate"><span class="pre">houdini()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.open_boneageassessment"><code class="docutils literal notranslate"><span class="pre">open_boneageassessment()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.open_downloads"><code class="docutils literal notranslate"><span class="pre">open_downloads()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.switch_folders"><code class="docutils literal notranslate"><span class="pre">switch_folders()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.unzip_sh"><code class="docutils literal notranslate"><span class="pre">unzip_sh()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.write_in_macro"><code class="docutils literal notranslate"><span class="pre">write_in_macro()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#utils.write_info"><code class="docutils literal notranslate"><span class="pre">write_info()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to baa’s documentation!</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="RSNA.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">RSNA package</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By GiuseppeAntonioMotisi&GiuseppeFanciulli
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, GiuseppeAntonioMotisi&amp;GiuseppeFanciulli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

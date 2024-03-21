@@ -1,5 +1,5 @@
 """
-merge.py code defines functions and a class related to merging CSV files and images for
+Merge module code defines functions and a class related to merging CSV files and images for
 a dataset project.
 Overall, the code is designed to facilitate the management and organization of datasets by merging
 separate files into a single dataset file and consolidating images into a single folder.
@@ -113,4 +113,13 @@ class Merge:
         self.merge_images()
 
 if __name__ == '__main__':
-    Merge().merge()
+    # Create an instance of the Merge class
+    merger = Merge()
+    
+    # Merge CSV files
+    merger.merge_csv()
+    
+    # Merge images
+    merger.merge_images()
+    
+    print("Merge operation completed successfully!")

@@ -1,6 +1,7 @@
 """
-checker.py defines a class called Checker which is responsible for checking the contents of
+Checker module defines a class called Checker which is responsible for checking the contents of
 specified folders and CSV files.
+
 Overall, the Checker class is designed to provide a simple mechanism for verifying the contents of
 specific folders and CSV files, which can be useful in various data processing and validation
 tasks.
@@ -10,8 +11,7 @@ import pandas as pd
 from tools_rsna import extract_info_as_dict
 
 class Checker:
-    """The class Checker is a simple class for evaluate dataset transformation.
-    """
+    """The class Checker is a simple class for evaluate dataset transformation."""
     def __init__(self):
         """
         Initialize Checker class with default paths and dependencies.

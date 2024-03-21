@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>preprocessing.tools &#8212; baa 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=e1a75a79"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/preprocessing/tools';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">baa 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">baa</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../RSNA.html">RSNA package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preprocessing.html">preprocessing package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../age.html">age package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html">utils module</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for preprocessing.tools</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">After data manipulation and data augmentation, what we need to do is to preprocess our images.</span>
+<span class="sd">This is step has two main purposes: one is to reduce the dataset size and the second is to clean</span>
+<span class="sd">as much as possible the images, making the background black and our subjects (the hands) shiny,</span>
+<span class="sd">i.e. with a higher level of gray. This expedient would create a dataset that would be more readable</span>
+<span class="sd">for our deep learning networks.</span>
+<span class="sd">Let&#39;s start by importing all the packages that we need to perform our preprocessing and then we</span>
+<span class="sd">define the functions that we are going to use throughout this step.</span>
+
+<span class="sd">Requirements: os, csv, numpy, matplolib, cv2 and mediapipe</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="c1">#import csv</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="s1">&#39;baa&#39;</span><span class="p">))</span>
+<span class="kn">import</span> <span class="nn">mediapipe</span> <span class="k">as</span> <span class="nn">mp</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">extract_info</span>
+
+<div class="viewcode-block" id="Preprocessing">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing">[docs]</a>
+<span class="k">class</span> <span class="nc">Preprocessing</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baa</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;baa&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;validation&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Preprocessing.in_box">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.in_box">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">in_box</span><span class="p">(</span><span class="n">vertex_x</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">vertex_y</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">image_width</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">image_height</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Takes as input the x and y coordinates of a point and checks whether it is inside or</span>
+<span class="sd">        outside a rectangle (for example an image).</span>
+<span class="sd">        If the point is inside the box, the function returns a tuple containing the x coordinate</span>
+<span class="sd">        as the first element and the y coordinate as the second element. Otherwise, if the point</span>
+<span class="sd">        is outside the box, it gets redefined on the border of the box and then the function</span>
+<span class="sd">        returns the tuple with the corrected coordinates.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            - vertex_x (int): x coordinate of point</span>
+<span class="sd">            - vertex_y (int): y cooridnate of point</span>
+<span class="sd">            - image_width (int): width of the box (image)</span>
+<span class="sd">            - image_hieght (int): height of the box (image)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple (int, int): x and y coordinates of the point (may be corrected).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">vertex_x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vertex_x</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">vertex_x</span> <span class="o">&gt;=</span> <span class="n">image_width</span><span class="p">:</span>
+            <span class="n">vertex_x</span> <span class="o">=</span> <span class="n">image_width</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">vertex_y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vertex_y</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">vertex_y</span> <span class="o">&gt;=</span> <span class="n">image_height</span><span class="p">:</span>
+            <span class="n">vertex_y</span> <span class="o">=</span> <span class="n">image_height</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="n">vertex</span> <span class="o">=</span> <span class="p">(</span><span class="n">vertex_x</span><span class="p">,</span> <span class="n">vertex_y</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">vertex</span></div>
+
+
+<div class="viewcode-block" id="Preprocessing.rectangle">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.rectangle">[docs]</a>
+    <span class="k">def</span> <span class="nf">rectangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">frame</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">coord</span><span class="p">:</span><span class="nb">list</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Takes as input a 2-D array (e.g. an image) and a 2-D list contianing the x and y</span>
+<span class="sd">        coordinates of two points, the upper left and the bottom right vertex of a rectangle.</span>
+<span class="sd">        Starting from this two points, it moves them by a fraction of the frame shape (frac)</span>
+<span class="sd">        and then with the in_box function check if they are inside frame (if they are not,</span>
+<span class="sd">        the function changes their coordinates). Returns two tuples, the first containing x</span>
+<span class="sd">        and y cooridnates of the top left vertex of an enlarged rectangle and the second one </span>
+<span class="sd">        are the x and y coordinates of the bottom right vertex of the same rectangle.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            - frame (np.ndarray): 2-D array (image)</span>
+<span class="sd">            - coord (list): 2-D list containing x and y coordinates of top left and bottom right vertex</span>
+
+<span class="sd">        Returns: </span>
+<span class="sd">            tuple (int, int), tuple (int, int): coordinates of &#39;enlarged&#39; vertices of rectangle</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">frac</span> <span class="o">=</span> <span class="mf">0.15</span>
+        <span class="n">elong</span> <span class="o">=</span> <span class="n">image_height</span><span class="o">*</span><span class="n">frac</span>
+        <span class="n">widen</span> <span class="o">=</span> <span class="n">image_width</span><span class="o">*</span><span class="n">frac</span>
+        <span class="n">top_left_x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="n">widen</span><span class="p">)</span>
+        <span class="n">top_left_y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">elong</span><span class="p">)</span>
+        <span class="n">top_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_box</span><span class="p">(</span><span class="n">top_left_x</span><span class="p">,</span> <span class="n">top_left_y</span><span class="p">,</span> <span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span><span class="p">)</span>
+        <span class="n">bottom_right_x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="n">widen</span><span class="p">)</span>
+        <span class="n">bottom_right_y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="n">elong</span><span class="p">)</span>
+        <span class="n">bottom_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_box</span><span class="p">(</span><span class="n">bottom_right_x</span><span class="p">,</span> <span class="n">bottom_right_y</span><span class="p">,</span> <span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">top_left</span><span class="p">,</span> <span class="n">bottom_right</span></div>
+
+
+<div class="viewcode-block" id="Preprocessing.cut_peak">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.cut_peak">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">cut_peak</span><span class="p">(</span><span class="n">h</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">frac</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds index corresponding to approximate end of background contribution in an X-ray image.</span>
+<span class="sd">        It takes as inputs the array histogram of the image, the index to which correpsonds the</span>
+<span class="sd">        maximum of the histogram, the peak fraction where to cut the maximum peak and the name of</span>
+<span class="sd">        the image file. By descending along the peak to its right side (therefore by assuming that</span>
+<span class="sd">        the maximum of the histogram is in the black shade region) the algorithm finds the index</span>
+<span class="sd">        (new_index) where the histogram value is less than the maximum of the histogram divided</span>
+<span class="sd">        by the peak fraction chosen. If the new_index is further than 10 levels of gray,it is</span>
+<span class="sd">        automatically set as index + 5 levels of gray. The code also checks if the index found is</span>
+<span class="sd">        too large (larger than the array size) and if it is the case, it puts the new_index = 0</span>
+<span class="sd">        and prints the name of the problematic image.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            - h (np.ndarray): histogram array of some image</span>
+<span class="sd">            - index (int): index (and gray level) corresponding to histogram maximum</span>
+<span class="sd">            - frac (float): fraction of the histogram maximum where background ends</span>
+<span class="sd">            - filename (str): name of the image file</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: the index found, corresponding to the last level of background</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">h</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">h</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">/</span><span class="n">frac</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">h</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="n">index</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                <span class="k">break</span>
+        <span class="n">new_index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="n">i</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">new_index</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">index</span><span class="p">):</span>
+            <span class="n">new_index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">5</span>
+        <span class="k">return</span> <span class="n">new_index</span></div>
+
+
+<div class="viewcode-block" id="Preprocessing.square">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.square">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">image</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It takes as input an image and outputs the image with same height and width,</span>
+<span class="sd">        by choosing as the square length side the greater between height and width</span>
+<span class="sd">        of the original image. The image is centered and where there is no original</span>
+<span class="sd">        image, the new image is black (gray level = 0).</span>
+
+<span class="sd">        Arg:</span>
+<span class="sd">            - image (np.ndarray): array of the input image</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: squared image</span>
+<span class="sd">         &quot;&quot;&quot;</span>
+        <span class="n">im_height</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">im_width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">im_height</span> <span class="o">&gt;=</span> <span class="n">im_width</span><span class="p">):</span>
+            <span class="n">dim</span> <span class="o">=</span> <span class="n">im_height</span>
+            <span class="n">canvas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">canvas</span><span class="p">[:</span><span class="n">im_height</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">dim</span><span class="o">-</span><span class="n">im_width</span><span class="p">)):</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">dim</span><span class="o">+</span><span class="n">im_width</span><span class="p">)),</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">image</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dim</span> <span class="o">=</span> <span class="n">im_width</span>
+            <span class="n">canvas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">canvas</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">dim</span><span class="o">-</span><span class="n">im_height</span><span class="p">)):</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">dim</span><span class="o">+</span><span class="n">im_height</span><span class="p">)),</span> <span class="p">:</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">image</span>
+        <span class="k">return</span> <span class="n">canvas</span></div>
+
+
+<div class="viewcode-block" id="Preprocessing.resize">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.resize">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="n">image</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">dimension</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See documentation of OpenCV cv2.resize function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">dimension</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Preprocessing.histogram_equalization">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.histogram_equalization">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">histogram_equalization</span><span class="p">(</span><span class="n">image</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Performs the histogram equalization of some image.</span>
+<span class="sd">        It takes as input an image and equalizes its histogram with the method </span>
+<span class="sd">        presented here: https://en.wikipedia.org/wiki/Histogram_equalization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            - image (np.ndarray): array of some image</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: array of equalized image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">histim</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">h</span><span class="p">,</span><span class="n">e</span><span class="p">,</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">histim</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">))</span>
+        <span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="n">cdf_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">cdf</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">cdf</span><span class="p">)])</span>
+        <span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+        <span class="n">eq_im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="n">cdf</span><span class="p">[</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)]</span> <span class="o">-</span> <span class="n">cdf_min</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">cdf_min</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">eq_im</span></div>
+
+
+<div class="viewcode-block" id="Preprocessing.brightness_aug">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.brightness_aug">[docs]</a>
+    <span class="k">def</span> <span class="nf">brightness_aug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">image</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This function was only used for augmented images (rotated), in order to</span>
+<span class="sd">        remove the white frame and the black background that was originated from the</span>
+<span class="sd">        rotation operation. The background gets set at the most occurred gray level</span>
+<span class="sd">        excluding pitch black (gray level = 0) and complete white (gray level = 255).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            - image (np.ndarray): array of augmented image</span>
+<span class="sd">            - filename (str): name of the image file</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: array of corrected image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">brighter</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">histim</span> <span class="o">=</span> <span class="n">brighter</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">brighter</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">h</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">histim</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">254</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">253</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cut_peak</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">h</span><span class="o">==</span><span class="nb">max</span><span class="p">(</span><span class="n">h</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mf">10.</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+        <span class="n">the_mask</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&gt;</span> <span class="n">index</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&lt;</span> <span class="mi">255</span>
+        <span class="n">brighter</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">h</span><span class="o">==</span><span class="nb">max</span><span class="p">(</span><span class="n">h</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">brighter</span><span class="p">[</span><span class="o">~</span><span class="n">the_mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">h</span><span class="o">==</span><span class="nb">max</span><span class="p">(</span><span class="n">h</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">brighter</span></div>
+
+
+<div class="viewcode-block" id="Preprocessing.brightness">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.brightness">[docs]</a>
+    <span class="k">def</span> <span class="nf">brightness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">image</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span><span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove the background from the hand X-ray image we are delaing with.</span>
+<span class="sd">        By using the cut_peak function finds the index corresponding to the right</span>
+<span class="sd">        base of the higher peak of the image histogram (by assuming that this</span>
+<span class="sd">        peak is always corresponding to the background pixels). Then every pixel</span>
+<span class="sd">        value that is less than the found index or greater than 254 is set to 0.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            - image (np.ndarray): array of some image</span>
+<span class="sd">            - filename (str): name of the image file</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: array of corrected image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">histim</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">h</span><span class="p">,</span><span class="n">e</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">histim</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cut_peak</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">h</span><span class="o">==</span><span class="nb">max</span><span class="p">(</span><span class="n">h</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mf">10.</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+        <span class="n">mask1</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&lt;</span> <span class="mi">254</span>
+        <span class="n">mask2</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&gt;</span> <span class="n">index</span>
+
+        <span class="n">brighter</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">brighter</span><span class="p">[</span><span class="o">~</span><span class="n">mask1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">brighter</span><span class="p">[</span><span class="o">~</span><span class="n">mask2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">return</span> <span class="n">brighter</span></div>
+
+        
+<div class="viewcode-block" id="Preprocessing.process">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.process">[docs]</a>
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This function makes use of brightness, histogram_equalization,</span>
+<span class="sd">        square and resize functions to preprocess the image. This is the optimized</span>
+<span class="sd">        sequence that gives back an approximately segmented hand X-ray image.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">        - image (np.ndarray): array of image to preprocess</span>
+<span class="sd">        - filename (str): name of the image file</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        np.ndarray: array of preprocessed image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="c1">#image_ = brightness_aug(image_, filename)</span>
+        <span class="n">image_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span><span class="p">(</span><span class="n">image_</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">image_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">histogram_equalization</span><span class="p">(</span><span class="n">image_</span><span class="p">)</span>
+        <span class="n">image_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">image_</span><span class="p">)</span>
+        <span class="n">image_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image_</span><span class="p">,</span> <span class="p">(</span><span class="mi">399</span><span class="p">,</span> <span class="mi">399</span><span class="p">))</span> 
+
+        <span class="k">return</span> <span class="n">image_</span></div>
+
+
+
+<div class="viewcode-block" id="Preprocessing.preprocessing_image">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.preprocessing_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">preprocessing_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">image_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span><span class="n">show</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span><span class="n">save</span><span class="p">:</span><span class="nb">bool</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Takes the hand x-ray image as input and makes use of mediapipe package</span>
+<span class="sd">        in order to find the hand in the image. If found, first crops the image with</span>
+<span class="sd">        a bounding box around the hand and then applies the process method to the</span>
+<span class="sd">        cropped image; finally it shows/saves it. Alternatively, if it cannot find </span>
+<span class="sd">        hands, it just applies the process method to the image and then it shows/saves</span>
+<span class="sd">        it.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image_name (str): name of the image file</span>
+<span class="sd">            show (bool): True if user wants the image to be shown, False otherwise</span>
+<span class="sd">            save (bool): True if user wants the image to be saved, False otherwise</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Warning: if image doesn&#39;t get cropped, the program gives a warning.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Source path of raw image in boneageassessment/dataset/IMAGES/raw/</span>
+        <span class="n">from_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span><span class="n">image_name</span><span class="p">)</span>
+        <span class="c1"># Destination path of processed image in boneageassessment/dataset/IMAGES/processed/train/</span>
+        <span class="n">to_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">,</span><span class="n">image_name</span><span class="p">)</span>
+        
+        <span class="n">mp_hands</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">solutions</span><span class="o">.</span><span class="n">hands</span>
+        <span class="n">hand</span> <span class="o">=</span> <span class="n">mp_hands</span><span class="o">.</span><span class="n">Hands</span><span class="p">()</span>
+
+        <span class="n">coord</span> <span class="o">=</span> <span class="p">[[],[]]</span>
+
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">from_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">image_name</span><span class="si">}</span><span class="s1"> was not correctly converted in a numpy array!&#39;</span><span class="p">)</span>
+        <span class="n">image_width</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">image_height</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">hand</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+        <span class="n">hand_landmark</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">multi_hand_landmarks</span>
+
+        <span class="c1"># If one is detected tha landmark coordinates are saved</span>
+        <span class="k">if</span> <span class="n">hand_landmark</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">landmarks</span> <span class="ow">in</span> <span class="n">hand_landmark</span><span class="p">:</span>
+                <span class="c1"># Here is How to Get All the Coordinates</span>
+                <span class="k">for</span> <span class="n">ids</span><span class="p">,</span> <span class="n">landmrk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">landmarks</span><span class="o">.</span><span class="n">landmark</span><span class="p">):</span>
+                    <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">landmrk</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">image_width</span><span class="p">)</span>
+                    <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">landmrk</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">image_height</span><span class="p">)</span>
+                    <span class="c1"># Here we crop and process the image and then save it</span>
+                    <span class="n">top_left</span><span class="p">,</span> <span class="n">bottom_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">coord</span><span class="p">)</span>
+                    <span class="n">cropped_frame</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="n">bottom_right</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">bottom_right</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                    <span class="n">processed_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">cropped_frame</span><span class="p">,</span> <span class="n">from_path</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+                        <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">to_path</span><span class="p">,</span> <span class="n">processed_frame</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+                        <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">processed_frame</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The image was not cropped since no hand was detected!&#39;</span><span class="p">)</span>
+            <span class="n">processed_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">image_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">save</span><span class="p">:</span> 
+                <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">to_path</span><span class="p">,</span> <span class="n">processed_frame</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">processed_frame</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">processed_frame</span></div>
+
+        
+<div class="viewcode-block" id="Preprocessing.preprocessing_directory">
+<a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.preprocessing_directory">[docs]</a>
+    <span class="k">def</span> <span class="nf">preprocessing_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Takes the hand x-ray images contained in some directory as input and makes</span>
+<span class="sd">        use of mediapipe package in order to find the hand in the images. If found, </span>
+<span class="sd">        first crops the images with a bounding box around the hand and then applies the</span>
+<span class="sd">        process method to the cropped images; finally it saves them. Alternatively, if </span>
+<span class="sd">        it cannot find hands, it just applies the process method to the image and then </span>
+<span class="sd">        it saves it.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Source path of raw image in boneageassessment/dataset/IMAGES/raw/</span>
+        <span class="n">loading_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span>
+        <span class="c1"># Destination path of processed image in boneageassessment/dataset/IMAGES/processed/train/</span>
+        <span class="n">saving_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train</span>
+        
+        <span class="n">mp_hands</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">solutions</span><span class="o">.</span><span class="n">hands</span>
+        <span class="n">hand</span> <span class="o">=</span> <span class="n">mp_hands</span><span class="o">.</span><span class="n">Hands</span><span class="p">()</span>
+        <span class="n">hands</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">coord</span> <span class="o">=</span> <span class="p">[[],[]]</span>
+
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">loading_path</span><span class="p">):</span>
+
+            <span class="n">from_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">loading_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="n">to_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">saving_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">from_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1"> was not correctly converted in a numpy array!&#39;</span><span class="p">)</span>
+            <span class="n">image_width</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">image_height</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">hand</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+            <span class="n">hand_landmark</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">multi_hand_landmarks</span>
+
+        
+            <span class="c1"># If one is detected tha landmark coordinates are saved</span>
+            <span class="k">if</span> <span class="n">hand_landmark</span><span class="p">:</span>
+                <span class="n">hands</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">landmarks</span> <span class="ow">in</span> <span class="n">hand_landmark</span><span class="p">:</span>
+                    <span class="c1"># Here is How to Get All the Coordinates</span>
+                    <span class="k">for</span> <span class="n">ids</span><span class="p">,</span> <span class="n">landmrk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">landmarks</span><span class="o">.</span><span class="n">landmark</span><span class="p">):</span>
+                        <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">landmrk</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">image_width</span><span class="p">)</span>
+                        <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">landmrk</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">image_height</span><span class="p">)</span>
+                        <span class="c1"># Here we crop and process the image and then save it</span>
+                        <span class="n">top_left</span><span class="p">,</span> <span class="n">bottom_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">coord</span><span class="p">)</span>
+                        <span class="n">cropped_frame</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="n">bottom_right</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">bottom_right</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                        <span class="n">processed_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">cropped_frame</span><span class="p">,</span> <span class="n">from_path</span><span class="p">)</span>
+                        <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">to_path</span><span class="p">,</span> <span class="n">processed_frame</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1">#If no hand gets detected, the image only gets processed</span>
+                <span class="n">processed_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">to_path</span><span class="p">,</span> <span class="n">processed_frame</span><span class="p">)</span>
+            <span class="n">coord</span> <span class="o">=</span> <span class="p">[[],[]]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- </span><span class="si">{</span><span class="n">hands</span><span class="si">}</span><span class="s1"> hands images were correctly found and cropped&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- Total number of images = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">loading_path</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- Percentage of cropped images = </span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">hands</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">loading_path</span><span class="p">))</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By GiuseppeAntonioMotisi&GiuseppeFanciulli
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, GiuseppeAntonioMotisi&amp;GiuseppeFanciulli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -39,38 +39,6 @@ of its key components:
    - `r_squared`: Calculate Pearson correlation coefficient.
    - `mean_absolute_error`: Calculate Mean Absolute Error.
    - `mean_absolute_deviation`: Calculate Mean Absolute Deviation.
-
-Import:
-
-```python
-import os
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from tensorflow.python import keras
-from keras_preprocessing.image import ImageDataGenerator
-from keras.applications.vgg16 import VGG16
-from keras.layers import (
-    GlobalAveragePooling2D,
-    Dense,
-    Dropout,
-    Input,
-    Conv2D,
-    multiply,
-    LocallyConnected2D,
-    Lambda,
-    BatchNormalization
-)
-from keras.models import Model
-from keras.optimizers import Adam
-from keras.regularizers import l2
-from keras.callbacks import (
-    ModelCheckpoint,
-    LearningRateScheduler,
-    EarlyStopping,
-    ReduceLROnPlateau
-)
-import keras.backend as K
 """
 import os
 import numpy as np
@@ -105,10 +73,28 @@ sys.path.append(sys.path[0].replace('/age','/preprocessing'))
 from utils import extract_info
 
 def mean_absolute_error(y_true,y_pred):
+    """Calculate the mean absolute error.
+
+    Args:
+        y_true (np.ndarray): True values.
+        y_pred (np.ndarray): Predicted values.
+
+    Returns:
+        float: Mean absolute error.
+    """
     error = y_true - y_pred
     return np.sum(np.abs(error)) / len(error)
 
 def mean_absolute_deviation(y_true,y_pred):
+    """Calculate the mean absolute deviation.
+
+    Args:
+        y_true (np.ndarray): True values.
+        y_pred (np.ndarray): Predicted values.
+
+    Returns:
+        float: Mean absolute deviation.
+    """
     error = y_true - y_pred
     return np.sum(np.abs(error - np.mean(error))) / len(error)
 
@@ -117,12 +103,12 @@ def lr_scheduler(epoch, initial_lr=1e-04, decay_rate=0.95):
     Learning rate schedule function with exponential decay.
 
     Parameters:
-    - epoch: Current epoch number
-    - initial_lr: Initial learning rate
-    - decay_rate: Rate of decay
+        epoch (int): Current epoch number.
+        initial_lr (float, optional): Initial learning rate. Defaults to 1e-04.
+        decay_rate (float, optional): Rate of decay. Defaults to 0.95.
 
     Returns:
-    - lr: Updated learning rate
+        float: Updated learning rate.
     """
     lr = initial_lr * np.power(decay_rate, epoch)
     return lr
@@ -131,7 +117,7 @@ def lr_scheduler(epoch, initial_lr=1e-04, decay_rate=0.95):
 def r_squared(y_true, y_pred):
     """Calculate R-squared metric.
 
-     Args:
+    Args:
         y_true (tensor): True values.
         y_pred (tensor): Predicted values.
 
@@ -149,24 +135,25 @@ class BoneAgeAssessment():
     evaluation, and visualization.
 
     Attributes:
-        main (str): Path to the boneageassessment directory.
-        baa (str): Path to the baa directory.
-        IMAGES (str): Path to the images directory.
-        labels (str): Path to the labels directory.
-        processed (str): Path to the processed data directory.
-        train (str): Path to the training data directory.
-        train_df (pd.DataFrame): DataFrame containing training data.
-        validation (str): Path to the validation data directory.
-        validation_df (pd.DataFrame): DataFrame containing validation data.
-        test (str): Path to the test data directory.
-        test_df (pd.DataFrame): DataFrame containing test data.
-        image_size (tuple): Size of the input images.
-        batch_size (tuple): Batch size for training, validation, and test.
-        opts (list): List of allowed options.
-        weights (str): Path to the directory for storing model weights.
+    
+        - main (str): Path to the boneageassessment directory.
+        - baa (str): Path to the baa directory.
+        - IMAGES (str): Path to the images directory.
+        - labels (str): Path to the labels directory.
+        - processed (str): Path to the processed data directory.
+        - train (str): Path to the training data directory.
+        - train_df (pd.DataFrame): DataFrame containing training data.
+        - validation (str): Path to the validation data directory.
+        - validation_df (pd.DataFrame): DataFrame containing validation data.
+        - test (str): Path to the test data directory.
+        - test_df (pd.DataFrame): DataFrame containing test data.
+        - image_size (tuple): Size of the input images.
+        - batch_size (tuple): Batch size for training, validation, and test.
+        - opts (list): List of allowed options.
+        - weights (str): Path to the directory for storing model weights.
 
     Methods:
-        update_batch_size(new_batch_size: tuple):
+        - update_batch_size(new_batch_size: tuple):
             Update the batch size for training, validation, and test.
 
         preparation(kind: str):
@@ -246,6 +233,7 @@ class BoneAgeAssessment():
         Args:
             new_batch_size (int ot tuple): New batch size value if key is in
             ['train','validation','test]. New batch size values if key is 'all'.
+            key (str): One of ['train', 'validation', 'test', 'all'].
         """
         new_opts = ['train','validation','test','all']
         if key not in new_opts:
@@ -263,10 +251,12 @@ class BoneAgeAssessment():
                 self.batch_size = new_batch_size
         
     def __update_lr__(self,new_lr:float) -> None:
-        """Update learning rate attribute.
+        """Update the batch size for training, validation, and test.
 
         Args:
-            new_lr (float): new learning rate for Adam optmizer.
+            new_batch_size (int ot tuple): New batch size value if key is in
+            ['train','validation','test]. New batch size values if key is 'all'.
+            key (str): One of ['train', 'validation', 'test', 'all'].
         """
         self.lr = new_lr
     
@@ -279,16 +269,15 @@ class BoneAgeAssessment():
         self.epochs = new_num_epochs
     
     def __show_info__(self) -> dict:
-        """Show attributes of BoneAgeAssessment class. If you create an instance,
-        this method returns attributes for your instance.
+        """Show attributes of BoneAgeAssessment class.
 
         Returns:
-            dict: dictionary which coinaints useful information like:
-                    - 'image size': size of input images
-                    - 'batch size': size of batches images
-                    - 'learning rate': choosen learning rate
-                    - 'number of epochs': number of epochs for training
-                    - 'weights loc': where weights are saved.
+            dict: dictionary containing useful information like:
+                - 'image size': size of input images
+                - 'batch size': size of batches images
+                - 'learning rate': chosen learning rate
+                - 'number of epochs': number of epochs for training
+                - 'weights loc': where weights are saved.
         """
         return {'image size':self.image_size,
                 'batch size':self.batch_size,
@@ -302,11 +291,8 @@ class BoneAgeAssessment():
         Args:
             kind (str): Type of data preparation.
 
-        Raises:
-            KeyError: Raised if the selected key is not allowed.
-
         Returns:
-            pandas.DataFrame: Traininig or validation or test dataframe  
+            pandas.DataFrame: Training or validation or test dataframe
         """
         if kind not in self.opts:
             raise KeyError(f"the selected key is not allowed. Chooices: {self.opts}")
@@ -319,14 +305,10 @@ class BoneAgeAssessment():
                 return self.test_df
                 
     def __get_generator__(self,kind:str):
-        """Get a generator selecting a key. If key is 'test', the function
-        returns images and labels.
+        """Get a generator selecting a key.
 
         Args:
             kind (str): Type of data preparation.
-
-        Raises:
-            KeyError: Raised if the selected key is not allowed.
 
         Returns:
             keras.generator: A DataFrameIterator yielding tuples of (x, y) where x is a
@@ -368,13 +350,15 @@ class BoneAgeAssessment():
             return next(generator)
 
     def __change_training__(self,balanced:bool=True):
-        """Change attribute training. The options are True (if you want to use balanced dataset),
-        and False (if you do not want to use balanced dataset). The False option is not suggested,
-        because better results can be achived with artificial balanced dataset.
+        """Change attribute training.
+
+        The options are True (if you want to use balanced dataset),
+        and False (if you do not want to use balanced dataset).
+        The False option is not suggested because better results can be achieved with an artificially balanced dataset.
 
         Args:
             balanced (bool, optional): boolean key for selecting between balanced/unbalanced.
-            Defaults to True.
+                Defaults to True.
         """
         if balanced:
             self.train_df = pd.read_csv(os.path.join(self.labels, 'train_bal.csv'))
@@ -382,8 +366,7 @@ class BoneAgeAssessment():
             self.train_df = pd.read_csv(os.path.join(self.labels, 'train.csv'))
 
     def preparatory(self):
-        """Prepare data generators for training and validation.
-        """
+        """Prepare data generators for training and validation."""
         self.train_generator = self.__get_generator__('train')
         self.validation_generator = self.__get_generator__('validation')
 
@@ -391,11 +374,10 @@ class BoneAgeAssessment():
         """Compile the model with specified optimizer and loss function.
 
         Args:
-        model (keras.Model): The model to be compiled.
-        lr (float, optional): Learning rate for the optimizer. Defaults to 0.0001.
+            model (keras.Model): The model to be compiled.
 
         Returns:
-        keras.Model: Compiled model.
+            keras.Model: Compiled model.
         """
         optim = Adam(learning_rate=self.lr)
         return model.compile(optimizer=optim,loss='mse',metrics=['mae', r_squared],run_eagerly=True)
@@ -417,10 +399,9 @@ class BoneAgeAssessment():
 
         Args:
             model (keras.Model): The model to be trained.
-            num_epochs (int): Number of epochs for training.
 
         Returns:
-            History: Training history.
+            dict: Training history.
         """
         path = os.path.join(self.weights,'model.keras')
         checkpoint = ModelCheckpoint(path,
@@ -450,11 +431,11 @@ class BoneAgeAssessment():
 
         Args:
             model (keras.Model): The model to be trained.
-            num_epochs (int): Number of epochs for training.
-            train_generator(keras.generator): Keras training dataset generator.
-            validation_generator(keras.generator): Keras validation dataset generator.
+            train_generator (keras.generator): Keras training dataset generator.
+            validation_generator (keras.generator): Keras validation dataset generator.
+
         Returns:
-            History: Training history.
+            dict: Training history.
         """
         histo = model.fit(train_generator,
                             steps_per_epoch=len(self.train_df['id']) // self.batch_size[0],
@@ -497,7 +478,6 @@ class BoneAgeAssessment():
 
         Args:
             model (keras.Model): The trained model.
-            num_epochs (int): Number of epochs used for training.
         """
         path_ckpnt = os.path.join(self.weights,'ckpnt','checkpoint_epoch_{epoch:02d}_model.weights.h5')
         path_best = os.path.join(self.weights,'best_model.keras')
@@ -578,8 +558,8 @@ class BoneAgeAssessment():
         """Evaluate the model on the test set.
 
         Args:
-            training (bool): if True, load the just trained model. Else
-                             load the weight specified by the input path,.
+            training (bool): if True, load the just trained model.
+            Else load the weight specified by the input path.
             weight (str, optional): Name of the pre-trained weight file.
         """
         test_x, test_y = self.__get_generator__('test')
@@ -689,32 +669,21 @@ class BaaModel:
         summ (bool): Flag to show model summary.
 
     Methods:
-        vgg16regression():
+        vgg16regression() -> keras.Model:
             Create a simplified VGG16 regression model.
 
-        vgg16regression_atn():
-            Create VGG16 regression model with attention mechanism.
-
-        vgg16regression_atn_l1(reg_factor):
-            Create VGG16 regression model with attention mechanism and L1 regularization.
-
-        vgg16regression_atn_l2(reg_factor):
-            Create VGG16 regression model with attention mechanism and L2 regularization.
-            
-        vgg16regression_l2(reg_factor):
+        vgg16regression_l2(reg_factor: float) -> keras.Model:
             Create VGG16 regression model with L2 regularization.
-
     """
     def __init__(self,input_size:tuple=(399,399,3),summ:bool=True):
         """Initialize the BoneAgeAssessmentModel.
 
         Args:
             input_size (tuple, optional): The input size of the model. Defaults to (399, 399, 3).
-            transfer_learning (bool, optional): Whether to use transfer learning. Default: False.
             summ (bool, optional): Whether to show summary. Defaults to True.
 
         Raises:
-            TypeError: Raised if input_size is not a tuple or transfer_learning is not a bool.
+            TypeError: Raised if input_size is not a tuple.
         """
         if not isinstance(input_size,tuple):
             raise TypeError("Input size must be a tuple.")
@@ -757,6 +726,9 @@ class BaaModel:
 
     def vgg16regression_l2(self, reg_factor:float):
         """Create VGG16 regression model with L2 regularization.
+
+        Args:
+            reg_factor (float): Regularization factor.
 
         Returns:
             keras.Model: VGG16 regression model.

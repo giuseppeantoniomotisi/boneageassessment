@@ -1,0 +1,876 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>RSNA package &#8212; baa 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=e1a75a79"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'RSNA';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="preprocessing package" href="preprocessing.html" />
+    <link rel="prev" title="baa" href="modules.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">baa 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modules.html">baa</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">RSNA package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">preprocessing package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="age.html">age package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/RSNA.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>RSNA package</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA.merge">RSNA.merge module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.Merge"><code class="docutils literal notranslate"><span class="pre">Merge</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.Merge.merge"><code class="docutils literal notranslate"><span class="pre">Merge.merge()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.Merge.merge_csv"><code class="docutils literal notranslate"><span class="pre">Merge.merge_csv()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.Merge.merge_images"><code class="docutils literal notranslate"><span class="pre">Merge.merge_images()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.change_columns_names"><code class="docutils literal notranslate"><span class="pre">change_columns_names()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.switch_columns"><code class="docutils literal notranslate"><span class="pre">switch_columns()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA.split">RSNA.split module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.split.Split"><code class="docutils literal notranslate"><span class="pre">Split</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.split.Split.hist"><code class="docutils literal notranslate"><span class="pre">Split.hist()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.split.Split.splitting"><code class="docutils literal notranslate"><span class="pre">Split.splitting()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.split.Split.update_split"><code class="docutils literal notranslate"><span class="pre">Split.update_split()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA.balancing">RSNA.balancing module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset"><code class="docutils literal notranslate"><span class="pre">BalancingDataset</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset.balance"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.balance()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset.create_bal_csv"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.create_bal_csv()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset.create_images"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.create_images()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset.find_element"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.find_element()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset.rotation"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.rotation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA.checker">RSNA.checker module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.checker.Checker"><code class="docutils literal notranslate"><span class="pre">Checker</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.checker.Checker.check"><code class="docutils literal notranslate"><span class="pre">Checker.check()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.checker.Checker.update_csv"><code class="docutils literal notranslate"><span class="pre">Checker.update_csv()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.checker.Checker.update_dir"><code class="docutils literal notranslate"><span class="pre">Checker.update_dir()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA.tools_rsna">RSNA.tools_rsna module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.check_path"><code class="docutils literal notranslate"><span class="pre">check_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.clean_workspace"><code class="docutils literal notranslate"><span class="pre">clean_workspace()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.create_directories"><code class="docutils literal notranslate"><span class="pre">create_directories()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.extract_info_as_dict"><code class="docutils literal notranslate"><span class="pre">extract_info_as_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.open_downloads"><code class="docutils literal notranslate"><span class="pre">open_downloads()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.unzip_current_in_folders"><code class="docutils literal notranslate"><span class="pre">unzip_current_in_folders()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.unzip_folder"><code class="docutils literal notranslate"><span class="pre">unzip_folder()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA">Module contents</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="rsna-package">
+<h1>RSNA package<a class="headerlink" href="#rsna-package" title="Link to this heading">#</a></h1>
+<section id="module-RSNA.merge">
+<span id="rsna-merge-module"></span><h2>RSNA.merge module<a class="headerlink" href="#module-RSNA.merge" title="Link to this heading">#</a></h2>
+<p>Merge module code defines functions and a class related to merging CSV files and images for
+a dataset project.
+Overall, the code is designed to facilitate the management and organization of datasets by merging
+separate files into a single dataset file and consolidating images into a single folder.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="RSNA.merge.Merge">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">RSNA.merge.</span></span><span class="sig-name descname"><span class="pre">Merge</span></span><a class="reference internal" href="_modules/RSNA/merge.html#Merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.merge.Merge" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for merging training and validation CSV files into a single dataset CSV file.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>path_to_train (str): Path to the training CSV file.
+path_to_val (str): Path to the validation CSV file.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.merge.Merge.merge">
+<span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/merge.html#Merge.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.merge.Merge.merge" title="Link to this definition">#</a></dt>
+<dd><p>Merges both CSV files and images.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.merge.Merge.merge_csv">
+<span class="sig-name descname"><span class="pre">merge_csv</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/merge.html#Merge.merge_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.merge.Merge.merge_csv" title="Link to this definition">#</a></dt>
+<dd><p>Merges the training and validation CSV files into a single dataset CSV file.</p>
+<p>Reads the training and validation CSV files, performs necessary data transformations,
+concatenates them into a single dataset, and saves the merged dataset CSV file.
+Removes the original training and validation CSV files after merging.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.merge.Merge.merge_images">
+<span class="sig-name descname"><span class="pre">merge_images</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/merge.html#Merge.merge_images"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.merge.Merge.merge_images" title="Link to this definition">#</a></dt>
+<dd><p>Merges images from training and validation folders to a single folder.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RSNA.merge.change_columns_names">
+<span class="sig-prename descclassname"><span class="pre">RSNA.merge.</span></span><span class="sig-name descname"><span class="pre">change_columns_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RSNA/merge.html#change_columns_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.merge.change_columns_names" title="Link to this definition">#</a></dt>
+<dd><p>Simple function to change column names.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dataframe (pandas.DataFrame): Original dataframe.
+new_names (list): List of strings which contains new columns’ names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RSNA.merge.switch_columns">
+<span class="sig-prename descclassname"><span class="pre">RSNA.merge.</span></span><span class="sig-name descname"><span class="pre">switch_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_name1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_name2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/RSNA/merge.html#switch_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.merge.switch_columns" title="Link to this definition">#</a></dt>
+<dd><p>Simple function to switch two columns in a pandas.DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dataframe (pandas.DataFrame): Original dataframe.
+column_name1 (str): First column’s name.
+column_name2 (str): Second column’s name.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The old dataframe with two columns swapped.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-RSNA.split">
+<span id="rsna-split-module"></span><h2>RSNA.split module<a class="headerlink" href="#module-RSNA.split" title="Link to this heading">#</a></h2>
+<p>Split module facilitates the splitting of a dataset into training, validation, and
+test sets. Additionally, it organizes images corresponding to these sets into separate directories.
+Original splitting is set:</p>
+<ul class="simple">
+<li><p>70% for training data,</p></li>
+<li><p>20% for validation data,</p></li>
+<li><p>10% per test data.</p></li>
+</ul>
+<p>If you decide to change splitting ratio, first check dimension of dataset and then use the
+updat_split method.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="RSNA.split.Split">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">RSNA.split.</span></span><span class="sig-name descname"><span class="pre">Split</span></span><a class="reference internal" href="_modules/RSNA/split.html#Split"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.split.Split" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for splitting a dataset into training, validation, and test sets,
+and organizing corresponding images into separate directories.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>labels (str): Path to the directory containing label-related information.
+processed (str): Path to the directory where processed data will be stored.
+dataset (pd.DataFrame): DataFrame containing dataset information loaded from ‘dataset.csv’.
+train_val (float): Ratio of training and validation data (default is 0.9).
+test (float): Ratio of test data (default is 0.1).</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.split.Split.hist">
+<span class="sig-name descname"><span class="pre">hist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/split.html#Split.hist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.split.Split.hist" title="Link to this definition">#</a></dt>
+<dd><p>Generates a histogram for a specific column in the given DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dataframe (pd.DataFrame): DataFrame containing data for histogram.
+col_index (str): Name of the column to be used for the histogram.
+nbins (int): Number of bins for the histogram.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.split.Split.splitting">
+<span class="sig-name descname"><span class="pre">splitting</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/split.html#Split.splitting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.split.Split.splitting" title="Link to this definition">#</a></dt>
+<dd><p>Splits the dataset into training, validation, and test sets, and organizes images into
+separate directories.</p>
+<p>You must check dimension of dataframe before use it; then choose a proper splitter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.split.Split.update_split">
+<span class="sig-name descname"><span class="pre">update_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/split.html#Split.update_split"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.split.Split.update_split" title="Link to this definition">#</a></dt>
+<dd><p>Updates the train_val and test ratios.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>new_train (float): New ratio for training data.
+new_val (float): New ratio for validation data.
+new_test (float): New ratio for test data.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the sum of new_train, new_val, and new_test is not equal to 1,
+or if any of the ratios is not between 0 and 1.
+TypeError: If new_train, new_val, or new_test is not a float.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-RSNA.balancing">
+<span id="rsna-balancing-module"></span><h2>RSNA.balancing module<a class="headerlink" href="#module-RSNA.balancing" title="Link to this heading">#</a></h2>
+<p>Balancing module defines a class BalancingDataset that is designed to balance a dataset by augmenting
+the training data with additional samples. The process involves creating a balanced CSV file and,
+optionally, generating augmented images.</p>
+<p>This method balances the dataset by calling create_bal_csv to create the balanced CSV file.
+If create_images is set to True, it further calls create_images to generate and save augmented
+images.</p>
+<p>In summary, this script is designed to balance a dataset by creating a balanced CSV file and
+optionally generating augmented images for training. The augmentation involves introducing random
+rotations to the images.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="RSNA.balancing.BalancingDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">RSNA.balancing.</span></span><span class="sig-name descname"><span class="pre">BalancingDataset</span></span><a class="reference internal" href="_modules/RSNA/balancing.html#BalancingDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.balancing.BalancingDataset" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>BalancingDataset class handles the process of balancing a dataset by augmenting the
+training data with additional samples and creating balanced CSV and image files.</p>
+<dl>
+<dt>Attributes:</dt><dd><p>path_to_csv (str): Path to the directory containing CSV files.
+path_to_images (str): Path to the directory containing raw images.
+path_to_train (str): Path to the processed training folder.
+csv_name (str): Name of the training CSV file.
+dataframe (pd.DataFrame): Pandas DataFrame containing the training data.</p>
+<p>key_id (str): Column name for identifiers in the DataFrame.
+key_value (str): Column name for values used for categorization.</p>
+</dd>
+<dt>Methods:</dt><dd><dl class="simple">
+<dt>find_element(limit_value, num_classes) -&gt; tuple:</dt><dd><p>Categorizes elements in a DataFrame into classes based on their values, and calculates
+delta values
+based on the histogram of key_values column and limit_value.</p>
+</dd>
+<dt>create_bal_csv():</dt><dd><p>Creates a balanced CSV file by augmenting the training data with additional samples and
+saves it.</p>
+</dd>
+<dt>rotation(image, angle) -&gt; np.ndarray:</dt><dd><p>Rotates the image by a given angle.</p>
+</dd>
+<dt>create_images():</dt><dd><p>Creates augmented images based on the balanced CSV file and saves them to the
+processed training folder.</p>
+</dd>
+<dt>balance(create_images: bool = False):</dt><dd><p>Balances the dataset by creating a balanced CSV file and optionally generating
+augmented images.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.balancing.BalancingDataset.balance">
+<span class="sig-name descname"><span class="pre">balance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">create_images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/balancing.html#BalancingDataset.balance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.balancing.BalancingDataset.balance" title="Link to this definition">#</a></dt>
+<dd><p>Balances the dataset by creating a balanced CSV file and optionally generating
+augmented images.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>create_images (bool): If True, generates and saves augmented images.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.balancing.BalancingDataset.create_bal_csv">
+<span class="sig-name descname"><span class="pre">create_bal_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/balancing.html#BalancingDataset.create_bal_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.balancing.BalancingDataset.create_bal_csv" title="Link to this definition">#</a></dt>
+<dd><p>Creates a balanced CSV file by augmenting the training data with additional
+samples and saves it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.balancing.BalancingDataset.create_images">
+<span class="sig-name descname"><span class="pre">create_images</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/balancing.html#BalancingDataset.create_images"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.balancing.BalancingDataset.create_images" title="Link to this definition">#</a></dt>
+<dd><p>Creates augmented images based on the balanced CSV file and saves them to the processed
+training folder.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.balancing.BalancingDataset.find_element">
+<span class="sig-name descname"><span class="pre">find_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/RSNA/balancing.html#BalancingDataset.find_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.balancing.BalancingDataset.find_element" title="Link to this definition">#</a></dt>
+<dd><dl>
+<dt>Summary:</dt><dd><p>The function find_element seems designed to categorize elements in a DataFrame into
+classes based on their values in a particular column, key_values.
+Additionally, it calculates the delta values based on the histogram of key_values
+column and limit_value.</p>
+</dd>
+<dt>Args:</dt><dd><p>dataframe (pd.DataFrame): A pandas DataFrame containing the data.
+key_id (str): The name of the column in the DataFrame containing the identifiers.
+key_values (str): The name of the column in the DataFrame containing the values to be
+categorized.
+limit_value (int): The maximum number of elements allowed in each class.
+num_classes (int): The number of classes to categorize the data into.</p>
+</dd>
+<dt>Raises:</dt><dd><p>TypeError: If dataframe is not of type pd.DataFrame.
+TypeError: If limit_value is not of type int.
+TypeError: If num_classes is not of type int.
+ValueError: If key_id or key_values are not found in the DataFrame.
+ValueError: If limit_value is less than the maximum histogram value.</p>
+</dd>
+<dt>Returns:</dt><dd><p>tuple: A tuple containing a dictionary representing classes and an array representing
+the delta values.</p>
+<blockquote>
+<div><p>The dictionary (dict): Keys represent the classes, and values represent the
+elements in each class.
+The array (numpy.ndarray): Represents the difference between the limit_value and
+the histogram values.</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.balancing.BalancingDataset.rotation">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/RSNA/balancing.html#BalancingDataset.rotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.balancing.BalancingDataset.rotation" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>Summary:</dt><dd><p>Rotate the image by a given angle.</p>
+</dd>
+<dt>Args:</dt><dd><p>image (numpy.ndarray): The input image.
+angle (float): The angle by which the image should be rotated.</p>
+</dd>
+<dt>Returns:</dt><dd><p>numpy.ndarray: The rotated image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-RSNA.checker">
+<span id="rsna-checker-module"></span><h2>RSNA.checker module<a class="headerlink" href="#module-RSNA.checker" title="Link to this heading">#</a></h2>
+<p>Checker module defines a class called Checker which is responsible for checking the contents of
+specified folders and CSV files.</p>
+<p>Overall, the Checker class is designed to provide a simple mechanism for verifying the contents of
+specific folders and CSV files, which can be useful in various data processing and validation
+tasks.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="RSNA.checker.Checker">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">RSNA.checker.</span></span><span class="sig-name descname"><span class="pre">Checker</span></span><a class="reference internal" href="_modules/RSNA/checker.html#Checker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.checker.Checker" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The class Checker is a simple class for evaluate dataset transformation.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.checker.Checker.check">
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/checker.html#Checker.check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.checker.Checker.check" title="Link to this definition">#</a></dt>
+<dd><p>Check the contents of specified folders and CSV files.</p>
+<p>Iterates through the default directories and CSV files, printing
+the number of elements in each folder and the number of rows in
+each CSV file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.checker.Checker.update_csv">
+<span class="sig-name descname"><span class="pre">update_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_default_csv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/checker.html#Checker.update_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.checker.Checker.update_csv" title="Link to this definition">#</a></dt>
+<dd><p>Update the default CSV file names with the provided list.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>new_default_csv (list): New list of default CSV file names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RSNA.checker.Checker.update_dir">
+<span class="sig-name descname"><span class="pre">update_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_default_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/checker.html#Checker.update_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.checker.Checker.update_dir" title="Link to this definition">#</a></dt>
+<dd><p>Update the default directories with the provided list.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>new_default_dir (list): New list of default directories.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-RSNA.tools_rsna">
+<span id="rsna-tools-rsna-module"></span><h2>RSNA.tools_rsna module<a class="headerlink" href="#module-RSNA.tools_rsna" title="Link to this heading">#</a></h2>
+<p>tools_rsna.py is used to create folders so that the correct paths used by the application can
+be constructed. Specifically, it switches from the subdivision proposed by RSNA (training,
+validation-1, validation-2).</p>
+<p>You can easily find your new dataset in the same repository where you downloaded.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="RSNA.tools_rsna.check_path">
+<span class="sig-prename descclassname"><span class="pre">RSNA.tools_rsna.</span></span><span class="sig-name descname"><span class="pre">check_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/tools_rsna.html#check_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.tools_rsna.check_path" title="Link to this definition">#</a></dt>
+<dd><p>Check and update the RSNA paths.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RSNA.tools_rsna.clean_workspace">
+<span class="sig-prename descclassname"><span class="pre">RSNA.tools_rsna.</span></span><span class="sig-name descname"><span class="pre">clean_workspace</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/tools_rsna.html#clean_workspace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.tools_rsna.clean_workspace" title="Link to this definition">#</a></dt>
+<dd><p>Remove old directories from Documents folder.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RSNA.tools_rsna.create_directories">
+<span class="sig-prename descclassname"><span class="pre">RSNA.tools_rsna.</span></span><span class="sig-name descname"><span class="pre">create_directories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/tools_rsna.html#create_directories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.tools_rsna.create_directories" title="Link to this definition">#</a></dt>
+<dd><p>Create necessary directories.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RSNA.tools_rsna.extract_info_as_dict">
+<span class="sig-prename descclassname"><span class="pre">RSNA.tools_rsna.</span></span><span class="sig-name descname"><span class="pre">extract_info_as_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/RSNA/tools_rsna.html#extract_info_as_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.tools_rsna.extract_info_as_dict" title="Link to this definition">#</a></dt>
+<dd><p>Assign paths to various datasets from the original RSNA paths file.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>dict: A dictionary containing paths to different datasets.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RSNA.tools_rsna.open_downloads">
+<span class="sig-prename descclassname"><span class="pre">RSNA.tools_rsna.</span></span><span class="sig-name descname"><span class="pre">open_downloads</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/tools_rsna.html#open_downloads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.tools_rsna.open_downloads" title="Link to this definition">#</a></dt>
+<dd><p>Open Downloads directory based on the current platform.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RSNA.tools_rsna.unzip_current_in_folders">
+<span class="sig-prename descclassname"><span class="pre">RSNA.tools_rsna.</span></span><span class="sig-name descname"><span class="pre">unzip_current_in_folders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/tools_rsna.html#unzip_current_in_folders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.tools_rsna.unzip_current_in_folders" title="Link to this definition">#</a></dt>
+<dd><p>Unzip all files in the current directory.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RSNA.tools_rsna.unzip_folder">
+<span class="sig-prename descclassname"><span class="pre">RSNA.tools_rsna.</span></span><span class="sig-name descname"><span class="pre">unzip_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zip_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RSNA/tools_rsna.html#unzip_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RSNA.tools_rsna.unzip_folder" title="Link to this definition">#</a></dt>
+<dd><p>Unzip a specified zip file.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>zip_file (str): Name of the zip file to unzip.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-RSNA">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-RSNA" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="modules.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">baa</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="preprocessing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">preprocessing package</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA.merge">RSNA.merge module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.Merge"><code class="docutils literal notranslate"><span class="pre">Merge</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.Merge.merge"><code class="docutils literal notranslate"><span class="pre">Merge.merge()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.Merge.merge_csv"><code class="docutils literal notranslate"><span class="pre">Merge.merge_csv()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.Merge.merge_images"><code class="docutils literal notranslate"><span class="pre">Merge.merge_images()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.change_columns_names"><code class="docutils literal notranslate"><span class="pre">change_columns_names()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.merge.switch_columns"><code class="docutils literal notranslate"><span class="pre">switch_columns()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA.split">RSNA.split module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.split.Split"><code class="docutils literal notranslate"><span class="pre">Split</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.split.Split.hist"><code class="docutils literal notranslate"><span class="pre">Split.hist()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.split.Split.splitting"><code class="docutils literal notranslate"><span class="pre">Split.splitting()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.split.Split.update_split"><code class="docutils literal notranslate"><span class="pre">Split.update_split()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA.balancing">RSNA.balancing module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset"><code class="docutils literal notranslate"><span class="pre">BalancingDataset</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset.balance"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.balance()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset.create_bal_csv"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.create_bal_csv()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset.create_images"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.create_images()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset.find_element"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.find_element()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.balancing.BalancingDataset.rotation"><code class="docutils literal notranslate"><span class="pre">BalancingDataset.rotation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA.checker">RSNA.checker module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.checker.Checker"><code class="docutils literal notranslate"><span class="pre">Checker</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.checker.Checker.check"><code class="docutils literal notranslate"><span class="pre">Checker.check()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.checker.Checker.update_csv"><code class="docutils literal notranslate"><span class="pre">Checker.update_csv()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.checker.Checker.update_dir"><code class="docutils literal notranslate"><span class="pre">Checker.update_dir()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA.tools_rsna">RSNA.tools_rsna module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.check_path"><code class="docutils literal notranslate"><span class="pre">check_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.clean_workspace"><code class="docutils literal notranslate"><span class="pre">clean_workspace()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.create_directories"><code class="docutils literal notranslate"><span class="pre">create_directories()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.extract_info_as_dict"><code class="docutils literal notranslate"><span class="pre">extract_info_as_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.open_downloads"><code class="docutils literal notranslate"><span class="pre">open_downloads()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.unzip_current_in_folders"><code class="docutils literal notranslate"><span class="pre">unzip_current_in_folders()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#RSNA.tools_rsna.unzip_folder"><code class="docutils literal notranslate"><span class="pre">unzip_folder()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-RSNA">Module contents</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By GiuseppeAntonioMotisi&GiuseppeFanciulli
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, GiuseppeAntonioMotisi&amp;GiuseppeFanciulli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

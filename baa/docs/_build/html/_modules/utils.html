@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>utils &#8212; baa 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=e1a75a79"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/utils';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">baa 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../modules.html">baa</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../RSNA.html">RSNA package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocessing.html">preprocessing package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../age.html">age package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils module</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Some useful functions.</span>
+
+<span class="sd">This module contains a collection of utility functions for various tasks such as file operations, directory manipulation,</span>
+<span class="sd">and data processing.</span>
+
+<span class="sd">Functions:</span>
+<span class="sd">    - append_in_json(key: str, value, json_file: str): Append a key-value pair in a JSON file.</span>
+<span class="sd">    - write_in_macro(): Write the current working directory path into a JSON file.</span>
+<span class="sd">    - open_boneageassessment(naive: bool = True): Open the boneageassessment directory.</span>
+<span class="sd">    - unzip_sh(path_to_zip: str): Unzip a file using the system&#39;s shell.</span>
+<span class="sd">    - open_downloads(): Open the Downloads directory based on the current platform.</span>
+<span class="sd">    - get_downloads(): Get the Downloads directory path based on the current platform.</span>
+<span class="sd">    - switch_folders(folder1_path: str, folder2_path: str): Switch the contents of two folders.</span>
+<span class="sd">    - houdini(opt: str = &#39;dataset&#39;): Switch two folders with the same name.</span>
+<span class="sd">    - write_info(): Write paths of main directories in boneageassessment.</span>
+<span class="sd">    - extract_info(key: str): Extract information from a CSV file.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pwd</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<div class="viewcode-block" id="append_in_json">
+<a class="viewcode-back" href="../utils.html#utils.append_in_json">[docs]</a>
+<span class="k">def</span> <span class="nf">append_in_json</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">json_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Append key-value pair in a JSON file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key (str): Key to append.</span>
+<span class="sd">        value: Value corresponding to the key.</span>
+<span class="sd">        json_file (str): Path to the JSON file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_line</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="write_in_macro">
+<a class="viewcode-back" href="../utils.html#utils.write_in_macro">[docs]</a>
+<span class="k">def</span> <span class="nf">write_in_macro</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write current working directory path into a JSON file.&quot;&quot;&quot;</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="s2">&quot;Path to boneageassessment&quot;</span>
+    <span class="n">macro</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">&#39;baa&#39;</span><span class="p">,</span> <span class="s1">&#39;macro.json&#39;</span><span class="p">)</span>
+    <span class="n">append_in_json</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">json_file</span><span class="o">=</span><span class="n">macro</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="open_boneageassessment">
+<a class="viewcode-back" href="../utils.html#utils.open_boneageassessment">[docs]</a>
+<span class="k">def</span> <span class="nf">open_boneageassessment</span><span class="p">(</span><span class="n">naive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Open the boneageassessment directory.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        naive (bool, optional): Whether to open naively. Defaults to True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">naive</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="unzip_sh">
+<a class="viewcode-back" href="../utils.html#utils.unzip_sh">[docs]</a>
+<span class="k">def</span> <span class="nf">unzip_sh</span><span class="p">(</span><span class="n">path_to_zip</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unzip a file using the system&#39;s shell.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path_to_zip (str): Path to the ZIP file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unzip </span><span class="si">{</span><span class="n">path_to_zip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="open_downloads">
+<a class="viewcode-back" href="../utils.html#utils.open_downloads">[docs]</a>
+<span class="k">def</span> <span class="nf">open_downloads</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Open the Downloads directory based on the current platform.&quot;&quot;&quot;</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">pwd</span><span class="o">.</span><span class="n">getpwuid</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">())</span><span class="o">.</span><span class="n">pw_name</span>
+    <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;C:/Users/username/Downloads&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/username/&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Darwin&#39;</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/username/Downloads&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/username/&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Linux&#39;</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/home/username/Downloads&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/username/&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_downloads">
+<a class="viewcode-back" href="../utils.html#utils.get_downloads">[docs]</a>
+<span class="k">def</span> <span class="nf">get_downloads</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the Downloads directory path based on the current platform.&quot;&quot;&quot;</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">pwd</span><span class="o">.</span><span class="n">getpwuid</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">())</span><span class="o">.</span><span class="n">pw_name</span>
+    <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;C:/Users/username/Downloads&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/username/&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Darwin&#39;</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/username/Downloads&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/username/&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Linux&#39;</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/home/username/Downloads&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/username/&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span></div>
+
+
+<div class="viewcode-block" id="switch_folders">
+<a class="viewcode-back" href="../utils.html#utils.switch_folders">[docs]</a>
+<span class="k">def</span> <span class="nf">switch_folders</span><span class="p">(</span><span class="n">folder1_path</span><span class="p">,</span> <span class="n">folder2_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Switch the contents of two folders.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        folder1_path (str): Path to the first folder.</span>
+<span class="sd">        folder2_path (str): Path to the second folder.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">temp_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">folder1_path</span><span class="p">),</span> <span class="s1">&#39;temp&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder1_path</span><span class="p">)):</span>
+        <span class="n">item_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder1_path</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">item_path</span><span class="p">,</span> <span class="n">temp_dir</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder2_path</span><span class="p">)):</span>
+        <span class="n">item_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder2_path</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">item_path</span><span class="p">,</span> <span class="n">folder1_path</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">)):</span>
+        <span class="n">item_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">item_path</span><span class="p">,</span> <span class="n">folder2_path</span><span class="p">)</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">rmdir</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="houdini">
+<a class="viewcode-back" href="../utils.html#utils.houdini">[docs]</a>
+<span class="k">def</span> <span class="nf">houdini</span><span class="p">(</span><span class="n">opt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;dataset&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Switch two folders with the same name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        opt (str, optional): Type of folder to switch. Defaults to &#39;dataset&#39;.</span>
+<span class="sd">            Options: &#39;dataset&#39; and &#39;weights&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;dataset&#39;</span><span class="p">:</span>
+        <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">)</span>
+        <span class="n">new_loc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;dataset&#39;</span><span class="p">)</span>
+
+        <span class="n">down</span> <span class="o">=</span> <span class="n">get_downloads</span><span class="p">()</span>
+        <span class="n">old_loc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">down</span><span class="p">,</span> <span class="s1">&#39;dataset&#39;</span><span class="p">)</span>
+
+        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">old_loc</span><span class="p">,</span> <span class="n">new_loc</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span>
+        <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">)</span>
+        <span class="n">new_loc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;baa&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">)</span>
+
+        <span class="n">down</span> <span class="o">=</span> <span class="n">get_downloads</span><span class="p">()</span>
+        <span class="n">old_loc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">down</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">)</span>
+
+        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">old_loc</span><span class="p">,</span> <span class="n">new_loc</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;only &#39;dataset&#39; and &#39;weights&#39; are supported. Please check input.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="write_info">
+<a class="viewcode-back" href="../utils.html#utils.write_info">[docs]</a>
+<span class="k">def</span> <span class="nf">write_info</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write paths of main directories in boneageassessment.&quot;&quot;&quot;</span>
+    <span class="n">open_boneageassessment</span><span class="p">()</span>
+    <span class="n">main_baa_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">baa_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">main_baa_dir</span><span class="p">,</span> <span class="s1">&#39;baa&#39;</span><span class="p">)</span>
+    <span class="n">rsna</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">baa_dir</span><span class="p">,</span> <span class="s1">&#39;RSNA&#39;</span><span class="p">)</span>
+    <span class="n">preprocessing</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">baa_dir</span><span class="p">,</span> <span class="s1">&#39;preprocessing&#39;</span><span class="p">)</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">baa_dir</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">)</span>
+
+    <span class="n">IMAGES_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">main_baa_dir</span><span class="p">,</span> <span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="s1">&#39;IMAGES&#39;</span><span class="p">)</span>
+    <span class="n">labels_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">IMAGES_dir</span><span class="p">,</span> <span class="s1">&#39;labels&#39;</span><span class="p">)</span>
+    <span class="n">raw_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">IMAGES_dir</span><span class="p">,</span> <span class="s1">&#39;raw&#39;</span><span class="p">)</span>
+    <span class="n">processed_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">IMAGES_dir</span><span class="p">,</span> <span class="s1">&#39;processed&#39;</span><span class="p">)</span>
+    <span class="n">train_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">,</span> <span class="s1">&#39;train&#39;</span><span class="p">)</span>
+    <span class="n">validation_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">,</span> <span class="s1">&#39;val&#39;</span><span class="p">)</span>
+    <span class="n">test_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">)</span>
+
+    <span class="n">info</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;main&#39;</span><span class="p">:</span> <span class="n">main_baa_dir</span><span class="p">,</span>
+            <span class="s1">&#39;baa&#39;</span><span class="p">:</span> <span class="n">baa_dir</span><span class="p">,</span>
+            <span class="s1">&#39;IMAGES&#39;</span><span class="p">:</span> <span class="n">IMAGES_dir</span><span class="p">,</span>
+            <span class="s1">&#39;labels&#39;</span><span class="p">:</span> <span class="n">labels_dir</span><span class="p">,</span>
+            <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="n">raw_dir</span><span class="p">,</span>
+            <span class="s1">&#39;processed&#39;</span><span class="p">:</span> <span class="n">processed_dir</span><span class="p">,</span>
+            <span class="s1">&#39;train&#39;</span><span class="p">:</span> <span class="n">train_dir</span><span class="p">,</span>
+            <span class="s1">&#39;validation&#39;</span><span class="p">:</span> <span class="n">validation_dir</span><span class="p">,</span>
+            <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="n">test_dir</span><span class="p">,</span>
+            <span class="s1">&#39;rsna&#39;</span><span class="p">:</span> <span class="n">rsna</span><span class="p">,</span>
+            <span class="s1">&#39;preprocessing&#39;</span><span class="p">:</span> <span class="n">preprocessing</span><span class="p">,</span>
+            <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">age</span><span class="p">}</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">baa_dir</span><span class="p">,</span> <span class="s1">&#39;info.csv&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Dictionary key,Path to folder</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">info</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="extract_info">
+<a class="viewcode-back" href="../utils.html#utils.extract_info">[docs]</a>
+<span class="k">def</span> <span class="nf">extract_info</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract information from a CSV file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key (str): Key to extract.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Path to the folder.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">open_boneageassessment</span><span class="p">()</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;baa&#39;</span><span class="p">,</span> <span class="s1">&#39;info.csv&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">element</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By GiuseppeAntonioMotisi&GiuseppeFanciulli
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, GiuseppeAntonioMotisi&amp;GiuseppeFanciulli.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
