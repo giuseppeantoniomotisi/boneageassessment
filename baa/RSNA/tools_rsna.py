@@ -27,10 +27,13 @@ You can easily find your new dataset in the same repository where you downloaded
 
 
 import os
+import sys
 import pwd
 import platform
 import zipfile
 
+sys.path.append(sys.path[0].replace('RSNA', ''))
+from utils import get_downloads
 # def open_desktop():
 #     """
 #     Open Desktop directory based on the current platform.
@@ -61,8 +64,7 @@ def create_directories():
     """
     Create necessary directories.
     """
-    open_downloads()
-    current_dir = os.getcwd()
+    current_dir = get_downloads()
 
     # Creating directories
     main_baa_dir = os.path.join(current_dir, 'dataset')

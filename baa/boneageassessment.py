@@ -151,8 +151,8 @@ def prediction_module(opt:bool,name:str,path:str):
         if not os.path.exists(os.path.join(path, name)):
             raise FileNotFoundError("image was not found! Please check it.")
         prediction_result = prediction.process(name, path)
+        print(prediction_result)
         prediction_result = 0
-        return prediction_result
     else:
         pass
 
@@ -165,7 +165,6 @@ def baa(info_json):
     """
     if info_json == None:
         info_json = {
-            'Path to boneageassessment': '../',
             'RSNA': False,
             'Training and testing model': False,
             'Path to hyperparameters.json': '../baa/age/age_macro.json',

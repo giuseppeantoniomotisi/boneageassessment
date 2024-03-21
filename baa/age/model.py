@@ -653,30 +653,31 @@ class BoneAgeAssessment():
         Returns:
             float: Predicted age.
         """
-        # First load the best weights for the model
+                # First load the best weights for the model
         weights = os.path.join(self.weights,'best_model.keras')
-        model = keras.models.load_model(weights, safe_mode=False)
+        model = keras.saving.load_model(weights, safe_mode=False, compile=False)
         # Now make prediction
-        pred = model.predict(image, steps = 1)
-        results = pd.read_csv(os.path.join(self.results,'results.csv'))
-        error = results['MAD(months)'] # As error we use MAD in months
+        image_batch = np.expand_dims(image, axis=0)
+        
+        pred = model.predict(image_batch)
+        results = pd.read_csv(os.path.join(self.results, 'case_b', 'results.csv'))
+        error = results['MAD(months)'].values # As error we use MAD in months
 
-        fig, ax = plt.subplots(figsize=(10,10))
+        fig, ax = plt.subplots(figsize=(6,6))
         z = ax.imshow(image,cmap='gray')
-        ax.set_title(f'Predicted age: {round(pred, 0)}$\pm${round(error, 0)}') # Results is shown as title
+        ax.set_title(f'Predicted age: {round(pred[0][0], 0)}$\pm${round(error[0], 0)} months') # Results is shown as title
         ax.axis('off')
         plt.colorbar(z, ax=ax)
+        # Save flag, default if True
+        if save:
+            save_fig = os.path.join(self.predictions, f'prediction_{image_id}.png')
+            plt.savefig(save_fig)
         # Show flag, default if True
         if show:
             plt.show()
-        # Save flag, default if True
-        if save:
-            os.makedirs(os.path.join(os.getcwd(),'predictions'), exist_ok=True)
-            save_fig = os.path.join(os.getcwd(),'predictions',f'prediction_{image_id}.png')
-            plt.savefig(save_fig)
-            plt.close()
+        plt.close()
 
-        return f'Predicted age is {round(pred, 0)}$\pm${round(error, 0)}.'
+        return f'Predicted age is {round(pred[0][0], 0)} +/- {round(error[0], 0)} months.'
 
 class BaaModel:
     """Class for Bone Age Assessment model creation.

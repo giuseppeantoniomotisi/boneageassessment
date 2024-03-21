@@ -21,11 +21,12 @@
 """
 import argparse
 import os
+from matplotlib.pyplot import imread
 from utils import extract_info
 from preprocessing.tools import Preprocessing
 from age.model import BoneAgeAssessment
 
-def process(image_name:str, image_path:str, save:bool=True) -> str:
+def process(image_name:str, image_path:str, save:bool=True, prep:bool=True) -> str:
     """Predict the age of an individual based on an input image.
 
     This function performs the following steps:
@@ -43,12 +44,16 @@ def process(image_name:str, image_path:str, save:bool=True) -> str:
     image = os.path.join(image_path, image_name)
 
     # First preprocess the image
-    prep_instance = Preprocessing()
-    preprocessed_image = prep_instance.preprocessing_image(image_name=image, save=save, show=False)
+    if prep:
+        prep_instance = Preprocessing()
+        img = prep_instance.preprocessing_image(image_name=image, save=save, show=False)
+
+    else:
+        img = imread(image)
 
     # Now load model and make prediction
     baa_instance = BoneAgeAssessment()
-    prediction = baa_instance.prediction(preprocessed_image, show=True, save=save, image_id=image_name[:-4])
+    prediction = baa_instance.prediction(img, show=True, save=save, image_id=image_name[:-4])
     # prediction uses the best_model.keras
     return prediction
 
