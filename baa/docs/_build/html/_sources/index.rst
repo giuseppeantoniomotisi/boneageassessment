@@ -6,6 +6,12 @@
 Welcome to baa's documentation!
 ===============================
 
+This script provides a modular system for Bone Age Assessment (BAA). 
+It integrates various modules such as data preprocessing, machine learning, and prediction. 
+Users can configure the behavior of the system using a JSON configuration file.
+
+===============================
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
