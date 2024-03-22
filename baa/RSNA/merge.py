@@ -24,8 +24,11 @@ Overall, the code is designed to facilitate the management and organization of d
 separate files into a single dataset file and consolidating images into a single folder.
 """
 import os
+import sys
 import pandas as pd
 from tools_rsna import extract_info_as_dict
+sys.path.append(sys.path[0].replace('RSNA', ''))
+from utils import extract_info
 
 def switch_columns(dataframe: pd.DataFrame, column_name1: str, column_name2: str) -> pd.DataFrame:
     """
@@ -76,9 +79,9 @@ class Merge:
         # Default path to the validation images folder
         self.path_to_val_imgs = info['val_images_path']
         # Default path for the dataset project (Desktop/boneageassessment/)
-        self.main_dir = info['main_dir']
-        self.raw = info['raw']
-        self.labels = info['labels']
+        self.main_dir = extract_info('main')
+        self.raw = extract_info('raw')
+        self.labels = extract_info('labels')
 
     def merge_csv(self):
         """
