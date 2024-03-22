@@ -30,10 +30,13 @@ If you decide to change splitting ratio, first check dimension of dataset and th
 updat_split method.
 """
 import os
+import sys
 import shutil
 import pandas as pd
 from tqdm import tqdm
-from tools_rsna import extract_info_as_dict
+
+sys.path.append(os.path.join(sys.path[0], ''))
+from utils import extract_info
 
 class Split:
     """
@@ -51,10 +54,9 @@ class Split:
         """
         Initializes the Split class with default attributes and loads the dataset.
         """
-        info = extract_info_as_dict()
-        self.raw = info['raw']
-        self.labels = info['labels']
-        self.processed = info['processed']
+        self.temp = os.path.join(extract_info('raw'), 'temp')
+        self.labels = extract_info('labels')
+        self.processed = extract_info('processed')
 
         if os.path.exists(os.path.join(self.labels, 'dataset.csv')):
             self.dataset = pd.read_csv(os.path.join(self.labels, 'dataset.csv'))
@@ -124,29 +126,31 @@ class Split:
         val = os.path.join(self.processed, 'validation')
         test = os.path.join(self.processed, 'test')
 
-        for element in tqdm(os.listdir(self.raw)):
+        for element in tqdm(os.listdir(self.temp)):
             if element in self.dataset['id'].values:
-                input_path = os.path.join(self.raw, element)
+                input_path = os.path.join(self.temp, element)
                 if element in ds_training['id'].values:
                     output_path = os.path.join(train, element)
                     if os.path.exists(output_path):
                         pass
                     else:
-                        shutil.copyfile(input_path, output_path)
+                        shutil.move(input_path, output_path)
                 elif element in ds_validation['id'].values:
                     output_path = os.path.join(val, element)
                     if os.path.exists(output_path):
                         pass
                     else:
-                        shutil.copyfile(input_path, output_path)
+                        shutil.move(input_path, output_path)
                 elif element in ds_test['id'].values:
                     output_path = os.path.join(test, element)
                     if os.path.exists(output_path):
                         pass
                     else:
-                        shutil.copyfile(input_path, output_path)
+                        shutil.move(input_path, output_path)
             else:
                 pass
+
+        os.rmdir(self.temp)
 
     def hist(self, dataframe: pd.DataFrame, col_index: str, nbins: int):
         """

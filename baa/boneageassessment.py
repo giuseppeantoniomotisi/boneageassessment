@@ -39,6 +39,7 @@ import argparse
 import json
 import os
 import sys
+import shutil
 sys.path.append(os.path.join(sys.path[0], 'RSNA'))
 sys.path.append(os.path.join(sys.path[0], 'preprocessing'))
 sys.path.append(os.path.join(sys.path[0], 'age'))
@@ -61,14 +62,21 @@ def preprocessing_module(opt:bool):
     """
     print("Preliminary operation module is running. Please wait.")
     utils.write_info()
+    downloads_dir = utils.get_downloads()
     
     if opt:
         print("We are manipulating dataset. Please wait.")
         rsna.process()
+        utils.houdini()
         print("Done!")
         print("We are processing images. Please wait.")
         preprocessing.process()
-        utils.houdini()
+        print("Done!")
+        print("We are splitting dataset. Please wait.")
+        rsna.split()
+        print("Done!")
+        print("We are balancing dataset per year. Please wait.")
+        rsna.balance()
         print("Done!")
 
     else:
@@ -83,8 +91,8 @@ def preprocessing_module(opt:bool):
             print("We are unzipping dataset folder. Please wait.")
             os.system(f"unzip {os.path.join(downloads_dir, 'dataset.zip')}")
             #if os.path.exists(os.path.join(downloads_dir, '__MACOSX')):
-            if os.path.exists('__MACOSX'):
-                os.system(f"rm -r '__MACOSX')")
+            # if os.path.exists('__MACOSX'):
+            #    os.system(f"rm -r '__MACOSX')")
             os.remove(os.path.join(downloads_dir, 'dataset.zip'))
             print("Done!")
 
@@ -105,8 +113,8 @@ def preprocessing_module(opt:bool):
 
         print("We are unzipping weights folder. Please wait.")
         os.system(f"unzip {os.path.join(downloads_dir, 'weights.zip')} -d {os.path.join(os.getcwd(), 'baa', 'age')}")
-        if os.path.exists(os.path.join(os.getcwd(), 'baa', 'age', '__MACOSX')):
-            os.system(f"rm -r {os.path.join(os.getcwd(), 'baa', 'age', '__MACOSX')}")
+        # if os.path.exists(os.path.join(os.getcwd(), 'baa', 'age', '__MACOSX')):
+        #     shutil.rmtree(os.path.join(os.getcwd(), 'baa', 'age', '__MACOSX'))
         os.remove(os.path.join(downloads_dir, 'weights.zip'))
         print("Done!")
 

@@ -122,7 +122,13 @@ class Merge:
             for element in os.listdir(input_folder):
                 source = os.path.join(input_folder, element)
                 destination = os.path.join(output_folder, element)
-                os.replace(source, destination)
+                if '.png' in element:
+                    os.replace(source, destination)
+                elif os.path.isdir(source):
+                    for subelement in os.listdir(source):
+                        subsource = os.path.join(source, subelement)
+                        subdestination = os.path.join(output_folder, subelement)
+                        os.replace(subsource, subdestination)
 
     def merge(self):
         """

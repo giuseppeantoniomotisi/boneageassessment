@@ -27,9 +27,10 @@ You can easily find your new dataset in the same repository where you downloaded
 
 
 import os
-import sys
 import pwd
 import platform
+import sys
+import shutil
 import zipfile
 
 sys.path.append(sys.path[0].replace('RSNA', ''))
@@ -47,18 +48,18 @@ from utils import get_downloads
 #         path = '/home/username/Desktop'.replace('/username/', f'/{username}/')
 #     os.chdir(path)
 
-def open_downloads():
-    """
-    Open Downloads directory based on the current platform.
-    """
-    username = pwd.getpwuid(os.getuid()).pw_name
-    if platform.system() == 'Windows':
-        path = 'C:/Users/username/Downloads'.replace('/username/', f'/{username}/')
-    elif platform.system() == 'Darwin':
-        path = '/Users/username/Downloads'.replace('/username/', f'/{username}/')
-    elif platform.system() == 'Linux':
-        path = '/home/username/Downloads'.replace('/username/', f'/{username}/')
-    os.chdir(path)
+# def open_downloads():
+#     """
+#     Open Downloads directory based on the current platform.
+#     """
+#     username = pwd.getpwuid(os.getuid()).pw_name
+#     if platform.system() == 'Windows':
+#         path = 'C:/Users/username/Downloads'.replace('/username/', f'/{username}/')
+#     elif platform.system() == 'Darwin':
+#         path = '/Users/username/Downloads'.replace('/username/', f'/{username}/')
+#     elif platform.system() == 'Linux':
+#         path = '/home/username/Downloads'.replace('/username/', f'/{username}/')
+#     os.chdir(path)
 
 def create_directories():
     """
@@ -112,27 +113,26 @@ def unzip_folder(zip_file):
     Args:
         zip_file (str): Name of the zip file to unzip.
     """
-    name = zip_file[:-4]
-    with zipfile.ZipFile(zip_file, 'r') as zip_ref:
-        zip_ref.extractall(name)
-        os.remove(name + '.zip')
+    destination_folder = os.path.splitext(zip_file)[0]
+    shutil.unpack_archive(zip_file, destination_folder)
+    os.remove(zip_file)
 
 def check_path():
     """
     Check and update the RSNA paths.
     """
-    open_downloads()
-    path_file = os.path.join(os.getcwd(), 'dataset', 'original_rsna_paths.txt')
+    downloads_dir = get_downloads()
+    path_file = os.path.join(downloads_dir, 'dataset', 'original_rsna_paths.txt')
     if os.path.exists(path_file):
         os.remove(path_file)
     with open(path_file, 'a') as input_file:
         input_file.write('# This txt file contains all RSNA paths\n')
 
-    open_downloads()
-    elements = list(map(lambda x: os.path.join(os.getcwd(), x), ['train.csv',
+    elements = list(map(lambda x: os.path.join(downloads_dir, x), ['train.csv',
                                                                  'Bone Age Validation Set',
                                                                  'boneage-training-dataset']))
     for element in elements:
+        # while is not a empty directory
         if os.path.exists(element):
             if os.path.isdir(element):
                 with open(path_file, 'a') as input_file:
@@ -170,8 +170,8 @@ def extract_info_as_dict() -> dict:
         dict: A dictionary containing paths to different datasets.
     """
     # Open the Desktop directory
-    open_downloads()
-    main = os.path.join(os.getcwd(),'dataset')
+    downloads_dir = get_downloads()
+    main = os.path.join(downloads_dir, 'dataset')
 
     # Get the path of the original RSNA paths file
     input_file = os.path.join(main, 'original_rsna_paths.txt')
@@ -221,16 +221,16 @@ def extract_info_as_dict() -> dict:
 
 def clean_workspace():
     """Remove old directories from Documents folder."""
-    open_downloads()
+    downloads_dir = get_downloads()
 
-    directories = ['Bone Age Validation Set','boneage-training-dataset']
+    directories = list(map(lambda x: os.path.join(downloads_dir, x), ['Bone Age Validation Set',
+                                                                      'boneage-training-dataset']))
     for directory in directories:
-        if os.path.exists(path_to_remove):
-            path_to_remove = os.path.join(os.getcwd(),directory)
-            os.remove(path_to_remove)
+        if os.path.exists(directory):
+            shutil.rmtree(directory)
         else:
             pass
-    path_file = os.path.join(os.getcwd(), 'dataset', 'original_rsna_paths.txt')
+    path_file = os.path.join(downloads_dir, 'dataset', 'original_rsna_paths.txt')
     if os.path.exists(path_file):
         os.remove(path_file)
     else:

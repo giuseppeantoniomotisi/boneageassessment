@@ -256,7 +256,26 @@ document.write(`
                 <article class="bd-article">
                   
   <h1>Source code for preprocessing.tools</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="c1"># Copyright (C) 2024 g.fanciulli2@studenti.unipi.it</span>
+<span class="c1">#</span>
+<span class="c1"># For the license terms see the file LICENSE, distributed along with this</span>
+<span class="c1"># software.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software; you can redistribute it and/or modify it</span>
+<span class="c1"># under the terms of the GNU General Public License as published by the</span>
+<span class="c1"># Free Software Foundation; either version 2 of the License, or (at your</span>
+<span class="c1"># option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful, but</span>
+<span class="c1"># WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU</span>
+<span class="c1"># General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License along</span>
+<span class="c1"># with this program; if not, write to the Free Software Foundation Inc.,</span>
+<span class="c1"># 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">After data manipulation and data augmentation, what we need to do is to preprocess our images.</span>
 <span class="sd">This is step has two main purposes: one is to reduce the dataset size and the second is to clean</span>
 <span class="sd">as much as possible the images, making the background black and our subjects (the hands) shiny,</span>
@@ -268,9 +287,9 @@ document.write(`
 <span class="sd">Requirements: os, csv, numpy, matplolib, cv2 and mediapipe</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="c1">#import csv</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="s1">&#39;baa&#39;</span><span class="p">))</span>
@@ -285,6 +304,8 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">baa</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;baa&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">raw</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">train</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;validation&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">test</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
@@ -384,13 +405,13 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">h</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1"> could not be processed!&#39;</span><span class="p">)</span>
             <span class="k">return</span> <span class="mi">0</span>
         <span class="k">while</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">h</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">/</span><span class="n">frac</span><span class="p">):</span>
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">h</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
                 <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="n">index</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1"> could not be processed!&#39;</span><span class="p">)</span>
                 <span class="k">break</span>
         <span class="n">new_index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="n">i</span>
         <span class="k">if</span><span class="p">(</span><span class="n">new_index</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">index</span><span class="p">):</span>
@@ -546,7 +567,7 @@ document.write(`
 
 <div class="viewcode-block" id="Preprocessing.preprocessing_image">
 <a class="viewcode-back" href="../../preprocessing.html#preprocessing.tools.Preprocessing.preprocessing_image">[docs]</a>
-    <span class="k">def</span> <span class="nf">preprocessing_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">image_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span><span class="n">show</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span><span class="n">save</span><span class="p">:</span><span class="nb">bool</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">preprocessing_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">show</span><span class="p">:</span><span class="nb">bool</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Takes the hand x-ray image as input and makes use of mediapipe package</span>
 <span class="sd">        in order to find the hand in the image. If found, first crops the image with</span>
 <span class="sd">        a bounding box around the hand and then applies the process method to the</span>
@@ -555,24 +576,22 @@ document.write(`
 <span class="sd">        it.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            image_name (str): name of the image file</span>
+<span class="sd">            image_name (str): path to the image file</span>
 <span class="sd">            show (bool): True if user wants the image to be shown, False otherwise</span>
-<span class="sd">            save (bool): True if user wants the image to be saved, False otherwise</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            Warning: if image doesn&#39;t get cropped, the program gives a warning.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Source path of raw image in boneageassessment/dataset/IMAGES/raw/</span>
-        <span class="n">from_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span><span class="n">image_name</span><span class="p">)</span>
         <span class="c1"># Destination path of processed image in boneageassessment/dataset/IMAGES/processed/train/</span>
-        <span class="n">to_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">,</span><span class="n">image_name</span><span class="p">)</span>
+        <span class="n">image_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">image_path</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span>
         
         <span class="n">mp_hands</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">solutions</span><span class="o">.</span><span class="n">hands</span>
         <span class="n">hand</span> <span class="o">=</span> <span class="n">mp_hands</span><span class="o">.</span><span class="n">Hands</span><span class="p">()</span>
 
         <span class="n">coord</span> <span class="o">=</span> <span class="p">[[],[]]</span>
 
-        <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">from_path</span><span class="p">)</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">image_name</span><span class="si">}</span><span class="s1"> was not correctly converted in a numpy array!&#39;</span><span class="p">)</span>
         <span class="n">image_width</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -580,7 +599,7 @@ document.write(`
         <span class="n">results</span> <span class="o">=</span> <span class="n">hand</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
         <span class="n">hand_landmark</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">multi_hand_landmarks</span>
 
-        <span class="c1"># If one is detected tha landmark coordinates are saved</span>
+        <span class="c1"># If one hand is detected tha landmark coordinates are saved</span>
         <span class="k">if</span> <span class="n">hand_landmark</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">landmarks</span> <span class="ow">in</span> <span class="n">hand_landmark</span><span class="p">:</span>
                 <span class="c1"># Here is How to Get All the Coordinates</span>
@@ -588,18 +607,15 @@ document.write(`
                     <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">landmrk</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">image_width</span><span class="p">)</span>
                     <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">landmrk</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">image_height</span><span class="p">)</span>
                     <span class="c1"># Here we crop and process the image and then save it</span>
-                    <span class="n">top_left</span><span class="p">,</span> <span class="n">bottom_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">coord</span><span class="p">)</span>
-                    <span class="n">cropped_frame</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="n">bottom_right</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">bottom_right</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-                    <span class="n">processed_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">cropped_frame</span><span class="p">,</span> <span class="n">from_path</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
-                        <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">to_path</span><span class="p">,</span> <span class="n">processed_frame</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
-                        <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">processed_frame</span><span class="p">)</span>
+            <span class="n">top_left</span><span class="p">,</span> <span class="n">bottom_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">coord</span><span class="p">)</span>
+            <span class="n">cropped_frame</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="n">bottom_right</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">bottom_right</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">processed_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">cropped_frame</span><span class="p">,</span> <span class="n">image_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">processed_frame</span><span class="p">)</span>
+
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The image was not cropped since no hand was detected!&#39;</span><span class="p">)</span>
             <span class="n">processed_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">image_name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">save</span><span class="p">:</span> 
-                <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">to_path</span><span class="p">,</span> <span class="n">processed_frame</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
                 <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">processed_frame</span><span class="p">)</span>
 
@@ -619,7 +635,7 @@ document.write(`
         <span class="c1"># Source path of raw image in boneageassessment/dataset/IMAGES/raw/</span>
         <span class="n">loading_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span>
         <span class="c1"># Destination path of processed image in boneageassessment/dataset/IMAGES/processed/train/</span>
-        <span class="n">saving_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train</span>
+        <span class="n">saving_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp</span>
         
         <span class="n">mp_hands</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">solutions</span><span class="o">.</span><span class="n">hands</span>
         <span class="n">hand</span> <span class="o">=</span> <span class="n">mp_hands</span><span class="o">.</span><span class="n">Hands</span><span class="p">()</span>
@@ -627,7 +643,13 @@ document.write(`
 
         <span class="n">coord</span> <span class="o">=</span> <span class="p">[[],[]]</span>
 
-        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">loading_path</span><span class="p">):</span>
+        <span class="c1"># Obtain files in loading_path</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">loading_path</span><span class="p">)</span>
+
+        <span class="c1"># Filtering only images to prevent errors</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.png&#39;</span><span class="p">),</span> <span class="n">images</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">images</span><span class="p">):</span>
 
             <span class="n">from_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">loading_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
             <span class="n">to_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">saving_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
@@ -657,12 +679,12 @@ document.write(`
                 <span class="c1">#If no hand gets detected, the image only gets processed</span>
                 <span class="n">processed_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
                 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">to_path</span><span class="p">,</span> <span class="n">processed_frame</span><span class="p">)</span>
-            <span class="n">coord</span> <span class="o">=</span> <span class="p">[[],[]]</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- </span><span class="si">{</span><span class="n">hands</span><span class="si">}</span><span class="s1"> hands images were correctly found and cropped&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- Total number of images = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">loading_path</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- Percentage of cropped images = </span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">hands</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">loading_path</span><span class="p">))</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span></div>
+            <span class="n">coord</span> <span class="o">=</span> <span class="p">[[],[]]</span></div>
 </div>
 
+            <span class="c1"># print(f&#39;- {hands} hands images were correctly found and cropped&#39;)</span>
+            <span class="c1"># print(f&#39;- Total number of images = {len(os.listdir(loading_path))}&#39;)</span>
+            <span class="c1"># print(f&#39;- Cropping{100*hands/len(os.listdir(loading_path))}...&#39;)</span>
 </pre></div>
 
                 </article>

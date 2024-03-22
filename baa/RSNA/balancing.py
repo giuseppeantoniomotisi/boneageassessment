@@ -31,13 +31,16 @@ optionally generating augmented images for training. The augmentation involves i
 rotations to the images.
 """
 import os
+import sys
 import shutil
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import cv2 as cv
-from tools_rsna import extract_info_as_dict
+
+sys.path.append(os.path.join(sys.path[0], ''))
+from utils import extract_info
 
 class BalancingDataset:
     """
@@ -81,10 +84,9 @@ class BalancingDataset:
         Initializes BalancingDataset class with default paths and dependencies.
         """
         # find all dependicies
-        info = extract_info_as_dict()
-        self.path_to_csv = info['labels']
-        self.path_to_images = info['raw']
-        self.path_to_train = os.path.join(info['processed'],'train')
+        self.path_to_csv = extract_info('labels')
+        self.path_to_images = extract_info('raw')
+        self.path_to_train = os.path.join(extract_info('processed'), 'train')
         self.csv_name = 'train.csv'
 
         if os.path.exists(os.path.join(self.path_to_csv, self.csv_name)):
@@ -138,8 +140,8 @@ class BalancingDataset:
             raise TypeError(type_error)
 
         # Check limit_value type
-        if type(limit_value) != int:
-            raise TypeError(f"limit_value's expeted type is <class 'int'>, not {type(limit_value)}")
+        # if type(limit_value) != int:
+        #     raise TypeError(f"limit_value's expeted type is <class 'int'>, not {type(limit_value)}")
 
         # Check num_classes type
         if type(num_classes) != int:
@@ -152,10 +154,8 @@ class BalancingDataset:
 
         # Calculate histogram
         hist, edges = np.histogram(self.dataframe[self.key_value], bins=num_classes)
-
-        # Check if limit_value is greater than the maximum bin value
-        if limit_value <= np.max(hist):
-            raise ValueError(f"limit_value must be greater or equal to max_hist: {np.max(hist)}!")
+        
+        limit_value = int(np.max(hist))
 
         # Define how much is distant the desired number of images
         delta_array = limit_value - hist
@@ -167,17 +167,17 @@ class BalancingDataset:
                     classes[j].append(self.dataframe[self.key_id][i])
                     break
 
-        return classes, delta_array
+        return classes, delta_array, limit_value
 
-    def create_bal_csv(self, limit):
+    def create_bal_csv(self):
         """
         Creates a balanced CSV file by augmenting the training data with additional
         samples and saves it.
         """
         num = 19
-        list_of_names, delta_balanced = self.find_element(limit, num)
+        list_of_names, delta_balanced, _ = self.find_element(num)
 
-        temp_id, temp_boneage, temp_gender, temp_bn, temp_angles = [], [], [], [], []
+        temp_id, temp_boneage, temp_gender, temp_original, temp_angles = [], [], [], [], []
         for i in range(len(list_of_names)):
             print(f'Creating {delta_balanced[i]} files for [{i}, {i+1}) age range ...')
             for j in range(delta_balanced[i]):
@@ -185,8 +185,8 @@ class BalancingDataset:
                 selected_name = np.random.choice(list_of_names[i])
                 idx = np.where(selected_name == self.dataframe['id'])[0]
 
-                # Generate a random angle to rotate image
-                angle = np.random.rand() * 360
+                # Generate a random angle to rotate image in range (-20, 20)
+                angle = np.random.uniform(-20., 20.)
 
                 angle_name = str("%.3f" % angle).replace('.', '')
                 new_name = f'{angle_name}{selected_name}'  # Adding angle to the name
@@ -196,16 +196,18 @@ class BalancingDataset:
                 temp_angles.append(angle)
                 temp_boneage.append(self.dataframe['boneage'].values[idx][0])
                 temp_gender.append(self.dataframe['male'].values[idx][0])
+                temp_original.append(selected_name)
 
             print('Done!')
 
         temp_df = pd.DataFrame({'id':temp_id,
                                 'boneage':temp_boneage,
                                 'male':temp_gender,
-                                'angle':temp_angles})
+                                'angle':temp_angles,
+                                'original':temp_original})
 
         dataframe_aug = pd.concat([self.dataframe, temp_df], ignore_index=True)
-        dataframe_aug_name = os.path.join(self.path_to_csv, 'augmented.csv')
+        dataframe_aug_name = os.path.join(self.path_to_csv, 'train_bal.csv')
         dataframe_aug.to_csv(dataframe_aug_name, index=False)
 
     @staticmethod

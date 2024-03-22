@@ -26,8 +26,11 @@ specific folders and CSV files, which can be useful in various data processing a
 tasks.
 """
 import os
+import sys
 import pandas as pd
-from tools_rsna import extract_info_as_dict
+
+sys.path.append(os.path.join(sys.path[0], ''))
+from utils import extract_info
 
 class Checker:
     """The class Checker is a simple class for evaluate dataset transformation."""
@@ -38,9 +41,8 @@ class Checker:
         The class extracts information from the initialization module (__init__)
         and sets default directories and CSV file names.
         """
-        info = extract_info_as_dict()
-        self.path_to_processed = info['processed']
-        self.path_to_csv = info['labels']
+        self.path_to_processed = extract_info('processed')
+        self.path_to_csv = extract_info('labels')
         self.default_dir = ['train', 'validation', 'test']
         self.default_csv = ['train.csv', 'validation.csv', 'test.csv']
 

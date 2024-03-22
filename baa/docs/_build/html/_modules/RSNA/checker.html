@@ -256,7 +256,26 @@ document.write(`
                 <article class="bd-article">
                   
   <h1>Source code for RSNA.checker</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="c1"># Copyright (C) 2024 motisigiuseppeantonio@yahoo.it</span>
+<span class="c1">#</span>
+<span class="c1"># For the license terms see the file LICENSE, distributed along with this</span>
+<span class="c1"># software.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software; you can redistribute it and/or modify it</span>
+<span class="c1"># under the terms of the GNU General Public License as published by the</span>
+<span class="c1"># Free Software Foundation; either version 2 of the License, or (at your</span>
+<span class="c1"># option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful, but</span>
+<span class="c1"># WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU</span>
+<span class="c1"># General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License along</span>
+<span class="c1"># with this program; if not, write to the Free Software Foundation Inc.,</span>
+<span class="c1"># 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Checker module defines a class called Checker which is responsible for checking the contents of</span>
 <span class="sd">specified folders and CSV files.</span>
 
@@ -265,8 +284,11 @@ document.write(`
 <span class="sd">tasks.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tools_rsna</span> <span class="kn">import</span> <span class="n">extract_info_as_dict</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">extract_info</span>
 
 <div class="viewcode-block" id="Checker">
 <a class="viewcode-back" href="../../RSNA.html#RSNA.checker.Checker">[docs]</a>
@@ -279,9 +301,8 @@ document.write(`
 <span class="sd">        The class extracts information from the initialization module (__init__)</span>
 <span class="sd">        and sets default directories and CSV file names.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">info</span> <span class="o">=</span> <span class="n">extract_info_as_dict</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path_to_processed</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;processed&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path_to_csv</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_to_processed</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;processed&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_to_csv</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">default_dir</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">default_csv</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;train.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;validation.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;test.csv&#39;</span><span class="p">]</span>
 

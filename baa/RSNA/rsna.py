@@ -35,12 +35,17 @@ def preparatory():
     # Check if the path is valid
     check_path()
 
-def merge_and_split():
+def merge():
     """
-    Function to merge and split datasets.
+    Function to merge datasets.
     """
     # Merge datasets
     Merge().merge()
+    
+def split():
+    """
+    Function to split datasets.
+    """
     # Split datasets
     Split().splitting()
 
@@ -49,7 +54,7 @@ def balance():
     Function to balance the dataset.
     """
     # Balance the dataset, creating images if required
-    BalancingDataset().balance(create_images=False)
+    BalancingDataset().balance(create_images=True)
 
 def check():
     """
@@ -62,11 +67,11 @@ def process():
     # Perform preparatory tasks
     preparatory()
     # Merge and split datasets
-    merge_and_split()
+    merge() # Forse dovrei fare prima il preprocessing dello splitting!!!
     # Balance the dataset
-    balance()
+    # balance() Il balancing solo dopo il preprocessing!!!
     # Check the integrity of the dataset
-    check()
+    # check()
     # Now clean workspace
     clean_workspace()
 

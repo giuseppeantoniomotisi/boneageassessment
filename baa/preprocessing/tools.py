@@ -29,9 +29,9 @@ define the functions that we are going to use throughout this step.
 Requirements: os, csv, numpy, matplolib, cv2 and mediapipe
 """
 import os
-#import csv
 import numpy as np
 from matplotlib import pyplot as plt
+from tqdm import tqdm
 import cv2
 import sys
 sys.path.append(os.path.join(os.getcwd(),'baa'))
@@ -44,6 +44,8 @@ class Preprocessing:
         self.baa = extract_info('baa')
         self.raw = extract_info('raw')
         self.labels = extract_info('labels')
+        os.makedirs(os.path.join(self.raw, 'temp'), exist_ok=True)
+        self.temp = os.path.join(self.raw, 'temp')
         self.train = extract_info('train')
         self.validation = extract_info('validation')
         self.test = extract_info('test')
@@ -276,7 +278,7 @@ class Preprocessing:
         return image_
 
 
-    def preprocessing_image(self,image_path:str,show:bool,save:bool):
+    def preprocessing_image(self, image_path:str, show:bool):
         """Takes the hand x-ray image as input and makes use of mediapipe package
         in order to find the hand in the image. If found, first crops the image with
         a bounding box around the hand and then applies the process method to the
@@ -287,7 +289,6 @@ class Preprocessing:
         Args:
             image_name (str): path to the image file
             show (bool): True if user wants the image to be shown, False otherwise
-            save (bool): True if user wants the image to be saved, False otherwise
 
         Raises:
             Warning: if image doesn't get cropped, the program gives a warning.
@@ -295,14 +296,13 @@ class Preprocessing:
         # Source path of raw image in boneageassessment/dataset/IMAGES/raw/
         # Destination path of processed image in boneageassessment/dataset/IMAGES/processed/train/
         image_name = os.path.splitext(os.path.basename(image_path))[0] + '.png'
-        to_path = os.path.join(self.train,image_name)
         
         mp_hands = mp.solutions.hands
         hand = mp_hands.Hands()
 
         coord = [[],[]]
 
-        frame = cv2.imread(image_path)
+        frame = plt.imread(image_path)
         if type(frame) is not np.ndarray:
             raise TypeError(f'{image_name} was not correctly converted in a numpy array!')
         image_width = frame.shape[1]
@@ -321,15 +321,12 @@ class Preprocessing:
             top_left, bottom_right = self.rectangle(frame, coord)
             cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
             processed_frame = self.process(cropped_frame, image_path)
-            if save:
-                cv2.imwrite(to_path, processed_frame)
             if show:
                 cv2.imshow(processed_frame)
+
         else:
             print('The image was not cropped since no hand was detected!')
             processed_frame = self.process(frame, image_name)
-            if save: 
-                cv2.imwrite(to_path, processed_frame)
             if show:
                 cv2.imshow(processed_frame)
 
@@ -346,7 +343,7 @@ class Preprocessing:
         # Source path of raw image in boneageassessment/dataset/IMAGES/raw/
         loading_path = self.raw
         # Destination path of processed image in boneageassessment/dataset/IMAGES/processed/train/
-        saving_path = self.train
+        saving_path = self.temp
         
         mp_hands = mp.solutions.hands
         hand = mp_hands.Hands()
@@ -354,7 +351,13 @@ class Preprocessing:
 
         coord = [[],[]]
 
-        for filename in os.listdir(loading_path):
+        # Obtain files in loading_path
+        images = os.listdir(loading_path)
+
+        # Filtering only images to prevent errors
+        images = list(filter(lambda x: x.endswith('.png'), images))
+
+        for filename in tqdm(images):
 
             from_path = os.path.join(loading_path, filename)
             to_path = os.path.join(saving_path, filename)
@@ -376,15 +379,15 @@ class Preprocessing:
                         coord[0].append(landmrk.x * image_width)
                         coord[1].append(landmrk.y * image_height)
                         # Here we crop and process the image and then save it
-                top_left, bottom_right = self.rectangle(frame, coord)
-                cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
-                processed_frame = self.process(cropped_frame, from_path)
-                cv2.imwrite(to_path, processed_frame)
+                        top_left, bottom_right = self.rectangle(frame, coord)
+                        cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
+                        processed_frame = self.process(cropped_frame, from_path)
+                        cv2.imwrite(to_path, processed_frame)
             else:
                 #If no hand gets detected, the image only gets processed
                 processed_frame = self.process(frame, filename)
                 cv2.imwrite(to_path, processed_frame)
             coord = [[],[]]
-            print(f'- {hands} hands images were correctly found and cropped')
-            print(f'- Total number of images = {len(os.listdir(loading_path))}')
-            print(f'- Percentage of cropped images = {100*hands/len(os.listdir(loading_path))}%')
+            # print(f'- {hands} hands images were correctly found and cropped')
+            # print(f'- Total number of images = {len(os.listdir(loading_path))}')
+            # print(f'- Cropping{100*hands/len(os.listdir(loading_path))}...')

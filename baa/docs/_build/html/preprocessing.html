@@ -461,7 +461,7 @@ it saves it.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="preprocessing.tools.Preprocessing.preprocessing_image">
-<span class="sig-name descname"><span class="pre">preprocessing_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.preprocessing_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.preprocessing_image" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">preprocessing_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/preprocessing/tools.html#Preprocessing.preprocessing_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#preprocessing.tools.Preprocessing.preprocessing_image" title="Link to this definition">#</a></dt>
 <dd><p>Takes the hand x-ray image as input and makes use of mediapipe package
 in order to find the hand in the image. If found, first crops the image with
 a bounding box around the hand and then applies the process method to the
@@ -469,9 +469,8 @@ cropped image; finally it shows/saves it. Alternatively, if it cannot find
 hands, it just applies the process method to the image and then it shows/saves
 it.</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>image_name (str): name of the image file
-show (bool): True if user wants the image to be shown, False otherwise
-save (bool): True if user wants the image to be saved, False otherwise</p>
+<dt>Args:</dt><dd><p>image_name (str): path to the image file
+show (bool): True if user wants the image to be shown, False otherwise</p>
 </dd>
 <dt>Raises:</dt><dd><p>Warning: if image doesn’t get cropped, the program gives a warning.</p>
 </dd>
