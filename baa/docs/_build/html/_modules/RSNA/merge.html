@@ -282,8 +282,11 @@ document.write(`
 <span class="sd">separate files into a single dataset file and consolidating images into a single folder.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">tools_rsna</span> <span class="kn">import</span> <span class="n">extract_info_as_dict</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;RSNA&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">extract_info</span>
 
 <div class="viewcode-block" id="switch_columns">
 <a class="viewcode-back" href="../../RSNA.html#RSNA.merge.switch_columns">[docs]</a>
@@ -342,9 +345,9 @@ document.write(`
         <span class="c1"># Default path to the validation images folder</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path_to_val_imgs</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;val_images_path&#39;</span><span class="p">]</span>
         <span class="c1"># Default path for the dataset project (Desktop/boneageassessment/)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">main_dir</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;main_dir&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">raw</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_dir</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">extract_info</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Merge.merge_csv">
 <a class="viewcode-back" href="../../RSNA.html#RSNA.merge.Merge.merge_csv">[docs]</a>
