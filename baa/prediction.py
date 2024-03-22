@@ -21,7 +21,7 @@
 """
 import argparse
 import os
-from matplotlib.pyplot import imread
+import cv2
 from utils import extract_info
 from preprocessing.tools import Preprocessing
 from age.model import BoneAgeAssessment
@@ -46,10 +46,13 @@ def process(image_name:str, image_path:str, save:bool=True, prep:bool=True) -> s
     # First preprocess the image
     if prep:
         prep_instance = Preprocessing()
-        img = prep_instance.preprocessing_image(image_name=image, save=save, show=False)
+        img = prep_instance.preprocessing_image(image_path=image, save=save, show=False)
+        img /= 255.
 
     else:
-        img = imread(image)
+        image = os.path.join(image_path, image_name)
+        img = cv2.imread(image)
+        img /= 255.
 
     # Now load model and make prediction
     baa_instance = BoneAgeAssessment()

@@ -2,7 +2,7 @@
     "RSNA": false,
     "Training and testing model": false,
     "Path to hyperparameters.json": "../baa/age/macro_age.json",
-    "New prediction": false,
-    "New image name": "image.png",
-    "Path to new image": "../"
+    "New prediction": true,
+    "New image name": "1400.png",
+    "Path to new image": "/home/peppe/Scrivania/"
 }

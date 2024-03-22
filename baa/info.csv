@@ -1,13 +1,13 @@
 Dictionary key,Path to folder
-main,../boneageassessment
-baa,../boneageassessment/baa
-IMAGES,../boneageassessment/dataset/IMAGES
-labels,../boneageassessment/dataset/IMAGES/labels
-raw,../boneageassessment/dataset/IMAGES/raw
-processed,../boneageassessment/dataset/IMAGES/processed
-train,../boneageassessment/dataset/IMAGES/processed/train
-validation,../boneageassessment/dataset/IMAGES/processed/val
-test,../boneageassessment/dataset/IMAGES/processed/test
-rsna,../boneageassessment/baa/RSNA
-preprocessing,../boneageassessment/baa/preprocessing
-age,../boneageassessment/baa/age
+main,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment
+baa,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/baa
+IMAGES,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/dataset/IMAGES
+labels,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/dataset/IMAGES/labels
+raw,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/dataset/IMAGES/raw
+processed,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/dataset/IMAGES/processed
+train,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/dataset/IMAGES/processed/train
+validation,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/dataset/IMAGES/processed/val
+test,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/dataset/IMAGES/processed/test
+rsna,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/baa/RSNA
+preprocessing,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/baa/preprocessing
+age,/home/peppe/Scrivania/cmepda22/Progetto esame/boneageassessment/baa/age

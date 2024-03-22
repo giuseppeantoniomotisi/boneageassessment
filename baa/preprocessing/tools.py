@@ -135,13 +135,13 @@ class Preprocessing:
         """
         i = 1
         if(index+i >= h.size):
-            print(filename)
+            print(f'{filename} could not be processed!')
             return 0
         while(h[index+i] > h[index]/frac):
             i += 1
             if(index+i >= h.size):
                 i = -index
-                print(filename)
+                print(f'{filename} could not be processed!')
                 break
         new_index = index + i
         if(new_index > 10 + index):
@@ -276,7 +276,7 @@ class Preprocessing:
         return image_
 
 
-    def preprocessing_image(self,image_name:str,show:bool,save:bool):
+    def preprocessing_image(self,image_path:str,show:bool,save:bool):
         """Takes the hand x-ray image as input and makes use of mediapipe package
         in order to find the hand in the image. If found, first crops the image with
         a bounding box around the hand and then applies the process method to the
@@ -285,7 +285,7 @@ class Preprocessing:
         it.
 
         Args:
-            image_name (str): name of the image file
+            image_name (str): path to the image file
             show (bool): True if user wants the image to be shown, False otherwise
             save (bool): True if user wants the image to be saved, False otherwise
 
@@ -293,8 +293,8 @@ class Preprocessing:
             Warning: if image doesn't get cropped, the program gives a warning.
         """
         # Source path of raw image in boneageassessment/dataset/IMAGES/raw/
-        from_path = os.path.join(self.raw,image_name)
         # Destination path of processed image in boneageassessment/dataset/IMAGES/processed/train/
+        image_name = os.path.splitext(os.path.basename(image_path))[0] + '.png'
         to_path = os.path.join(self.train,image_name)
         
         mp_hands = mp.solutions.hands
@@ -302,7 +302,7 @@ class Preprocessing:
 
         coord = [[],[]]
 
-        frame = cv2.imread(from_path)
+        frame = cv2.imread(image_path)
         if type(frame) is not np.ndarray:
             raise TypeError(f'{image_name} was not correctly converted in a numpy array!')
         image_width = frame.shape[1]
@@ -310,7 +310,7 @@ class Preprocessing:
         results = hand.process(frame)
         hand_landmark = results.multi_hand_landmarks
 
-        # If one is detected tha landmark coordinates are saved
+        # If one hand is detected tha landmark coordinates are saved
         if hand_landmark:
             for landmarks in hand_landmark:
                 # Here is How to Get All the Coordinates
@@ -318,13 +318,13 @@ class Preprocessing:
                     coord[0].append(landmrk.x * image_width)
                     coord[1].append(landmrk.y * image_height)
                     # Here we crop and process the image and then save it
-                    top_left, bottom_right = self.rectangle(frame, coord)
-                    cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
-                    processed_frame = self.process(cropped_frame, from_path)
-                    if save:
-                        cv2.imwrite(to_path, processed_frame)
-                    if show:
-                        cv2.imshow(processed_frame)
+            top_left, bottom_right = self.rectangle(frame, coord)
+            cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
+            processed_frame = self.process(cropped_frame, image_path)
+            if save:
+                cv2.imwrite(to_path, processed_frame)
+            if show:
+                cv2.imshow(processed_frame)
         else:
             print('The image was not cropped since no hand was detected!')
             processed_frame = self.process(frame, image_name)
@@ -376,10 +376,10 @@ class Preprocessing:
                         coord[0].append(landmrk.x * image_width)
                         coord[1].append(landmrk.y * image_height)
                         # Here we crop and process the image and then save it
-                        top_left, bottom_right = self.rectangle(frame, coord)
-                        cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
-                        processed_frame = self.process(cropped_frame, from_path)
-                        cv2.imwrite(to_path, processed_frame)
+                top_left, bottom_right = self.rectangle(frame, coord)
+                cropped_frame = frame[bottom_right[1]:top_left[1], top_left[0]:bottom_right[0]]
+                processed_frame = self.process(cropped_frame, from_path)
+                cv2.imwrite(to_path, processed_frame)
             else:
                 #If no hand gets detected, the image only gets processed
                 processed_frame = self.process(frame, filename)

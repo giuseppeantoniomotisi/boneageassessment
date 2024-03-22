@@ -63,6 +63,7 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import cv2
 
 from keras_preprocessing.image import ImageDataGenerator
 import tensorflow as tf
@@ -86,6 +87,7 @@ from keras.callbacks import (ModelCheckpoint,
                              EarlyStopping,
                              ReduceLROnPlateau)
 import keras.backend as K
+import keras.saving
 
 import sys
 sys.path.append(sys.path[0].replace('/age',''))
@@ -133,7 +135,7 @@ def lr_scheduler(epoch, initial_lr=1e-04, decay_rate=0.95):
     lr = initial_lr * np.power(decay_rate, epoch)
     return lr
 
-@tf.keras.saving.register_keras_serializable()
+#@tf.keras.saving.register_keras_serializable()
 def r_squared(y_true, y_pred):
     """Calculate R-squared metric.
 
@@ -225,7 +227,7 @@ class BoneAgeAssessment():
         self.processed = extract_info('processed')
         self.age = extract_info('age')
         self.weights = os.path.join(extract_info('age'), 'weights')
-        self.results = os.path.join(extract_info('age'), 'weights')
+        self.results = os.path.join(extract_info('age'), 'results')
 
         # Training, validation and test folders and labels
         self.train = extract_info('train')
@@ -641,7 +643,7 @@ class BoneAgeAssessment():
                                'Min error(months)':np.min(predictions-test_y)},dtype=float,index=[0])
         results.to_csv(os.path.join(self.results,'results.csv'),index=False)
     
-    def prediction(self, image:np.ndarray, show:bool=True, save:bool=True, image_id:int=0) -> float:
+    def prediction(self, image:np.ndarray, show:bool=False, save:bool=True, image_id:int=0) -> float:
         """Make prediction on an image and visualize the result.
 
         Args:
@@ -663,21 +665,38 @@ class BoneAgeAssessment():
         results = pd.read_csv(os.path.join(self.results, 'case_b', 'results.csv'))
         error = results['MAD(months)'].values # As error we use MAD in months
 
-        fig, ax = plt.subplots(figsize=(6,6))
-        z = ax.imshow(image,cmap='gray')
-        ax.set_title(f'Predicted age: {round(pred[0][0], 0)}$\pm${round(error[0], 0)} months') # Results is shown as title
-        ax.axis('off')
-        plt.colorbar(z, ax=ax)
+        #fig, ax = plt.subplots(figsize=(6,6))
+        #z = ax.imshow(image,cmap='gray')
+        #ax.set_title(f'Predicted age: {round(pred[0][0], 0)}$\pm${round(error[0], 0)} months') # Results is shown as title
+        #ax.axis('off')
+        #plt.colorbar(z, ax=ax)
+
+        height, width, ch = image.shape
+        image = np.round(image*255.)
+        new_width, new_height = width + width/20, height + height/8
+
+        # Crate a new canvas with new width and height.
+        canvas = np.ones((int(new_height), int(new_width), ch), dtype=np.uint8) * 255
+
+        # New replace the center of canvas with original image
+        padding_top, padding_left = 40, 10
+        if padding_top + height < new_height and padding_left + width < new_width:
+            canvas[padding_top:padding_top + height, padding_left:padding_left + width] = image
+        else:
+            print("The Given padding exceeds the limits.")
+
+        text1 = f'Predicted age: {round(pred[0][0], 0)} +/- {round(error[0], 0)} months'
+        img_writt = cv2.putText(canvas.copy(), text1, (int(0.05*width), 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0))
+
         # Save flag, default if True
         if save:
-            save_fig = os.path.join(self.predictions, f'prediction_{image_id}.png')
-            plt.savefig(save_fig)
+            save_fig = os.path.join('/home/peppe/Scrivania', f'prediction_{image_id}.png')
+            cv2.imwrite(save_fig, img_writt)
         # Show flag, default if True
         if show:
-            plt.show()
-        plt.close()
+            cv2.imshow('Prediction', img_writt)
 
-        return f'Predicted age is {round(pred[0][0], 0)} +/- {round(error[0], 0)} months.'
+        return f'Predicted age is {round(pred[0][0], 0)} \u00B1 {round(error[0], 0)} months.'
 
 class BaaModel:
     """Class for Bone Age Assessment model creation.
