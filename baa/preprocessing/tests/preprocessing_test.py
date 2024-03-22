@@ -1,7 +1,7 @@
 import unittest
 import sys
-sys.path.append(sys.path[0].replace('/preprocessing/unittest','')) # baa directory
-sys.path.append(sys.path[0].replace('/unittest','')) # age directory
+sys.path.append(sys.path[0].replace('/preprocessing/tests','')) # baa directory
+sys.path.append(sys.path[0].replace('/tests','')) # age directory
 import numpy as np
 import tools
 
