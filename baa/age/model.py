@@ -232,15 +232,16 @@ class BoneAgeAssessment():
         os.makedirs(self.predictions, exist_ok=True)
 
         # Training, validation and test folders and labels
-        self.train = extract_info('train')
-        if balanced:
-            self.train_df = pd.read_csv(os.path.join(self.labels, 'train_bal.csv'))
-        else:
-            self.train_df = pd.read_csv(os.path.join(self.labels, 'train.csv'))
-        self.validation = extract_info('validation')
-        self.validation_df = pd.read_csv(os.path.join(self.labels, 'validation.csv'))
-        self.test = extract_info('test')
-        self.test_df = pd.read_csv(os.path.join(self.labels, 'test.csv'))
+        if len(os.listdir(self.IMAGES)) > 2:
+            self.train = extract_info('train')
+            if balanced:
+                self.train_df = pd.read_csv(os.path.join(self.labels, 'train_bal.csv'))
+            else:
+                self.train_df = pd.read_csv(os.path.join(self.labels, 'train.csv'))
+            self.validation = extract_info('validation')
+            self.validation_df = pd.read_csv(os.path.join(self.labels, 'validation.csv'))
+            self.test = extract_info('test')
+            self.test_df = pd.read_csv(os.path.join(self.labels, 'test.csv'))
 
         # Instance BoneAgeAssessment() variables
         self.image_size = image_size

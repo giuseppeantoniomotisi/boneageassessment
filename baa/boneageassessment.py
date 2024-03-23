@@ -39,7 +39,7 @@ import argparse
 import json
 import os
 import sys
-import shutil
+from warnings import warn
 sys.path.append(os.path.join(sys.path[0], 'RSNA'))
 sys.path.append(os.path.join(sys.path[0], 'preprocessing'))
 sys.path.append(os.path.join(sys.path[0], 'age'))
@@ -120,6 +120,7 @@ def preprocessing_module(opt:bool):
             # if you decide not to download dataset, a empty folder will be created
             ds = os.path.join(os.getcwd(), 'dataset')
             os.makedirs(ds, exist_ok=True)
+            warn("Any version of dataset was found. An empty directory was created.")
 
     if 'weights.zip' in os.listdir(downloads_dir):
         if os.name != 'posix':
@@ -129,13 +130,22 @@ def preprocessing_module(opt:bool):
 
         print("We are unzipping weights folder. Please wait.")
         os.system(f"unzip {os.path.join(downloads_dir, 'weights.zip')} -d {os.path.join(os.getcwd(), 'baa', 'age')}")
-        # if os.path.exists(os.path.join(os.getcwd(), 'baa', 'age', '__MACOSX')):
-        #     shutil.rmtree(os.path.join(os.getcwd(), 'baa', 'age', '__MACOSX'))
         os.remove(os.path.join(downloads_dir, 'weights.zip'))
         print("Done!")
 
     elif 'weights' in os.listdir(downloads_dir):
         pass
+    
+    if 'weights_essential.zip' in os.listdir(downloads_dir):
+        if os.name != 'posix':
+            error = "you work on Windows. The shell command 'unzip' works only for MACOS and Linux.\n"
+            error += "Please unzip by your UtilityCompressor and retry."
+            raise NotImplementedError(error)
+
+        print("We are unzipping weights folder. Please wait.")
+        os.system(f"unzip {os.path.join(downloads_dir, 'weights_essential.zip')} -d {os.path.join(os.getcwd(), 'baa', 'age')}")
+        os.remove(os.path.join(downloads_dir, 'weights_essential.zip'))
+        print("Done!")
     
     elif os.path.exists(os.path.join(os.getcwd(), 'baa', 'age', 'weights')):
         pass

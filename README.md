@@ -99,7 +99,7 @@ Finally, the `boneageassessment.py` application orchestrates the smooth operatio
 This script provides a modular system for Bone Age Assessment (BAA). It integrates various modules such as data preprocessing, machine learning, and prediction. Users can configure the behavior of the system using a JSON configuration file.
 >[!IMPORTANT]
 >Before using this script, ensure that you have already installed the *dataset.zip*(only if RSNA flag is `false`) or *dataset_lite.zip*. 
->In any case, before use the script, please download *weights.zip* files at following link to [Google Drive](https://drive.google.com/drive/folders/1zNPHIJymBkvtQQkJgFwa-7K-x1XH2qdp). Once downloaded, verify if both files are present in the 'Downloads' directory, and then please proceed to unzip them. 
+>In any case, before use the script, please download *weights.zip* or *weights_essential.zip* files at following link to [Google Drive](https://drive.google.com/drive/folders/1zNPHIJymBkvtQQkJgFwa-7K-x1XH2qdp). Once downloaded, verify if both files are present in the 'Downloads' directory, and then please proceed to unzip them. 
 ```json
 {
  "RSNA": true, // false
