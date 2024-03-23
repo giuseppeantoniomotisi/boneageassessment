@@ -102,6 +102,7 @@ def preprocessing_module(opt:bool):
             pass
         
         elif 'dataset_lite.zip' in os.listdir(downloads_dir):
+            # lite version of dataset is about 3.5 Gbyte
             if os.name != 'posix':
                 error = "you work on Windows. The shell command 'unzip' works only for MACOS and Linux.\n"
                 error += "Please unzip by your UtilityCompressor and retry."
@@ -115,8 +116,10 @@ def preprocessing_module(opt:bool):
             os.remove(os.path.join(downloads_dir, 'dataset_lite.zip'))
             print("Done!")
 
-        else: 
-            raise FileNotFoundError("no file named dataset.zip or folder named dataset was found.")
+        else:
+            # if you decide not to download dataset, a empty folder will be created
+            ds = os.path.join(os.getcwd(), 'dataset')
+            os.makedirs(ds, exist_ok=True)
 
     if 'weights.zip' in os.listdir(downloads_dir):
         if os.name != 'posix':
