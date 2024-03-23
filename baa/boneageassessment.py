@@ -26,7 +26,7 @@ Users can configure the behavior of the system using a JSON configuration file.
 
 Usage:
 `
-    python script.py --macro <path_to_parameters_json>
+    python baa/boneageassessment.py --macro <path_to_parameters_json>
 
 Parameters:
     --macro <path_to_parameters_json>: Path to the JSON configuration file containing parameters
@@ -90,9 +90,8 @@ def preprocessing_module(opt:bool):
 
             print("We are unzipping dataset folder. Please wait.")
             os.system(f"unzip {os.path.join(downloads_dir, 'dataset.zip')}")
-            #if os.path.exists(os.path.join(downloads_dir, '__MACOSX')):
-            # if os.path.exists('__MACOSX'):
-            #    os.system(f"rm -r '__MACOSX')")
+            if os.path.exists('__MACOSX'):
+               os.system(f"rm -r '__MACOSX')")
             os.remove(os.path.join(downloads_dir, 'dataset.zip'))
             print("Done!")
 
@@ -101,6 +100,20 @@ def preprocessing_module(opt:bool):
 
         elif os.path.exists(os.path.join(os.getcwd(), 'dataset')):
             pass
+        
+        elif 'dataset_lite.zip' in os.listdir(downloads_dir):
+            if os.name != 'posix':
+                error = "you work on Windows. The shell command 'unzip' works only for MACOS and Linux.\n"
+                error += "Please unzip by your UtilityCompressor and retry."
+                raise NotImplementedError(error)
+
+            print("We are unzipping dataset_lite folder. Please wait.")
+            src = os.path.join(downloads_dir, 'dataset_lite.zip')
+            dest = os.path.join(os.getcwd(), 'dataset')
+            #shutil.unpack_archive(src, dest, format="zip")
+            os.system(f"unzip {src}")
+            os.remove(os.path.join(downloads_dir, 'dataset_lite.zip'))
+            print("Done!")
 
         else: 
             raise FileNotFoundError("no file named dataset.zip or folder named dataset was found.")

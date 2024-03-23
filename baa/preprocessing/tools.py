@@ -302,7 +302,7 @@ class Preprocessing:
 
         coord = [[],[]]
 
-        frame = plt.imread(image_path)
+        frame = cv2.imread(image_path)
         if type(frame) is not np.ndarray:
             raise TypeError(f'{image_name} was not correctly converted in a numpy array!')
         image_width = frame.shape[1]
