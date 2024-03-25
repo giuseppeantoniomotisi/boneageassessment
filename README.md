@@ -83,8 +83,8 @@ Finally, the `boneageassessment.py` application orchestrates the smooth operatio
 │       ├── labels
 │       ├── raw
 │       └── processed
-│           │──
-│           ├──
+│           ├── validation
+│           ├── test
 │           └── train
 ├── documentation
 │   ├── link_to_dataset.txt
@@ -99,7 +99,29 @@ Finally, the `boneageassessment.py` application orchestrates the smooth operatio
 This script provides a modular system for Bone Age Assessment (BAA). It integrates various modules such as data preprocessing, machine learning, and prediction. Users can configure the behavior of the system using a JSON configuration file.
 >[!IMPORTANT]
 >Before using this script, ensure that you have already installed the *dataset.zip*(only if RSNA flag is `false`) or *dataset_lite.zip*. 
->In any case, before use the script, please download *weights.zip* or *weights_essential.zip* files at following link to [Google Drive](https://drive.google.com/drive/folders/1zNPHIJymBkvtQQkJgFwa-7K-x1XH2qdp). Once downloaded, verify if both files are present in the 'Downloads' directory, and then please proceed to unzip them. 
+>In any case, before use the script, please download *weights.zip* or *weights_essential.zip* files at following link to [Google Drive](https://drive.google.com/drive/folders/1zNPHIJymBkvtQQkJgFwa-7K-x1XH2qdp). Once downloaded, verify that both files dataset and weights are present in the 'Downloads' directory, and then please proceed to unzip them. Please check, if there are not subdirectories with same name. 
+
+> [!Tip]
+>Example:
+>```
+>..Downloads
+>├── dataset
+>│   └── IMAGES
+>│       ├── labels
+>│       ├── raw
+>│       └── processed
+>│           ├── validation
+>│           ├── test
+>│           └── train
+>├── weights
+>│   ├── best_weights.keras
+>│   ├── case_a
+>│   ├── case_b
+>│   ├── case_d
+>│   └── case_f 
+
+
+
 ```json
 {
  "RSNA": true, // false
@@ -124,7 +146,7 @@ Check if you are running the code in `boneageassessment` directory.
 ## Methods
 ### Dataset
 - Dimensions: 14.2 GB
-- All images: 41206 (14036) images
+- All images: 45418 (31382+14036) images
 - Training : 27170 (9824) images
 - Validation : 2816 images
 - Test : 1396 images
