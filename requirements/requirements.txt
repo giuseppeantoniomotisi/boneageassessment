@@ -8,3 +8,5 @@ opencv_python==4.9.0.80
 pandas==2.1.4
 tensorflow==2.15.0
 tqdm==4.64.1
+Sphinx==7.2.6
+sphinx-book-theme==1.1.2
