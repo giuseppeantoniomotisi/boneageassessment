@@ -202,12 +202,10 @@ def dataset_process():
             error += "Please unzip by your UtilityCompressor and retry."
             raise NotImplementedError(error)
 
-        print("We are unzipping dataset folder. Please wait.")
         os.system(f"unzip {os.path.join(downloads_dir, 'dataset.zip')}")
         if os.path.exists('__MACOSX'):
             os.system(f"rm -r '__MACOSX')")
         os.remove(os.path.join(downloads_dir, 'dataset.zip'))
-        print("Done!")
 
     elif 'dataset' in os.listdir(downloads_dir):
         houdini(opt='dataset')
@@ -222,13 +220,11 @@ def dataset_process():
             error += "Please unzip by your UtilityCompressor and retry."
             raise NotImplementedError(error)
 
-        print("We are unzipping dataset_lite folder. Please wait.")
         src = os.path.join(downloads_dir, 'dataset_lite.zip')
         dest = os.path.join(os.getcwd(), 'dataset')
             #shutil.unpack_archive(src, dest, format="zip")
         os.system(f"unzip {src}")
         os.remove(os.path.join(downloads_dir, 'dataset_lite.zip'))
-        print("Done!")
 
     else:
         # if you decide not to download dataset, a empty folder will be created
@@ -244,7 +240,6 @@ def weights_process():
             error += "Please unzip by your UtilityCompressor and retry."
             raise NotImplementedError(error)
 
-        print("We are unzipping weights folder. Please wait.")
         os.system(f"unzip {os.path.join(downloads_dir, 'weights.zip')} -d {os.path.join(os.getcwd(), 'baa', 'age')}")
         os.remove(os.path.join(downloads_dir, 'weights.zip'))
         print("Done!")
@@ -258,14 +253,11 @@ def weights_process():
             error += "Please unzip by your UtilityCompressor and retry."
             raise NotImplementedError(error)
 
-        print("We are unzipping weights folder. Please wait.")
         os.system(f"unzip {os.path.join(downloads_dir, 'weights_essential.zip')} -d {os.path.join(os.getcwd(), 'baa', 'age')}")
         os.remove(os.path.join(downloads_dir, 'weights_essential.zip'))
-        print("Done!")
     
     elif os.path.exists(os.path.join(os.getcwd(), 'baa', 'age', 'weights')):
         pass
 
     else: 
         raise FileNotFoundError("no file named weights.zip or folder named weights was found.")
-    print("Done!")

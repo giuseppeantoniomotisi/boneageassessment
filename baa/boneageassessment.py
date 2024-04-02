@@ -61,7 +61,6 @@ def preprocessing_module(opt:bool):
     """
     print("Preliminary operation module is running. Please wait.")
     utils.write_info()
-    downloads_dir = utils.get_downloads()
     
     if opt:
         print("We are manipulating dataset. Please wait.")
@@ -112,11 +111,13 @@ def prediction_module(opt:bool,name:str,path:str):
         prediction_result (type): The result of prediction.
     """
     if opt:
+        print("Prediction module is running. Please wait.")
         if not os.path.exists(os.path.join(path, name)):
             raise FileNotFoundError("image was not found! Please check it.")
         prediction_result = prediction.process(name, path)
         print(prediction_result)
         prediction_result = 0
+        print("\n")
     else:
         pass
 
