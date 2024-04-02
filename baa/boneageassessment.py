@@ -39,7 +39,6 @@ import argparse
 import json
 import os
 import sys
-from warnings import warn
 sys.path.append(os.path.join(sys.path[0], 'RSNA'))
 sys.path.append(os.path.join(sys.path[0], 'preprocessing'))
 sys.path.append(os.path.join(sys.path[0], 'age'))
@@ -80,78 +79,9 @@ def preprocessing_module(opt:bool):
         print("Done!")
 
     else:
-        downloads_dir = utils.get_downloads()
+        utils.dataset_process()
 
-        if 'dataset.zip' in os.listdir(downloads_dir):
-            if os.name != 'posix':
-                error = "you work on Windows. The shell command 'unzip' works only for MACOS and Linux.\n"
-                error += "Please unzip by your UtilityCompressor and retry."
-                raise NotImplementedError(error)
-
-            print("We are unzipping dataset folder. Please wait.")
-            os.system(f"unzip {os.path.join(downloads_dir, 'dataset.zip')}")
-            if os.path.exists('__MACOSX'):
-               os.system(f"rm -r '__MACOSX')")
-            os.remove(os.path.join(downloads_dir, 'dataset.zip'))
-            print("Done!")
-
-        elif 'dataset' in os.listdir(downloads_dir):
-            pass
-
-        elif os.path.exists(os.path.join(os.getcwd(), 'dataset')):
-            pass
-        
-        elif 'dataset_lite.zip' in os.listdir(downloads_dir):
-            # lite version of dataset is about 3.5 Gbyte
-            if os.name != 'posix':
-                error = "you work on Windows. The shell command 'unzip' works only for MACOS and Linux.\n"
-                error += "Please unzip by your UtilityCompressor and retry."
-                raise NotImplementedError(error)
-
-            print("We are unzipping dataset_lite folder. Please wait.")
-            src = os.path.join(downloads_dir, 'dataset_lite.zip')
-            dest = os.path.join(os.getcwd(), 'dataset')
-            #shutil.unpack_archive(src, dest, format="zip")
-            os.system(f"unzip {src}")
-            os.remove(os.path.join(downloads_dir, 'dataset_lite.zip'))
-            print("Done!")
-
-        else:
-            # if you decide not to download dataset, a empty folder will be created
-            ds = os.path.join(os.getcwd(), 'dataset')
-            os.makedirs(ds, exist_ok=True)
-            warn("Any version of dataset was found. An empty directory was created.")
-
-    if 'weights.zip' in os.listdir(downloads_dir):
-        if os.name != 'posix':
-            error = "you work on Windows. The shell command 'unzip' works only for MACOS and Linux.\n"
-            error += "Please unzip by your UtilityCompressor and retry."
-            raise NotImplementedError(error)
-
-        print("We are unzipping weights folder. Please wait.")
-        os.system(f"unzip {os.path.join(downloads_dir, 'weights.zip')} -d {os.path.join(os.getcwd(), 'baa', 'age')}")
-        os.remove(os.path.join(downloads_dir, 'weights.zip'))
-        print("Done!")
-
-    elif 'weights' in os.listdir(downloads_dir):
-        pass
-    
-    if 'weights_essential.zip' in os.listdir(downloads_dir):
-        if os.name != 'posix':
-            error = "you work on Windows. The shell command 'unzip' works only for MACOS and Linux.\n"
-            error += "Please unzip by your UtilityCompressor and retry."
-            raise NotImplementedError(error)
-
-        print("We are unzipping weights folder. Please wait.")
-        os.system(f"unzip {os.path.join(downloads_dir, 'weights_essential.zip')} -d {os.path.join(os.getcwd(), 'baa', 'age')}")
-        os.remove(os.path.join(downloads_dir, 'weights_essential.zip'))
-        print("Done!")
-    
-    elif os.path.exists(os.path.join(os.getcwd(), 'baa', 'age', 'weights')):
-        pass
-
-    else: 
-        raise FileNotFoundError("no file named weights.zip or folder named weights was found.")
+    utils.weights_process()
     print("Done!")
 
 def machinelearning_module(opt:bool, hyperparameters_json):
